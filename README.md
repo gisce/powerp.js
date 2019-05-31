@@ -1,6 +1,6 @@
 # PowERP.js
 
-Javascript client for PowERP and MessagePack protkcol
+Javascript client for PowERP and MessagePack protocol.
 
 
 ## Example
