@@ -86,7 +86,7 @@ class Model {
             'execute', this.client.database, this.client.uid,
             this.client.password, this.model, 'create', values
         ];
-        return this._fetch(payload);
+        return this.client._fetch(payload);
 
     }
 
@@ -128,10 +128,11 @@ class Model {
     }
 
     async browse(ids) {
+        console.log('browsing');
         let records = [];
         const results = await this.read(ids);
         results.forEach((result) => {
-            const record = new Record(this, id);
+            const record = new Record(this, result.id);
             record.data = result;
             records.push(record);
         });
