@@ -9,6 +9,14 @@ describe("a PowERP Client", () => {
       expect(c.hasOwnProperty('user')).toBeTruthy();
       expect(c.hasOwnProperty('password')).toBeTruthy();
     });
+
+    it('should allow login', () => {
+      const c = new Client('http://localhost:8068', 'test_1559245558', 'admin', 'admin');
+      c.login().then(() => {
+        expect(c.uid).toBe(1);
+      })
+    })
+
   });
   describe('Getting a model', () => {
     it('should return a Model instance', () => {
