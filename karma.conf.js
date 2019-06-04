@@ -16,7 +16,8 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         'node_modules/@babel/polyfill/dist/polyfill.js',
-        'spec/*.js'
+        'src/**/*.js',
+        'spec/*.js',
     ],
 
 
@@ -28,7 +29,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'spec/*.js': ['webpack']
+      'src/**/*.js': ['webpack', 'coverage'],
+      'spec/*.js': ['webpack'],
     },
 
     webpack: {
@@ -57,7 +59,18 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: [
+        'progress',
+        'coverage'
+    ],
+
+    coverageReporter: {
+      dir: 'coverage',
+      reporters: [
+          {type: 'html', subdir: 'report'},
+          {type: 'json', subdir: './', file: 'coverage.json'}
+      ]
+    },
 
 
     // web server port
@@ -66,6 +79,8 @@ module.exports = function(config) {
 
     // enable / disable colors in the output (reporters and logs)
     colors: true,
+
+    browserNoActivityTimeout: 20000,
 
 
     // level of logging
