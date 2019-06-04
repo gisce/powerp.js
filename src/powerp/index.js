@@ -12,7 +12,6 @@ export default class Client {
     }
 
     async login() {
-        console.debug('login');
         const payload = [
             'login', this.database, this.user,
             this.password
@@ -26,6 +25,9 @@ export default class Client {
     }
 
     async _fetch(payload, service = 'object') {
+        if (!this.uid) {
+            throw "First login!";
+        }
         console.log(`Sending ${payload} to ${this.host}/${service}`);
         try {
             const response = await fetch(`${this.host}/${service}`, {
@@ -46,10 +48,9 @@ export default class Client {
     }
 
     model(modelname) {
-        return new Model(this, modelname);
+        return callUndefMethods(new Model(this, modelname));
     }
 }
-
 
 class Model {
     constructor(client, model) {
@@ -57,19 +58,7 @@ class Model {
         this.model = model;
     }
 
-    isLoged() {
-        if (!this.client.uid) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     async search(params, offset=0, limit=false, context=null) {
-        console.debug('searching');
-        if (!this.isLoged()) {
-            throw "First login"
-        }
         const payload = [
             'execute', this.client.database, this.client.uid,
             this.client.password, this.model, 'search', params, offset, limit
@@ -78,10 +67,6 @@ class Model {
     }
 
     async create(values) {
-        console.debug('creating');
-        if (!this.isLoged()) {
-            throw "First login"
-        }
         const payload = [
             'execute', this.client.database, this.client.uid,
             this.client.password, this.model, 'create', values
@@ -91,10 +76,6 @@ class Model {
     }
 
     async write(ids, values) {
-        console.debug('write');
-        if (!this.isLoged()) {
-            throw "First login"
-        }
         const payload = [
             'execute', this.client.database, this.client.uid,
             this.client.password, this.model, 'write', ids, values
@@ -103,10 +84,6 @@ class Model {
     }
 
     async unlink(ids) {
-        console.debug('unlink');
-        if (!this.isLoged()) {
-            throw "First login"
-        }
         const payload = [
             'execute', this.client.database, this.client.uid,
             this.client.password, this.model, 'unlink', ids
@@ -116,9 +93,6 @@ class Model {
 
     async read(ids, fields) {
         console.log('reading');
-        if (!this.isLoged()) {
-            throw "First login"
-        }
         const payload = [
             'execute', this.client.database, this.client.uid,
             this.client.password, this.model, 'read', ids, fields
@@ -132,7 +106,7 @@ class Model {
         let records = [];
         const results = await this.read(ids);
         results.forEach((result) => {
-            const record = new Record(this, result.id);
+            const record = new Record(callUndefMethods(this), result.id);
             record.data = result;
             records.push(record);
         });
@@ -140,6 +114,41 @@ class Model {
     }
 }
 
+/*
+This is a hack using Proxy to call self defined methods in models. We will
+try to maintain the base methods of the ERP.
+ */
+
+function callUndefMethods(obj) {
+    let handler = {
+        get(target, propKey, receiver) {
+            if (propKey in target) {
+                const orig = target[propKey];
+                if (orig instanceof Function) {
+                    return (...args) => {
+                        let result = orig.apply(this, args);
+                        return result;
+                };
+                } else {
+                    return orig;
+                }
+
+            } else {
+                return (...args) => {
+                    const payload = [
+                        'execute', target.client.database, target.client.uid,
+                        target.client.password, target.model, propKey, ...args
+                    ];
+
+                    const method = target.client._fetch;
+                    let result = method.apply(target.client, [payload, 'object']);
+                    return result;
+                };
+            }
+        }
+    };
+    return new Proxy(obj, handler);
+}
 
 class Record {
     constructor(model, id) {

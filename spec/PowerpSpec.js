@@ -15,7 +15,7 @@ describe("a PowERP Client", () => {
       c.login().then(() => {
         expect(c.uid).toBe(1);
         done();
-      })
+      }).catch(done);
     })
 
   });
@@ -30,63 +30,77 @@ describe("a PowERP Client", () => {
 });
 
 describe("a Model", () => {
+  describe('Calling methods', () => {
 
-  describe("when reading", () => {
-    it("must call post with the ids and fields", (done) => {
-      const c = new Client('http://localhost:8068', 'test_1559245558', 'admin', 'admin');
-      const model = c.model('res.partner');
-      c.login().then(() => {
-        model.read([1], ['name']).then(result => {
-          expect(result.length).toBe(1);
-          expect(result[0].id).toBe(1);
-          expect(result[0].hasOwnProperty('name')).toBeTruthy();
-          done();
-        }).catch(reason => {
-          throw reason;
-        });
-      });
-    });
-  });
-
-  describe("when searching", () => {
-    it("must accept a search args", (done) => {
-      const c = new Client('http://localhost:8068', 'test_1559245558', 'admin', 'admin');
-      const model = c.model('res.partner');
-      c.login().then(() => {
-        model.search([['name', 'ilike', 'tiny sprl']]).then(result => {
-          expect(result.length).toBe(1);
-          done();
-      });
-      });
-    });
-  });
-
-  describe("when creating", () => {
-    it("must create a new record", (done) => {
-      const c = new Client('http://localhost:8068', 'test_1559245558', 'admin', 'admin');
-      const model = c.model('res.partner');
-      c.login().then(() => {
-        model.create({name: 'GISCE'}).then(result => {
-          expect(result).toBeGreaterThan(0);
-          done();
-        });
-      });
-    });
-  });
-
-  describe('when browsing', () => {
-    it('should return a list of records', (done) => {
-      const c = new Client('http://localhost:8068', 'test_1559245558', 'admin', 'admin');
-      const model = c.model('res.partner');
-      c.login().then(() => {
-        model.search([]).then((ids) => {
-          const records = model.browse(ids).then((records) => {
-            expect(records.length).toBe(ids.length);
+    describe("when reading", () => {
+      it("must call post with the ids and fields", (done) => {
+        const c = new Client('http://localhost:8068', 'test_1559245558', 'admin', 'admin');
+        const model = c.model('res.partner');
+        c.login().then(() => {
+          model.read([1], ['name']).then(result => {
+            expect(result.length).toBe(1);
+            expect(result[0].id).toBe(1);
+            expect(result[0].hasOwnProperty('name')).toBeTruthy();
             done();
-          });
-        });
+          }).catch(done);
+        }).catch(done);
       });
     });
-  });
 
+    describe("when searching", () => {
+      it("must accept a search args", (done) => {
+        const c = new Client('http://localhost:8068', 'test_1559245558', 'admin', 'admin');
+        const model = c.model('res.partner');
+        c.login().then(() => {
+          model.search([['name', 'ilike', 'tiny sprl']]).then(result => {
+            expect(result.length).toBe(1);
+            done();
+          }).catch(done);
+        }).catch(done);
+      });
+    });
+
+    describe("when creating", () => {
+      it("must create a new record", (done) => {
+        const c = new Client('http://localhost:8068', 'test_1559245558', 'admin', 'admin');
+        const model = c.model('res.partner');
+        c.login().then(() => {
+          model.create({name: 'GISCE'}).then(result => {
+            expect(result).toBeGreaterThan(0);
+            done();
+          }).catch(done);
+        }).catch(done);
+      });
+    });
+
+    describe('when browsing', () => {
+      it('should return a list of records', (done) => {
+        const c = new Client('http://localhost:8068', 'test_1559245558', 'admin', 'admin');
+        const model = c.model('res.partner');
+        c.login().then(() => {
+          model.search([]).then((ids) => {
+            const records = model.browse(ids).then((records) => {
+              expect(records.length).toBe(ids.length);
+              done();
+            }).catch(done);
+          }).catch(done);
+        }).catch(done);
+      });
+    });
+
+    describe('when calling undefined method in library', () =>{
+      it('should call the method in the backend', (done) => {
+        const c = new Client('http://localhost:8068', 'test_1559245558', 'admin', 'admin');
+        const model = c.model('res.partner');
+        c.login().then(() => {
+          model.fields_get(['name']).then((result) => {
+            expect(result.hasOwnProperty('name')).toBeTruthy();
+            expect(result.name.hasOwnProperty('required')).toBeTruthy();
+            done();
+          })
+        }).catch(done);
+      });
+    });
+
+  });
 });
