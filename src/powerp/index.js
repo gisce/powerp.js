@@ -126,7 +126,7 @@ function callUndefMethods(obj) {
                 const orig = target[propKey];
                 if (orig instanceof Function) {
                     return (...args) => {
-                        let result = orig.apply(this, args);
+                        let result = orig.apply(target, args);
                         return result;
                 };
                 } else {
