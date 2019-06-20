@@ -25,7 +25,7 @@ export default class Client {
     }
 
     async _fetch(payload, service = 'object') {
-        if (!this.uid) {
+        if (service != 'common' && !this.uid) {
             throw "First login!";
         }
         console.log(`Sending ${payload} to ${this.host}/${service}`);
