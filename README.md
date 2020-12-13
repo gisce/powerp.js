@@ -1,28 +1,38 @@
 # PowERP.js
 
-Javascript client for PowERP and MessagePack protocol.
-
+A TypeScript implementation for a PowERP client.
 
 ## Example
 
 ```javascript
-import Client from 'powerp';
+import { Client } from "./client";
+import { Model } from "./model";
 
-
-const c = new Client('http://localhost:8068', 'test', 'admin', 'admin');
-c.login().then(() => {
-    const model = c.model('res.partner');
-    model.search([['name', 'ilike', 'asus']]).then((ids) => {
-        model.read(ids, ['name', 'vat']).then((results) => {
-            results.map((result) => {
-                console.log(`Partner ${result.name} vat: ${result.vat}`);
-            });
-        });
-    });
+// First we get authenticate in order to get the token
+const token = await Client.loginAndGetToken({
+    host: process.env.ERP_HOST!,
+    database: process.env.ERP_DB!,
+    user: process.env.ERP_USER!,
+    password: process.env.ERP_PASSWORD!,
 });
+
+// Then we can make further calls passing the token
+const result = await Model.search(
+    {
+        model: "res.partner",
+        params: [["id", "=", "1"]],
+    },
+    {
+        host: process.env.ERP_HOST!,
+        database: process.env.ERP_DB!,
+        token,
+    }
+);
 ```
 
 ## Running tests
+
+First adjust your `.env` file in order to fulfill the proper host, database and auth details.
 
 ```shell
 $ npm install
