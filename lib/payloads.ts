@@ -1,4 +1,4 @@
-import { LoginTokenPayload, ModelSearchPayload } from "./types";
+import { LoginTokenPayload, ModelSearchPayload, ModelCreatePayload } from "./types";
 
 export const createLoginTokenPayload = (options: LoginTokenPayload) => {
   const { database, user, password } = options;
@@ -17,5 +17,18 @@ export const createSearchPayload = (options: ModelSearchPayload) => {
     params,
     offset,
     limit,
+  ];
+};
+
+export const createCreatePayload = (options: ModelCreatePayload) => {
+  const { database, token, model, values } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "create",
+    values
   ];
 };

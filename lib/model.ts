@@ -1,6 +1,6 @@
 import { Client } from "./client";
-import { ModelConnectionOpts, ModelSearchOpts } from "./types";
-import { createSearchPayload } from "./payloads";
+import { ModelConnectionOpts, ModelSearchOpts, ModelCreateOpts } from "./types";
+import { createSearchPayload, createCreatePayload } from "./payloads";
 
 export abstract class Model {
   public static async search(
@@ -24,6 +24,28 @@ export abstract class Model {
       offset,
       limit,
       context,
+    });
+
+    return await Client._fetch({
+      host,
+      payload,
+      service: "object",
+      token,
+    });
+  }
+
+  public static async create(
+    options: ModelCreateOpts,
+    connection: ModelConnectionOpts
+  ) {
+    const { host, database, token } = connection;
+    const { model, values } = options;
+
+    const payload = createCreatePayload({
+      database,
+      token,
+      model,
+      values,
     });
 
     return await Client._fetch({

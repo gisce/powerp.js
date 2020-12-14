@@ -30,4 +30,28 @@ describe("A Model", () => {
       });
     });
   });
+  describe("when creating", () => {
+    test("must create a new record", async (done) => {
+      const token = await Client.loginAndGetToken({
+        host: process.env.ERP_HOST!,
+        database: process.env.ERP_DB!,
+        user: process.env.ERP_USER!,
+        password: process.env.ERP_PASSWORD!,
+      });
+      expect(token).toBeTruthy();
+      const result = await Model.create(
+        {
+          model: "res.partner",
+          values: { name: "GISCE" },
+        },
+        {
+          host: process.env.ERP_HOST!,
+          database: process.env.ERP_DB!,
+          token,
+        }
+      );
+      expect(result).toBeGreaterThan(0);
+      done();
+    });
+  });
 });

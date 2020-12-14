@@ -21,7 +21,7 @@ export type LoginAndGetTokenOpts = Host & Database & UserAuth;
 
 export type FetchOpts = Host & {
   payload: Array<
-    string | number | boolean | Array<string[]> | null | undefined
+    string | number | boolean | Array<string[]> | object | null | undefined
   >;
   service: string;
   token?: string;
@@ -40,4 +40,10 @@ export type ModelSearchOpts = Model & {
   context?: string | null;
 };
 
-export type ModelSearchPayload = Database & Token & Model & ModelSearchOpts;
+export type ModelCreateOpts = Model & {
+  values: object;
+};
+
+export type ModelSearchPayload = Database & Token & ModelSearchOpts;
+
+export type ModelCreatePayload = Database & Token & ModelCreateOpts;
