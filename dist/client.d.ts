@@ -1,5 +1,13 @@
-import { LoginAndGetTokenOpts, FetchOpts } from "./types";
-export declare abstract class Client {
-    static loginAndGetToken(options: LoginAndGetTokenOpts): Promise<any>;
-    static _fetch(options: FetchOpts): Promise<any>;
+import { UserAuth, FetchOpts } from "./types";
+export declare class Client {
+    host: string;
+    database?: string;
+    token?: string;
+    constructor(host: string);
+    setDatabase(database: string): void;
+    _fetch(options: FetchOpts): Promise<any>;
+    loginAndGetToken(options: UserAuth): Promise<any>;
+    getDatabases(): Promise<any>;
+    getServerVersion(): Promise<any>;
+    getLoginMessage(): Promise<any>;
 }

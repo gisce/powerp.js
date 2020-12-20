@@ -40,19 +40,94 @@ var client_1 = require("./client");
 require("dotenv").config();
 describe("A PowERP Client", function () {
     describe("When initializing", function () {
+        test("should receive host, database", function () {
+            var c = new client_1.Client(process.env.ERP_HOST);
+            expect(c.hasOwnProperty("host")).toBeTruthy();
+            expect(c.host).toBe(process.env.ERP_HOST);
+            c.setDatabase(process.env.ERP_DB);
+            expect(c.hasOwnProperty("database")).toBeTruthy();
+            expect(c.database).toBe(process.env.ERP_DB);
+            expect(c.token).toBeUndefined();
+        });
         test("should allow login", function (done) { return __awaiter(void 0, void 0, void 0, function () {
-            var token;
+            var c, token;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, client_1.Client.loginAndGetToken({
-                            host: process.env.ERP_HOST,
-                            database: process.env.ERP_PASSWORD,
-                            user: process.env.ERP_USER,
-                            password: process.env.ERP_PASSWORD,
-                        })];
+                    case 0:
+                        c = new client_1.Client(process.env.ERP_HOST);
+                        c.setDatabase(process.env.ERP_DB);
+                        return [4 /*yield*/, c.loginAndGetToken({
+                                user: process.env.ERP_USER,
+                                password: process.env.ERP_PASSWORD,
+                            })];
                     case 1:
                         token = _a.sent();
                         expect(token).toBeTruthy();
+                        done();
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        test("should not allow login with invalid credentials", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var c;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        c = new client_1.Client(process.env.ERP_HOST);
+                        c.setDatabase(process.env.ERP_DB);
+                        return [4 /*yield*/, expect(c.loginAndGetToken({
+                                user: process.env.ERP_USER,
+                                password: "invalidPassword",
+                            })).rejects.toEqual("Invalid User/Login")];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    });
+    describe("Before login", function () {
+        test("should be able to get list of db's", function (done) { return __awaiter(void 0, void 0, void 0, function () {
+            var c, dbs;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        c = new client_1.Client(process.env.ERP_HOST);
+                        return [4 /*yield*/, c.getDatabases()];
+                    case 1:
+                        dbs = _a.sent();
+                        expect(Array.isArray(dbs)).toBe(true);
+                        expect(dbs.length).toBeGreaterThan(0);
+                        done();
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        test("should be able to get server version", function (done) { return __awaiter(void 0, void 0, void 0, function () {
+            var c, serverVersion;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        c = new client_1.Client(process.env.ERP_HOST);
+                        return [4 /*yield*/, c.getServerVersion()];
+                    case 1:
+                        serverVersion = _a.sent();
+                        expect(serverVersion).toBeTruthy();
+                        done();
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        test("should be able to get login message", function (done) { return __awaiter(void 0, void 0, void 0, function () {
+            var c, loginMessage;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        c = new client_1.Client(process.env.ERP_HOST);
+                        return [4 /*yield*/, c.getLoginMessage()];
+                    case 1:
+                        loginMessage = _a.sent();
+                        expect(typeof loginMessage).toBe("string");
                         done();
                         return [2 /*return*/];
                 }

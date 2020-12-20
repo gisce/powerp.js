@@ -40,22 +40,65 @@ exports.Client = void 0;
 var axios_1 = require("axios");
 var payloads_1 = require("./payloads");
 var Client = /** @class */ (function () {
-    function Client() {
+    function Client(host) {
+        this.host = host;
     }
-    Client.loginAndGetToken = function (options) {
+    Client.prototype.setDatabase = function (database) {
+        this.database = database;
+    };
+    Client.prototype._fetch = function (options) {
         return __awaiter(this, void 0, void 0, function () {
-            var host, database, user, password, payload, token;
+            var _a, service, _b, host, token, response, e_1;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _a = options.service, service = _a === void 0 ? "object" : _a;
+                        _b = this, host = _b.host, token = _b.token;
+                        if (service != "common" && service != "db" && !token) {
+                            throw "You must login first";
+                        }
+                        console.debug("Sending " + options.payload + " to " + host + "/" + service);
+                        _c.label = 1;
+                    case 1:
+                        _c.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, axios_1.default.post(host + "/" + service, JSON.stringify(options.payload), {
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                            })];
+                    case 2:
+                        response = _c.sent();
+                        console.debug("Response from API: " + JSON.stringify(response.data));
+                        if (response.data.exception) {
+                            throw response.data.exception;
+                        }
+                        return [2 /*return*/, response.data];
+                    case 3:
+                        e_1 = _c.sent();
+                        console.error("Error in fetching " + host + "/" + service + ": " + JSON.stringify(e_1, null, 2));
+                        throw e_1;
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Client.prototype.loginAndGetToken = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var database, user, password, payload, token;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        host = options.host, database = options.database, user = options.user, password = options.password;
-                        payload = payloads_1.createLoginTokenPayload({
+                        database = this.database;
+                        user = options.user, password = options.password;
+                        if (!database) {
+                            throw "You must set a database first";
+                        }
+                        payload = payloads_1.makeLoginTokenPayload({
                             database: database,
                             user: user,
                             password: password,
                         });
                         return [4 /*yield*/, this._fetch({
-                                host: host,
                                 payload: payload,
                                 service: "common",
                             })];
@@ -64,39 +107,50 @@ var Client = /** @class */ (function () {
                         if (!token) {
                             throw "Invalid User/Login";
                         }
+                        this.token = token;
                         return [2 /*return*/, token];
                 }
             });
         });
     };
-    Client._fetch = function (options) {
+    Client.prototype.getDatabases = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, service, response, e_1;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _a = options.service, service = _a === void 0 ? "object" : _a;
-                        if (service != "common" && !options.token) {
-                            throw "You must login first";
-                        }
-                        console.debug("Sending " + options.payload + " to " + options.host + "/" + service);
-                        _b.label = 1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this._fetch({
+                            service: "db",
+                            payload: ["list"],
+                        })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    Client.prototype.getServerVersion = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this._fetch({
+                            service: "db",
+                            payload: ["server_version"],
+                        })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    Client.prototype.getLoginMessage = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var loginMessage;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this._fetch({
+                            service: "common",
+                            payload: ["login_message"],
+                        })];
                     case 1:
-                        _b.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, axios_1.default.post(options.host + "/" + service, JSON.stringify(options.payload), {
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                            })];
-                    case 2:
-                        response = _b.sent();
-                        console.debug("Response from API: " + response.data);
-                        return [2 /*return*/, response.data];
-                    case 3:
-                        e_1 = _b.sent();
-                        console.error("Error in fetching " + options.host + "/" + service + ": " + JSON.stringify(e_1, null, 2));
-                        throw e_1;
-                    case 4: return [2 /*return*/];
+                        loginMessage = _a.sent();
+                        return [2 /*return*/, loginMessage || ""];
                 }
             });
         });
