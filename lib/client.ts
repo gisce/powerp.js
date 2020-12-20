@@ -1,39 +1,52 @@
 import axios from "axios";
-import { LoginAndGetTokenOpts, FetchOpts } from "./types";
-import { createLoginTokenPayload } from "./payloads";
+import { ClientOpts, UserAuth, FetchOpts } from "./types";
+import { makeLoginTokenPayload } from "./payloads";
 
-export abstract class Client {
-  public static async loginAndGetToken(options: LoginAndGetTokenOpts) {
-    const { host, database, user, password } = options;
+export class Client {
+  host: string;
+  database: string;
+  token: string | null;
 
-    const payload = createLoginTokenPayload({
+  constructor(options: ClientOpts) {
+    const { host, database } = options;
+    this.host = host;
+    this.database = database;
+    this.token = null;
+  }
+
+  public async loginAndGetToken(options: UserAuth) {
+    const { database } = this;
+    const { user, password } = options;
+
+    const payload = makeLoginTokenPayload({
       database,
       user,
       password,
     });
     const token = await this._fetch({
-      host,
       payload,
       service: "common",
     });
     if (!token) {
       throw "Invalid User/Login";
     }
+    this.token = token;
     return token;
   }
 
-  public static async _fetch(options: FetchOpts) {
+  public async _fetch(options: FetchOpts) {
     const { service = "object" } = options;
+    const { host, token } = this;
 
-    if (service != "common" && !options.token) {
+    if (service != "common" && !token) {
       throw "You must login first";
     }
 
-    console.debug(`Sending ${options.payload} to ${options.host}/${service}`);
+    console.debug(`Sending ${options.payload} to ${host}/${service}`);
 
     try {
       const response = await axios.post(
-        `${options.host}/${service}`,
+        `${host}/${service}`,
         JSON.stringify(options.payload),
         {
           headers: {
@@ -48,11 +61,7 @@ export abstract class Client {
       return response.data;
     } catch (e) {
       console.error(
-        `Error in fetching ${options.host}/${service}: ${JSON.stringify(
-          e,
-          null,
-          2
-        )}`
+        `Error in fetching ${host}/${service}: ${JSON.stringify(e, null, 2)}`
       );
       throw e;
     }
