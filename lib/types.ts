@@ -11,8 +11,6 @@ export type UserAuth = {
   password: string;
 };
 
-export type ClientOpts = Host & Database;
-
 export type LoginTokenPayload = Database & UserAuth;
 
 export type Token = {
