@@ -7,7 +7,11 @@ export class Client {
   database?: string;
   token?: string;
 
-  constructor(host: string) {
+  constructor(host?: string) {
+    if (!host) {
+      throw "A host is required";
+    }
+
     this.host = host;
   }
 

@@ -41,6 +41,9 @@ var axios_1 = require("axios");
 var payloads_1 = require("./payloads");
 var Client = /** @class */ (function () {
     function Client(host) {
+        if (!host) {
+            throw "A host is required";
+        }
         this.host = host;
     }
     Client.prototype.setDatabase = function (database) {
