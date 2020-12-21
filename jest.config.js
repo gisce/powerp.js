@@ -1,5 +1,5 @@
 module.exports = {
-  roots: ["<rootDir>/lib"],
+  roots: ["<rootDir>/spec"],
   transform: {
     "^.+\\.tsx?$": "ts-jest",
   },

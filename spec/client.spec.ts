@@ -1,5 +1,5 @@
 import { doesNotMatch, strict } from "assert";
-import { Client } from "./client";
+import { Client } from "../lib/client";
 require("dotenv").config();
 
 describe("A PowERP Client", () => {
