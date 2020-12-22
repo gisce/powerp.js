@@ -5,6 +5,7 @@ export declare class Client {
     token?: string;
     constructor(host?: string);
     setDatabase(database: string): void;
+    setToken(token: string): void;
     _fetch(options: FetchOpts): Promise<any>;
     loginAndGetToken(options: UserAuth): Promise<any>;
     getDatabases(): Promise<any>;

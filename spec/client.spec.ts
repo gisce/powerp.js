@@ -23,6 +23,13 @@ describe("A PowERP Client", () => {
       expect(undefinedConstructor).toThrow("A host is required");
     });
 
+    test("should receive token externally", () => {
+      const c = new Client(process.env.ERP_HOST);
+      c.setToken("test-token");
+      expect(c.hasOwnProperty("token")).toBeTruthy();
+      expect(c.token).toBe("test-token");
+    });
+
     test("should allow login", async (done) => {
       const c = new Client(process.env.ERP_HOST);
       c.setDatabase(process.env.ERP_DB!);

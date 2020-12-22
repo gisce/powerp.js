@@ -49,6 +49,9 @@ var Client = /** @class */ (function () {
     Client.prototype.setDatabase = function (database) {
         this.database = database;
     };
+    Client.prototype.setToken = function (token) {
+        this.token = token;
+    };
     Client.prototype._fetch = function (options) {
         return __awaiter(this, void 0, void 0, function () {
             var _a, service, _b, host, token, response, e_1;

@@ -19,6 +19,10 @@ export class Client {
     this.database = database;
   }
 
+  public setToken(token: string) {
+    this.token = token;
+  }
+
   public async _fetch(options: FetchOpts) {
     const { service = "object" } = options;
     const { host, token } = this;
