@@ -56,7 +56,7 @@ export class Client {
     }
   }
 
-  public async loginAndGetToken(options: UserAuth) {
+  public async loginAndGetToken(options: UserAuth): Promise<string> {
     const { database } = this;
     const { user, password } = options;
 
@@ -113,7 +113,7 @@ export class Client {
       service: "common",
       payload: ["refresh_token", token],
     });
-    // this.token = refreshedToken;
+    this.token = refreshedToken;
     return refreshedToken;
   }
 }

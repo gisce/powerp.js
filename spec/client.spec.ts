@@ -66,6 +66,7 @@ describe("A PowERP Client", () => {
       const refreshedToken = await c.refreshToken(token);
       expect(c.token).toEqual(refreshedToken);
       expect(refreshedToken.length > 1).toBeTruthy();
+      expect(token !== refreshedToken).toBeTruthy();
     });
   });
 
