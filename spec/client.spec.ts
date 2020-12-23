@@ -53,6 +53,20 @@ describe("A PowERP Client", () => {
         })
       ).rejects.toEqual("Invalid User/Login");
     });
+
+    test("should refresh token", async () => {
+      const c = new Client(process.env.ERP_HOST);
+      c.setDatabase(process.env.ERP_DB!);
+      const token = await c.loginAndGetToken({
+        user: process.env.ERP_USER!,
+        password: process.env.ERP_PASSWORD!,
+      });
+
+      expect(c.token).toBe(token);
+      const refreshedToken = await c.refreshToken(token);
+      expect(c.token).toBe(refreshedToken);
+      expect(refreshedToken.length > 1).toBeTruthy();
+    });
   });
 
   describe("Before login", () => {

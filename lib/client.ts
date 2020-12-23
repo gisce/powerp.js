@@ -101,4 +101,18 @@ export class Client {
     });
     return loginMessage || "";
   }
+
+  public async refreshToken(token: string) {
+    const { database } = this;
+
+    if (!database) {
+      throw "You must set a database first";
+    }
+
+    const refreshedToken = await this._fetch({
+      service: "common",
+      payload: ["refresh_token", token],
+    });
+    return refreshedToken;
+  }
 }

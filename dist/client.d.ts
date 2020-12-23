@@ -11,4 +11,5 @@ export declare class Client {
     getDatabases(): Promise<any>;
     getServerVersion(): Promise<any>;
     getLoginMessage(): Promise<any>;
+    refreshToken(token: string): Promise<any>;
 }
