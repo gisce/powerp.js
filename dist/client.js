@@ -177,6 +177,7 @@ var Client = /** @class */ (function () {
                             })];
                     case 1:
                         refreshedToken = _a.sent();
+                        this.token = refreshedToken;
                         return [2 /*return*/, refreshedToken];
                 }
             });

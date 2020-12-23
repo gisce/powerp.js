@@ -113,6 +113,7 @@ export class Client {
       service: "common",
       payload: ["refresh_token", token],
     });
+    // this.token = refreshedToken;
     return refreshedToken;
   }
 }
