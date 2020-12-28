@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import { UserAuth, FetchOpts } from "./types";
 import { makeLoginTokenPayload } from "./payloads";
 
@@ -6,6 +6,7 @@ export class Client {
   host: string;
   database?: string;
   token?: string;
+  axiosInstance: AxiosInstance;
 
   constructor(host?: string) {
     if (!host) {
@@ -13,6 +14,7 @@ export class Client {
     }
 
     this.host = host;
+    this.axiosInstance = axios.create();
   }
 
   public setDatabase(database: string) {
@@ -21,6 +23,10 @@ export class Client {
 
   public setToken(token: string) {
     this.token = token;
+  }
+
+  public setAxiosInstance(axiosInstance: AxiosInstance) {
+    this.axiosInstance = axiosInstance;
   }
 
   public async _fetch(options: FetchOpts) {
@@ -34,7 +40,7 @@ export class Client {
     console.debug(`Sending ${options.payload} to ${host}/${service}`);
 
     try {
-      const response = await axios.post(
+      const response = await this.axiosInstance.post(
         `${host}/${service}`,
         JSON.stringify(options.payload),
         {

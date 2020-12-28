@@ -45,12 +45,16 @@ var Client = /** @class */ (function () {
             throw "A host is required";
         }
         this.host = host;
+        this.axiosInstance = axios_1.default.create();
     }
     Client.prototype.setDatabase = function (database) {
         this.database = database;
     };
     Client.prototype.setToken = function (token) {
         this.token = token;
+    };
+    Client.prototype.setAxiosInstance = function (axiosInstance) {
+        this.axiosInstance = axiosInstance;
     };
     Client.prototype._fetch = function (options) {
         return __awaiter(this, void 0, void 0, function () {
@@ -67,7 +71,7 @@ var Client = /** @class */ (function () {
                         _c.label = 1;
                     case 1:
                         _c.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, axios_1.default.post(host + "/" + service, JSON.stringify(options.payload), {
+                        return [4 /*yield*/, this.axiosInstance.post(host + "/" + service, JSON.stringify(options.payload), {
                                 headers: {
                                     "Content-Type": "application/json",
                                 },
