@@ -17,19 +17,19 @@ export class Client {
     this.axiosInstance = axios.create();
   }
 
-  public setDatabase(database: string) {
+  public setDatabase(database: string): void {
     this.database = database;
   }
 
-  public setToken(token: string) {
+  public setToken(token: string): void {
     this.token = token;
   }
 
-  public setAxiosInstance(axiosInstance: AxiosInstance) {
+  public setAxiosInstance(axiosInstance: AxiosInstance): void {
     this.axiosInstance = axiosInstance;
   }
 
-  public async _fetch(options: FetchOpts) {
+  public async _fetch(options: FetchOpts): Promise<any> {
     const { service = "object" } = options;
     const { host, token } = this;
 
@@ -86,21 +86,21 @@ export class Client {
     return token;
   }
 
-  public async getDatabases() {
+  public async getDatabases(): Promise<string[]> {
     return await this._fetch({
       service: "db",
       payload: ["list"],
     });
   }
 
-  public async getServerVersion() {
+  public async getServerVersion(): Promise<string> {
     return await this._fetch({
       service: "db",
       payload: ["server_version"],
     });
   }
 
-  public async getLoginMessage() {
+  public async getLoginMessage(): Promise<string> {
     const loginMessage = await this._fetch({
       service: "common",
       payload: ["login_message"],
@@ -108,7 +108,7 @@ export class Client {
     return loginMessage || "";
   }
 
-  public async refreshToken(token: string) {
+  public async refreshToken(token: string): Promise<string> {
     const { database } = this;
 
     if (!database) {

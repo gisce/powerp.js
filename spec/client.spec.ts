@@ -1,6 +1,9 @@
+/* eslint-disable no-prototype-builtins */
 import { Client } from "../lib/client";
-const axios = require("axios");
-require("dotenv").config();
+import axios from "axios";
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 describe("A PowERP Client", () => {
   describe("When initializing", () => {
@@ -18,7 +21,7 @@ describe("A PowERP Client", () => {
 
     test("should fail if we don't set a host in constructor", () => {
       const undefinedConstructor = () => {
-        const c = new Client("");
+        new Client("");
       };
 
       expect(undefinedConstructor).toThrow("A host is required");

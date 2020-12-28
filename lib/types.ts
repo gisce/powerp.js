@@ -21,10 +21,19 @@ export type Model = {
   model: string;
 };
 
+export type Payload = Array<
+  | string
+  | string[]
+  | number
+  | number[]
+  | boolean
+  | Array<string[]>
+  | null
+  | undefined
+>;
+
 export type FetchOpts = {
-  payload: Array<
-    string | number | boolean | Array<string[]> | object | null | undefined
-  >;
+  payload: Payload;
   service?: string;
 };
 

@@ -11,7 +11,7 @@ export class Model {
     this.client = client;
   }
 
-  public async search(options: ModelSearchOpts) {
+  public async search(options: ModelSearchOpts): Promise<any> {
     const { params, offset = 0, limit = false, context = null } = options;
     const { model } = this;
     const { database, token } = this.client;
@@ -31,7 +31,7 @@ export class Model {
     });
   }
 
-  public async read(options: ModelReadOpts) {
+  public async read(options: ModelReadOpts): Promise<any> {
     const { ids, fields } = options;
     const { model } = this;
     const { database, token } = this.client;
