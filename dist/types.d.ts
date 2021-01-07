@@ -47,7 +47,7 @@ export declare type ModelReadOpts = {
 };
 export declare type ModelReadPayload = Model & Database & Token & ModelReadOpts;
 export declare type ModelFieldsViewGetOpts = {
-  type: "tree" | "form";
+  type: string;
   id: number;
   context?: Context;
   toolbar: boolean;
