@@ -15,6 +15,7 @@ export declare type Token = {
 export declare type Model = {
   model: string;
 };
+export declare type Context = Array<any> | null;
 export declare type Payload = Array<
   | string
   | string[]
@@ -24,6 +25,7 @@ export declare type Payload = Array<
   | Array<string[]>
   | null
   | undefined
+  | Context
 >;
 export declare type FetchOpts = {
   payload: Payload;
@@ -33,7 +35,7 @@ export declare type ModelSearchOpts = {
   params?: Array<any>;
   offset?: number;
   limit?: boolean;
-  context?: string | null;
+  context?: Context;
 };
 export declare type ModelSearchPayload = Model &
   Database &
@@ -44,3 +46,13 @@ export declare type ModelReadOpts = {
   fields?: string[];
 };
 export declare type ModelReadPayload = Model & Database & Token & ModelReadOpts;
+export declare type ModelFieldsViewGetOpts = {
+  type: "tree" | "form";
+  id: number;
+  context?: Context;
+  toolbar: boolean;
+};
+export declare type ModelFieldsViewGetPayload = Model &
+  Database &
+  Token &
+  ModelFieldsViewGetOpts;

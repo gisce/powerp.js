@@ -1,6 +1,14 @@
 import { Client } from "./client";
-import { ModelSearchOpts, ModelReadOpts } from "./types";
-import { createSearchPayload, createReadPayload } from "./payloads";
+import {
+  ModelSearchOpts,
+  ModelReadOpts,
+  ModelFieldsViewGetOpts,
+} from "./types";
+import {
+  createSearchPayload,
+  createReadPayload,
+  createFieldsViewGetPayload,
+} from "./payloads";
 
 export class Model {
   model: string;
@@ -42,6 +50,26 @@ export class Model {
       model,
       ids,
       fields,
+    });
+
+    return await this.client._fetch({
+      payload,
+    });
+  }
+
+  public async fields_view_get(options: ModelFieldsViewGetOpts): Promise<any> {
+    const { id, context, type, toolbar } = options;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const payload = createFieldsViewGetPayload({
+      database: database!,
+      token: token!,
+      model,
+      id,
+      type,
+      context,
+      toolbar,
     });
 
     return await this.client._fetch({

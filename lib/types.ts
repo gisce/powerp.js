@@ -21,6 +21,8 @@ export type Model = {
   model: string;
 };
 
+export type Context = Array<any> | null;
+
 export type Payload = Array<
   | string
   | string[]
@@ -30,6 +32,7 @@ export type Payload = Array<
   | Array<string[]>
   | null
   | undefined
+  | Context
 >;
 
 export type FetchOpts = {
@@ -41,7 +44,7 @@ export type ModelSearchOpts = {
   params?: Array<any>;
   offset?: number;
   limit?: boolean;
-  context?: string | null;
+  context?: Context;
 };
 
 export type ModelSearchPayload = Model & Database & Token & ModelSearchOpts;
@@ -52,3 +55,15 @@ export type ModelReadOpts = {
 };
 
 export type ModelReadPayload = Model & Database & Token & ModelReadOpts;
+
+export type ModelFieldsViewGetOpts = {
+  type: "tree" | "form";
+  id: number;
+  context?: Context;
+  toolbar: boolean;
+};
+
+export type ModelFieldsViewGetPayload = Model &
+  Database &
+  Token &
+  ModelFieldsViewGetOpts;
