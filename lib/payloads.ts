@@ -3,6 +3,7 @@ import {
   ModelSearchPayload,
   ModelReadPayload,
   ModelFieldsViewGetPayload,
+  ModelExecutePayload,
   Payload,
 } from "./types";
 
@@ -47,4 +48,11 @@ export const createFieldsViewGetPayload = (
     context,
     toolbar,
   ];
+};
+
+export const createModelExecutePayload = (
+  options: ModelExecutePayload
+): Payload => {
+  const { database, token, model, id, action } = options;
+  return ["execute", database, "token", token, model, action, [id]];
 };

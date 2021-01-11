@@ -3,11 +3,13 @@ import {
   ModelSearchOpts,
   ModelReadOpts,
   ModelFieldsViewGetOpts,
+  ModelExecuteOpts,
 } from "./types";
 import {
   createSearchPayload,
   createReadPayload,
   createFieldsViewGetPayload,
+  createModelExecutePayload,
 } from "./payloads";
 
 export class Model {
@@ -70,6 +72,24 @@ export class Model {
       type,
       context,
       toolbar,
+    });
+
+    return await this.client._fetch({
+      payload,
+    });
+  }
+
+  public async execute(options: ModelExecuteOpts): Promise<any> {
+    const { id, action } = options;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const payload = createModelExecutePayload({
+      database: database!,
+      token: token!,
+      model,
+      id,
+      action,
     });
 
     return await this.client._fetch({

@@ -56,3 +56,11 @@ export declare type ModelFieldsViewGetPayload = Model &
   Database &
   Token &
   ModelFieldsViewGetOpts;
+export declare type ModelExecuteOpts = {
+  id: number;
+  action: string;
+};
+export declare type ModelExecutePayload = Model &
+  Database &
+  Token &
+  ModelExecuteOpts;

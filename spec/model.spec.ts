@@ -135,6 +135,37 @@ describe("A Model", () => {
         expect(fieldsAndArch.type).toBe("form");
         expect(fieldsAndArch.view_id).toBe(97);
       });
+      test("must be able to star/unstar an item", async () => {
+        const c = new Client(process.env.ERP_HOST);
+        c.setDatabase(process.env.ERP_DB!);
+
+        const token = await c.loginAndGetToken({
+          user: process.env.ERP_USER!,
+          password: process.env.ERP_PASSWORD!,
+        });
+        expect(token).toBeTruthy();
+
+        const menu = new Model("ir.ui.menu", c);
+        const menuItem = (
+          await menu.read({
+            ids: [87],
+          })
+        )[0];
+
+        const action = menuItem.starred ? "unstar" : "star";
+        const toggleStarMenuItem = await menu.execute({
+          id: 87,
+          action,
+        });
+
+        const menuItemUpdated = (
+          await menu.read({
+            ids: [87],
+          })
+        )[0];
+        const expectedValue = action === "star" ? true : false;
+        expect(menuItemUpdated.starred).toBe(expectedValue);
+      });
     });
   });
 });

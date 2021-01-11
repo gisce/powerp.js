@@ -3,6 +3,7 @@ import {
   ModelSearchOpts,
   ModelReadOpts,
   ModelFieldsViewGetOpts,
+  ModelExecuteOpts,
 } from "./types";
 export declare class Model {
   model: string;
@@ -11,4 +12,5 @@ export declare class Model {
   search(options: ModelSearchOpts): Promise<any>;
   read(options: ModelReadOpts): Promise<any>;
   fields_view_get(options: ModelFieldsViewGetOpts): Promise<any>;
+  execute(options: ModelExecuteOpts): Promise<any>;
 }
