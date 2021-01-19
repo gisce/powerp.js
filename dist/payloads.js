@@ -14,7 +14,10 @@ var createSearchPayload = function (options) {
     model = options.model,
     params = options.params,
     offset = options.offset,
-    limit = options.limit;
+    limit = options.limit,
+    order = options.order,
+    context = options.context,
+    count = options.count;
   return [
     "execute",
     database,
@@ -25,6 +28,9 @@ var createSearchPayload = function (options) {
     params,
     offset,
     limit,
+    order,
+    context,
+    count,
   ];
 };
 exports.createSearchPayload = createSearchPayload;

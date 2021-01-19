@@ -25,6 +25,25 @@ describe("A Model", () => {
         expect(result.length).toBe(1);
         done();
       });
+      test.only("must count items for a search query", async (done) => {
+        const c = new Client(process.env.ERP_HOST);
+        c.setDatabase(process.env.ERP_DB!);
+
+        const token = await c.loginAndGetToken({
+          user: process.env.ERP_USER!,
+          password: process.env.ERP_PASSWORD!,
+        });
+        expect(token).toBeTruthy();
+
+        const partner = new Model("res.partner", c);
+
+        const result = await partner.search({
+          count: true,
+        });
+        expect(result).toBeGreaterThan(100);
+        done();
+      });
+
       test("must retrieve menu items id's", async (done) => {
         const c = new Client(process.env.ERP_HOST);
         c.setDatabase(process.env.ERP_DB!);
@@ -153,7 +172,7 @@ describe("A Model", () => {
         )[0];
 
         const action = menuItem.starred ? "unstar" : "star";
-        const toggleStarMenuItem = await menu.execute({
+        await menu.execute({
           id: 87,
           action,
         });

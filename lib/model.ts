@@ -22,7 +22,14 @@ export class Model {
   }
 
   public async search(options: ModelSearchOpts): Promise<any> {
-    const { params, offset = 0, limit = false, context = null } = options;
+    const {
+      params = [],
+      offset = 0,
+      limit = false,
+      order = 0,
+      context = null,
+      count = false,
+    } = options;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -33,7 +40,9 @@ export class Model {
       params,
       offset,
       limit,
+      order,
       context,
+      count,
     });
 
     return await this.client._fetch({

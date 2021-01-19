@@ -13,7 +13,17 @@ export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
 };
 
 export const createSearchPayload = (options: ModelSearchPayload): Payload => {
-  const { database, token, model, params, offset, limit } = options;
+  const {
+    database,
+    token,
+    model,
+    params,
+    offset,
+    limit,
+    order,
+    context,
+    count,
+  } = options;
   return [
     "execute",
     database,
@@ -24,6 +34,9 @@ export const createSearchPayload = (options: ModelSearchPayload): Payload => {
     params,
     offset,
     limit,
+    order,
+    context,
+    count,
   ];
 };
 

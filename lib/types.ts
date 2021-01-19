@@ -45,6 +45,8 @@ export type ModelSearchOpts = {
   offset?: number;
   limit?: boolean;
   context?: Context;
+  order?: number;
+  count?: boolean;
 };
 
 export type ModelSearchPayload = Model & Database & Token & ModelSearchOpts;

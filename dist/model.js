@@ -142,30 +142,40 @@ var Model = /** @class */ (function () {
   }
   Model.prototype.search = function (options) {
     return __awaiter(this, void 0, void 0, function () {
-      var params,
-        _a,
-        offset,
+      var _a,
+        params,
         _b,
-        limit,
+        offset,
         _c,
-        context,
-        model,
+        limit,
         _d,
+        order,
+        _e,
+        context,
+        _f,
+        count,
+        model,
+        _g,
         database,
         token,
         payload;
-      return __generator(this, function (_e) {
-        switch (_e.label) {
+      return __generator(this, function (_h) {
+        switch (_h.label) {
           case 0:
-            (params = options.params),
-              (_a = options.offset),
-              (offset = _a === void 0 ? 0 : _a),
-              (_b = options.limit),
-              (limit = _b === void 0 ? false : _b),
-              (_c = options.context),
-              (context = _c === void 0 ? null : _c);
+            (_a = options.params),
+              (params = _a === void 0 ? [] : _a),
+              (_b = options.offset),
+              (offset = _b === void 0 ? 0 : _b),
+              (_c = options.limit),
+              (limit = _c === void 0 ? false : _c),
+              (_d = options.order),
+              (order = _d === void 0 ? 0 : _d),
+              (_e = options.context),
+              (context = _e === void 0 ? null : _e),
+              (_f = options.count),
+              (count = _f === void 0 ? false : _f);
             model = this.model;
-            (_d = this.client), (database = _d.database), (token = _d.token);
+            (_g = this.client), (database = _g.database), (token = _g.token);
             payload = payloads_1.createSearchPayload({
               database: database,
               token: token,
@@ -173,7 +183,9 @@ var Model = /** @class */ (function () {
               params: params,
               offset: offset,
               limit: limit,
+              order: order,
               context: context,
+              count: count,
             });
             return [
               4 /*yield*/,
@@ -182,7 +194,7 @@ var Model = /** @class */ (function () {
               }),
             ];
           case 1:
-            return [2 /*return*/, _e.sent()];
+            return [2 /*return*/, _h.sent()];
         }
       });
     });
