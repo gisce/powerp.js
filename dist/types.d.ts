@@ -34,7 +34,7 @@ export declare type FetchOpts = {
 export declare type ModelSearchOpts = {
   params?: Array<any>;
   offset?: number;
-  limit?: boolean;
+  limit?: number | boolean;
   context?: Context;
   order?: number;
   count?: boolean;
