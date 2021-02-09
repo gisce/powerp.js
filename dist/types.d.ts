@@ -59,7 +59,7 @@ export declare type ModelFieldsViewGetPayload = Model &
   Token &
   ModelFieldsViewGetOpts;
 export declare type ModelExecuteOpts = {
-  id: number;
+  id?: number;
   action: string;
 };
 export declare type ModelExecutePayload = Model &

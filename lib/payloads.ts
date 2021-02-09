@@ -67,5 +67,13 @@ export const createModelExecutePayload = (
   options: ModelExecutePayload
 ): Payload => {
   const { database, token, model, id, action } = options;
-  return ["execute", database, "token", token, model, action, [id]];
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    action,
+    id ? [id] : undefined,
+  ];
 };

@@ -71,7 +71,15 @@ var createModelExecutePayload = function (options) {
     model = options.model,
     id = options.id,
     action = options.action;
-  return ["execute", database, "token", token, model, action, [id]];
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    action,
+    id ? [id] : undefined,
+  ];
 };
 exports.createModelExecutePayload = createModelExecutePayload;
 //# sourceMappingURL=payloads.js.map
