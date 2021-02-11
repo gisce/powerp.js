@@ -13,6 +13,7 @@ export declare const createSearchPayload: (
   options: ModelSearchPayload
 ) => Payload;
 export declare const createReadPayload: (options: ModelReadPayload) => Payload;
+export declare const createWritePayload: (options: ModelReadPayload) => Payload;
 export declare const createFieldsViewGetPayload: (
   options: ModelFieldsViewGetPayload
 ) => Payload;

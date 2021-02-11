@@ -288,6 +288,34 @@ var Model = /** @class */ (function () {
       });
     });
   };
+  Model.prototype.write = function (options) {
+    return __awaiter(this, void 0, void 0, function () {
+      var ids, fields, model, _a, database, token, payload;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            (ids = options.ids), (fields = options.fields);
+            model = this.model;
+            (_a = this.client), (database = _a.database), (token = _a.token);
+            payload = payloads_1.createWritePayload({
+              database: database,
+              token: token,
+              model: model,
+              ids: ids,
+              fields: fields,
+            });
+            return [
+              4 /*yield*/,
+              this.client._fetch({
+                payload: payload,
+              }),
+            ];
+          case 1:
+            return [2 /*return*/, _b.sent()];
+        }
+      });
+    });
+  };
   return Model;
 })();
 exports.Model = Model;

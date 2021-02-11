@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
+exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createWritePayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
 var makeLoginTokenPayload = function (options) {
   var database = options.database,
     user = options.user,
@@ -43,6 +43,15 @@ var createReadPayload = function (options) {
   return ["execute", database, "token", token, model, "read", ids, fields];
 };
 exports.createReadPayload = createReadPayload;
+var createWritePayload = function (options) {
+  var database = options.database,
+    token = options.token,
+    model = options.model,
+    ids = options.ids,
+    fields = options.fields;
+  return ["execute", database, "token", token, model, "write", ids, fields];
+};
+exports.createWritePayload = createWritePayload;
 var createFieldsViewGetPayload = function (options) {
   var database = options.database,
     token = options.token,

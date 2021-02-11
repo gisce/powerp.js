@@ -45,6 +45,11 @@ export const createReadPayload = (options: ModelReadPayload): Payload => {
   return ["execute", database, "token", token, model, "read", ids, fields];
 };
 
+export const createWritePayload = (options: ModelReadPayload): Payload => {
+  const { database, token, model, ids, fields } = options;
+  return ["execute", database, "token", token, model, "write", ids, fields];
+};
+
 export const createFieldsViewGetPayload = (
   options: ModelFieldsViewGetPayload
 ): Payload => {

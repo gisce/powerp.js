@@ -4,12 +4,14 @@ import {
   ModelReadOpts,
   ModelFieldsViewGetOpts,
   ModelExecuteOpts,
+  ModelWriteOpts,
 } from "./types";
 import {
   createSearchPayload,
   createReadPayload,
   createFieldsViewGetPayload,
   createModelExecutePayload,
+  createWritePayload,
 } from "./payloads";
 
 export class Model {
@@ -99,6 +101,24 @@ export class Model {
       model,
       id,
       action,
+    });
+
+    return await this.client._fetch({
+      payload,
+    });
+  }
+
+  public async write(options: ModelWriteOpts): Promise<any> {
+    const { ids, fields } = options;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const payload = createWritePayload({
+      database: database!,
+      token: token!,
+      model,
+      ids,
+      fields,
     });
 
     return await this.client._fetch({

@@ -25,7 +25,7 @@ describe("A Model", () => {
         expect(result.length).toBe(1);
         done();
       });
-      test.only("must count items for a search query", async (done) => {
+      test("must count items for a search query", async (done) => {
         const c = new Client(process.env.ERP_HOST);
         c.setDatabase(process.env.ERP_DB!);
 
@@ -184,6 +184,35 @@ describe("A Model", () => {
         )[0];
         const expectedValue = action === "star" ? true : false;
         expect(menuItemUpdated.starred).toBe(expectedValue);
+      });
+    });
+    describe("when writing", () => {
+      test("must update name field for an user", async (done) => {
+        const c = new Client(process.env.ERP_HOST);
+        c.setDatabase(process.env.ERP_DB!);
+
+        const token = await c.loginAndGetToken({
+          user: process.env.ERP_USER!,
+          password: process.env.ERP_PASSWORD!,
+        });
+        expect(token).toBeTruthy();
+
+        const userModel = new Model("res.users", c);
+        const newName = "test " + Date.now().toString();
+
+        await userModel.write({
+          ids: [6],
+          fields: { name: newName },
+        });
+
+        const updatedUser = (
+          await userModel.read({
+            ids: [6],
+          })
+        )[0];
+
+        expect(updatedUser.name).toBe(newName);
+        done();
       });
     });
   });
