@@ -58,7 +58,7 @@ export declare type ModelWritePayload = Model &
   ModelWriteOpts;
 export declare type ModelFieldsViewGetOpts = {
   type: string;
-  id: number;
+  id: number | null;
   context?: Context;
   toolbar: boolean;
 };

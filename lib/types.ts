@@ -67,7 +67,7 @@ export type ModelWritePayload = Model & Database & Token & ModelWriteOpts;
 
 export type ModelFieldsViewGetOpts = {
   type: string;
-  id: number;
+  id: number | null;
   context?: Context;
   toolbar: boolean;
 };
