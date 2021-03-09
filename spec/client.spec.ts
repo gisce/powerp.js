@@ -111,8 +111,5 @@ describe("A PowERP Client", () => {
       expect(typeof loginMessage).toBe("string");
       done();
     });
-    test.only("", () => {
-      expect(true).toBeTruthy();
-    });
   });
 });

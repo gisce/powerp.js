@@ -91,7 +91,7 @@ export class Model {
   }
 
   public async execute(options: ModelExecuteOpts): Promise<any> {
-    const { id, action } = options;
+    const { ids, action } = options;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -99,7 +99,7 @@ export class Model {
       database: database!,
       token: token!,
       model,
-      id,
+      ids,
       action,
     });
 

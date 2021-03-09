@@ -71,14 +71,6 @@ export const createFieldsViewGetPayload = (
 export const createModelExecutePayload = (
   options: ModelExecutePayload
 ): Payload => {
-  const { database, token, model, id, action } = options;
-  return [
-    "execute",
-    database,
-    "token",
-    token,
-    model,
-    action,
-    id ? [id] : undefined,
-  ];
+  const { database, token, model, ids, action } = options;
+  return ["execute", database, "token", token, model, action, ids || undefined];
 };

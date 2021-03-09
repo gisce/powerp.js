@@ -173,7 +173,7 @@ describe("A Model", () => {
 
         const action = menuItem.starred ? "unstar" : "star";
         await menu.execute({
-          id: 87,
+          ids: [87],
           action,
         });
 
