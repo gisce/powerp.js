@@ -78,7 +78,7 @@ export type ModelFieldsViewGetPayload = Model &
   ModelFieldsViewGetOpts;
 
 export type ModelExecuteOpts = {
-  ids?: number[];
+  payload?: any;
   action: string;
 };
 

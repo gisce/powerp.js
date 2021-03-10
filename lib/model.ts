@@ -91,20 +91,20 @@ export class Model {
   }
 
   public async execute(options: ModelExecuteOpts): Promise<any> {
-    const { ids, action } = options;
+    const { payload, action } = options;
     const { model } = this;
     const { database, token } = this.client;
 
-    const payload = createModelExecutePayload({
+    const executePayload = createModelExecutePayload({
       database: database!,
       token: token!,
       model,
-      ids,
+      payload,
       action,
     });
 
     return await this.client._fetch({
-      payload,
+      payload: executePayload,
     });
   }
 

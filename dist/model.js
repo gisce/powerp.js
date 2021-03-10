@@ -262,24 +262,24 @@ var Model = /** @class */ (function () {
   };
   Model.prototype.execute = function (options) {
     return __awaiter(this, void 0, void 0, function () {
-      var ids, action, model, _a, database, token, payload;
+      var payload, action, model, _a, database, token, executePayload;
       return __generator(this, function (_b) {
         switch (_b.label) {
           case 0:
-            (ids = options.ids), (action = options.action);
+            (payload = options.payload), (action = options.action);
             model = this.model;
             (_a = this.client), (database = _a.database), (token = _a.token);
-            payload = payloads_1.createModelExecutePayload({
+            executePayload = payloads_1.createModelExecutePayload({
               database: database,
               token: token,
               model: model,
-              ids: ids,
+              payload: payload,
               action: action,
             });
             return [
               4 /*yield*/,
               this.client._fetch({
-                payload: payload,
+                payload: executePayload,
               }),
             ];
           case 1:

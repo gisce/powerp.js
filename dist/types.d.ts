@@ -67,7 +67,7 @@ export declare type ModelFieldsViewGetPayload = Model &
   Token &
   ModelFieldsViewGetOpts;
 export declare type ModelExecuteOpts = {
-  ids?: number[];
+  payload?: any;
   action: string;
 };
 export declare type ModelExecutePayload = Model &
