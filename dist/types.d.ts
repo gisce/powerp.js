@@ -49,13 +49,20 @@ export declare type ModelReadOpts = {
 };
 export declare type ModelWriteOpts = {
   ids: Array<number>;
-  fields: any;
+  values: any;
+};
+export declare type ModelCreateOpts = {
+  values: any;
 };
 export declare type ModelReadPayload = Model & Database & Token & ModelReadOpts;
 export declare type ModelWritePayload = Model &
   Database &
   Token &
   ModelWriteOpts;
+export declare type ModelCreatePayload = Model &
+  Database &
+  Token &
+  ModelCreateOpts;
 export declare type ModelFieldsViewGetOpts = {
   type: string;
   id: number | null;

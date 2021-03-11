@@ -290,11 +290,11 @@ var Model = /** @class */ (function () {
   };
   Model.prototype.write = function (options) {
     return __awaiter(this, void 0, void 0, function () {
-      var ids, fields, model, _a, database, token, payload;
+      var ids, values, model, _a, database, token, payload;
       return __generator(this, function (_b) {
         switch (_b.label) {
           case 0:
-            (ids = options.ids), (fields = options.fields);
+            (ids = options.ids), (values = options.values);
             model = this.model;
             (_a = this.client), (database = _a.database), (token = _a.token);
             payload = payloads_1.createWritePayload({
@@ -302,7 +302,34 @@ var Model = /** @class */ (function () {
               token: token,
               model: model,
               ids: ids,
-              fields: fields,
+              values: values,
+            });
+            return [
+              4 /*yield*/,
+              this.client._fetch({
+                payload: payload,
+              }),
+            ];
+          case 1:
+            return [2 /*return*/, _b.sent()];
+        }
+      });
+    });
+  };
+  Model.prototype.create = function (options) {
+    return __awaiter(this, void 0, void 0, function () {
+      var values, model, _a, database, token, payload;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            values = options.values;
+            model = this.model;
+            (_a = this.client), (database = _a.database), (token = _a.token);
+            payload = payloads_1.createCreatePayload({
+              database: database,
+              token: token,
+              model: model,
+              values: values,
             });
             return [
               4 /*yield*/,

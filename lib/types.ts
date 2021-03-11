@@ -58,12 +58,18 @@ export type ModelReadOpts = {
 
 export type ModelWriteOpts = {
   ids: Array<number>;
-  fields: any;
+  values: any;
+};
+
+export type ModelCreateOpts = {
+  values: any;
 };
 
 export type ModelReadPayload = Model & Database & Token & ModelReadOpts;
 
 export type ModelWritePayload = Model & Database & Token & ModelWriteOpts;
+
+export type ModelCreatePayload = Model & Database & Token & ModelCreateOpts;
 
 export type ModelFieldsViewGetOpts = {
   type: string;

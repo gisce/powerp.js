@@ -202,7 +202,7 @@ describe("A Model", () => {
 
         await userModel.write({
           ids: [6],
-          fields: { name: newName },
+          values: { name: newName },
         });
 
         const updatedUser = (
@@ -212,6 +212,38 @@ describe("A Model", () => {
         )[0];
 
         expect(updatedUser.name).toBe(newName);
+        done();
+      });
+    });
+    describe("when creating", () => {
+      test("must get new id for new object", async (done) => {
+        const c = new Client(process.env.ERP_HOST);
+        c.setDatabase(process.env.ERP_DB!);
+
+        const token = await c.loginAndGetToken({
+          user: process.env.ERP_USER!,
+          password: process.env.ERP_PASSWORD!,
+        });
+        expect(token).toBeTruthy();
+
+        const userModel = new Model("giscedata.switching.xml.encoding", c);
+
+        const randName = "test " + Date.now().toString();
+
+        const newId = await userModel.create({
+          values: {
+            acronim: randName,
+            name: randName,
+          },
+        });
+
+        const newObject = (
+          await userModel.read({
+            ids: [newId],
+          })
+        )[0];
+
+        expect(newObject.name).toBe(randName);
         done();
       });
     });

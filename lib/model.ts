@@ -5,6 +5,7 @@ import {
   ModelFieldsViewGetOpts,
   ModelExecuteOpts,
   ModelWriteOpts,
+  ModelCreateOpts,
 } from "./types";
 import {
   createSearchPayload,
@@ -12,6 +13,7 @@ import {
   createFieldsViewGetPayload,
   createModelExecutePayload,
   createWritePayload,
+  createCreatePayload,
 } from "./payloads";
 
 export class Model {
@@ -109,7 +111,7 @@ export class Model {
   }
 
   public async write(options: ModelWriteOpts): Promise<any> {
-    const { ids, fields } = options;
+    const { ids, values } = options;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -118,7 +120,24 @@ export class Model {
       token: token!,
       model,
       ids,
-      fields,
+      values,
+    });
+
+    return await this.client._fetch({
+      payload,
+    });
+  }
+
+  public async create(options: ModelCreateOpts): Promise<any> {
+    const { values } = options;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const payload = createCreatePayload({
+      database: database!,
+      token: token!,
+      model,
+      values,
     });
 
     return await this.client._fetch({

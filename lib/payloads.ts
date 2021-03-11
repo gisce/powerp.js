@@ -2,8 +2,10 @@ import {
   LoginTokenPayload,
   ModelSearchPayload,
   ModelReadPayload,
+  ModelWritePayload,
   ModelFieldsViewGetPayload,
   ModelExecutePayload,
+  ModelCreatePayload,
   Payload,
 } from "./types";
 
@@ -45,9 +47,14 @@ export const createReadPayload = (options: ModelReadPayload): Payload => {
   return ["execute", database, "token", token, model, "read", ids, fields];
 };
 
-export const createWritePayload = (options: ModelReadPayload): Payload => {
-  const { database, token, model, ids, fields } = options;
-  return ["execute", database, "token", token, model, "write", ids, fields];
+export const createWritePayload = (options: ModelWritePayload): Payload => {
+  const { database, token, model, ids, values } = options;
+  return ["execute", database, "token", token, model, "write", ids, values];
+};
+
+export const createCreatePayload = (options: ModelCreatePayload): Payload => {
+  const { database, token, model, values } = options;
+  return ["execute", database, "token", token, model, "create", values];
 };
 
 export const createFieldsViewGetPayload = (

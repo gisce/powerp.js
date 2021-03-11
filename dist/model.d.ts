@@ -5,6 +5,7 @@ import {
   ModelFieldsViewGetOpts,
   ModelExecuteOpts,
   ModelWriteOpts,
+  ModelCreateOpts,
 } from "./types";
 export declare class Model {
   model: string;
@@ -15,4 +16,5 @@ export declare class Model {
   fields_view_get(options: ModelFieldsViewGetOpts): Promise<any>;
   execute(options: ModelExecuteOpts): Promise<any>;
   write(options: ModelWriteOpts): Promise<any>;
+  create(options: ModelCreateOpts): Promise<any>;
 }
