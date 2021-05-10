@@ -6,6 +6,7 @@ import {
   ModelExecuteOpts,
   ModelWriteOpts,
   ModelCreateOpts,
+  ModelDeleteOpts,
 } from "./types";
 export declare class Model {
   model: string;
@@ -17,4 +18,5 @@ export declare class Model {
   execute(options: ModelExecuteOpts): Promise<any>;
   write(options: ModelWriteOpts): Promise<any>;
   create(options: ModelCreateOpts): Promise<any>;
+  delete(options: ModelDeleteOpts): Promise<any>;
 }

@@ -247,5 +247,39 @@ describe("A Model", () => {
         done();
       });
     });
+    describe("when deleting", () => {
+      test("must get true when removing a new item", async (done) => {
+        const c = new Client(process.env.ERP_HOST);
+        c.setDatabase(process.env.ERP_DB!);
+
+        const token = await c.loginAndGetToken({
+          user: process.env.ERP_USER!,
+          password: process.env.ERP_PASSWORD!,
+        });
+        expect(token).toBeTruthy();
+
+        const userModel = new Model("giscedata.switching.xml.encoding", c);
+
+        const randName = "test " + Date.now().toString();
+
+        const newId = await userModel.create({
+          values: {
+            acronim: randName,
+            name: randName,
+          },
+        });
+
+        await userModel.delete({
+          ids: [newId],
+        });
+
+        const removedObject = await userModel.read({
+          ids: [newId],
+        });
+
+        expect(removedObject.length).toBe(0);
+        done();
+      });
+    });
   });
 });

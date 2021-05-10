@@ -6,6 +6,7 @@ import {
   ModelFieldsViewGetPayload,
   ModelExecutePayload,
   ModelCreatePayload,
+  ModelDeletePayload,
   Payload,
 } from "./types";
 
@@ -55,6 +56,11 @@ export const createWritePayload = (options: ModelWritePayload): Payload => {
 export const createCreatePayload = (options: ModelCreatePayload): Payload => {
   const { database, token, model, values } = options;
   return ["execute", database, "token", token, model, "create", values];
+};
+
+export const createDeletePayload = (options: ModelDeletePayload): Payload => {
+  const { database, token, model, ids } = options;
+  return ["execute", database, "token", token, model, "unlink", ids];
 };
 
 export const createFieldsViewGetPayload = (

@@ -54,6 +54,9 @@ export declare type ModelWriteOpts = {
 export declare type ModelCreateOpts = {
   values: any;
 };
+export declare type ModelDeleteOpts = {
+  ids: Array<number>;
+};
 export declare type ModelReadPayload = Model & Database & Token & ModelReadOpts;
 export declare type ModelWritePayload = Model &
   Database &
@@ -63,6 +66,10 @@ export declare type ModelCreatePayload = Model &
   Database &
   Token &
   ModelCreateOpts;
+export declare type ModelDeletePayload = Model &
+  Database &
+  Token &
+  ModelDeleteOpts;
 export declare type ModelFieldsViewGetOpts = {
   type: string;
   id: number | null;

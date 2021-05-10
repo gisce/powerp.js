@@ -6,6 +6,7 @@ import {
   ModelExecuteOpts,
   ModelWriteOpts,
   ModelCreateOpts,
+  ModelDeleteOpts,
 } from "./types";
 import {
   createSearchPayload,
@@ -14,6 +15,7 @@ import {
   createModelExecutePayload,
   createWritePayload,
   createCreatePayload,
+  createDeletePayload,
 } from "./payloads";
 
 export class Model {
@@ -138,6 +140,23 @@ export class Model {
       token: token!,
       model,
       values,
+    });
+
+    return await this.client._fetch({
+      payload,
+    });
+  }
+
+  public async delete(options: ModelDeleteOpts): Promise<any> {
+    const { ids } = options;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const payload = createDeletePayload({
+      database: database!,
+      token: token!,
+      model,
+      ids,
     });
 
     return await this.client._fetch({

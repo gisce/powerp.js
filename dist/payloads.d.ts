@@ -6,6 +6,7 @@ import {
   ModelFieldsViewGetPayload,
   ModelExecutePayload,
   ModelCreatePayload,
+  ModelDeletePayload,
   Payload,
 } from "./types";
 export declare const makeLoginTokenPayload: (
@@ -20,6 +21,9 @@ export declare const createWritePayload: (
 ) => Payload;
 export declare const createCreatePayload: (
   options: ModelCreatePayload
+) => Payload;
+export declare const createDeletePayload: (
+  options: ModelDeletePayload
 ) => Payload;
 export declare const createFieldsViewGetPayload: (
   options: ModelFieldsViewGetPayload
