@@ -95,3 +95,18 @@ export const createModelExecutePayload = (
     payload || undefined,
   ];
 };
+
+export const createModelExecuteWorkflowPayload = (
+  options: ModelExecutePayload
+): Payload => {
+  const { database, token, model, payload, action } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    action,
+    payload || undefined,
+  ];
+};

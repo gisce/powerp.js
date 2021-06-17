@@ -370,6 +370,34 @@ var Model = /** @class */ (function () {
       });
     });
   };
+  Model.prototype.executeWorkflow = function (options) {
+    return __awaiter(this, void 0, void 0, function () {
+      var payload, action, model, _a, database, token, executePayload;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            (payload = options.payload), (action = options.action);
+            model = this.model;
+            (_a = this.client), (database = _a.database), (token = _a.token);
+            executePayload = payloads_1.createModelExecuteWorkflowPayload({
+              database: database,
+              token: token,
+              model: model,
+              payload: payload,
+              action: action,
+            });
+            return [
+              4 /*yield*/,
+              this.client._fetch({
+                payload: executePayload,
+              }),
+            ];
+          case 1:
+            return [2 /*return*/, _b.sent()];
+        }
+      });
+    });
+  };
   return Model;
 })();
 exports.Model = Model;

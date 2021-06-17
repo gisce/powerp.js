@@ -19,4 +19,5 @@ export declare class Model {
   write(options: ModelWriteOpts): Promise<any>;
   create(options: ModelCreateOpts): Promise<any>;
   delete(options: ModelDeleteOpts): Promise<any>;
+  executeWorkflow(options: ModelExecuteOpts): Promise<any>;
 }

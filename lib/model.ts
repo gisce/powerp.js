@@ -16,6 +16,7 @@ import {
   createWritePayload,
   createCreatePayload,
   createDeletePayload,
+  createModelExecuteWorkflowPayload,
 } from "./payloads";
 
 export class Model {
@@ -161,6 +162,24 @@ export class Model {
 
     return await this.client._fetch({
       payload,
+    });
+  }
+
+  public async executeWorkflow(options: ModelExecuteOpts): Promise<any> {
+    const { payload, action } = options;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const executePayload = createModelExecuteWorkflowPayload({
+      database: database!,
+      token: token!,
+      model,
+      payload,
+      action,
+    });
+
+    return await this.client._fetch({
+      payload: executePayload,
     });
   }
 }
