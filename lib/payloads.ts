@@ -101,7 +101,7 @@ export const createModelExecuteWorkflowPayload = (
 ): Payload => {
   const { database, token, model, payload, action } = options;
   return [
-    "execute",
+    "exec_workflow",
     database,
     "token",
     token,

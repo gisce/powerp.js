@@ -114,7 +114,7 @@ var createModelExecuteWorkflowPayload = function (options) {
     payload = options.payload,
     action = options.action;
   return [
-    "execute",
+    "exec_workflow",
     database,
     "token",
     token,
