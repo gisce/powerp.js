@@ -49,13 +49,32 @@ export const createReadPayload = (options: ModelReadPayload): Payload => {
 };
 
 export const createWritePayload = (options: ModelWritePayload): Payload => {
-  const { database, token, model, ids, values } = options;
-  return ["execute", database, "token", token, model, "write", ids, values];
+  const { database, token, model, ids, values, context } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "write",
+    ids,
+    values,
+    context,
+  ];
 };
 
 export const createCreatePayload = (options: ModelCreatePayload): Payload => {
-  const { database, token, model, values } = options;
-  return ["execute", database, "token", token, model, "create", values];
+  const { database, token, model, values, context } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "create",
+    values,
+    context,
+  ];
 };
 
 export const createDeletePayload = (options: ModelDeletePayload): Payload => {

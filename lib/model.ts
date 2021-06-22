@@ -115,7 +115,7 @@ export class Model {
   }
 
   public async write(options: ModelWriteOpts): Promise<any> {
-    const { ids, values } = options;
+    const { ids, values, context } = options;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -125,6 +125,7 @@ export class Model {
       model,
       ids,
       values,
+      context,
     });
 
     return await this.client._fetch({
@@ -133,7 +134,7 @@ export class Model {
   }
 
   public async create(options: ModelCreateOpts): Promise<any> {
-    const { values } = options;
+    const { values, context } = options;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -142,6 +143,7 @@ export class Model {
       token: token!,
       model,
       values,
+      context,
     });
 
     return await this.client._fetch({

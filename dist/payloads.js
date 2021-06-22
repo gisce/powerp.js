@@ -48,16 +48,37 @@ var createWritePayload = function (options) {
     token = options.token,
     model = options.model,
     ids = options.ids,
-    values = options.values;
-  return ["execute", database, "token", token, model, "write", ids, values];
+    values = options.values,
+    context = options.context;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "write",
+    ids,
+    values,
+    context,
+  ];
 };
 exports.createWritePayload = createWritePayload;
 var createCreatePayload = function (options) {
   var database = options.database,
     token = options.token,
     model = options.model,
-    values = options.values;
-  return ["execute", database, "token", token, model, "create", values];
+    values = options.values,
+    context = options.context;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "create",
+    values,
+    context,
+  ];
 };
 exports.createCreatePayload = createCreatePayload;
 var createDeletePayload = function (options) {

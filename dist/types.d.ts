@@ -50,9 +50,11 @@ export declare type ModelReadOpts = {
 export declare type ModelWriteOpts = {
   ids: Array<number>;
   values: any;
+  context?: Context;
 };
 export declare type ModelCreateOpts = {
   values: any;
+  context?: Context;
 };
 export declare type ModelDeleteOpts = {
   ids: Array<number>;
