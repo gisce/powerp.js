@@ -81,12 +81,13 @@ export const createFieldsViewGetPayload = (
   ];
 };
 
-export const createModelExecutePayload = (
+const createModelExecutePayloadCustom = (
+  method: string,
   options: ModelExecutePayload
 ): Payload => {
   const { database, token, model, payload, action, context } = options;
   return [
-    "execute",
+    method,
     database,
     "token",
     token,
@@ -97,17 +98,14 @@ export const createModelExecutePayload = (
   ];
 };
 
+export const createModelExecutePayload = (
+  options: ModelExecutePayload
+): Payload => {
+  return createModelExecutePayloadCustom("execute", options);
+};
+
 export const createModelExecuteWorkflowPayload = (
   options: ModelExecutePayload
 ): Payload => {
-  const { database, token, model, payload, action } = options;
-  return [
-    "exec_workflow",
-    database,
-    "token",
-    token,
-    model,
-    action,
-    payload || undefined,
-  ];
+  return createModelExecutePayloadCustom("exec_workflow", options);
 };
