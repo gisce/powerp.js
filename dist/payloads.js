@@ -90,7 +90,7 @@ var createFieldsViewGetPayload = function (options) {
   ];
 };
 exports.createFieldsViewGetPayload = createFieldsViewGetPayload;
-var createModelExecutePayloadCustom = function (method, options) {
+var createModelExecutePayload = function (options) {
   var database = options.database,
     token = options.token,
     model = options.model,
@@ -98,7 +98,7 @@ var createModelExecutePayloadCustom = function (method, options) {
     action = options.action,
     context = options.context;
   return [
-    method,
+    "execute",
     database,
     "token",
     token,
@@ -108,12 +108,22 @@ var createModelExecutePayloadCustom = function (method, options) {
     context,
   ];
 };
-var createModelExecutePayload = function (options) {
-  return createModelExecutePayloadCustom("execute", options);
-};
 exports.createModelExecutePayload = createModelExecutePayload;
 var createModelExecuteWorkflowPayload = function (options) {
-  return createModelExecutePayloadCustom("exec_workflow", options);
+  var database = options.database,
+    token = options.token,
+    model = options.model,
+    payload = options.payload,
+    action = options.action;
+  return [
+    "exec_workflow",
+    database,
+    "token",
+    token,
+    model,
+    action,
+    payload || undefined,
+  ];
 };
 exports.createModelExecuteWorkflowPayload = createModelExecuteWorkflowPayload;
 //# sourceMappingURL=payloads.js.map
