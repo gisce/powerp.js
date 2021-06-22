@@ -83,6 +83,7 @@ export declare type ModelFieldsViewGetPayload = Model &
 export declare type ModelExecuteOpts = {
   payload?: any;
   action: string;
+  context?: Context;
 };
 export declare type ModelExecutePayload = Model &
   Database &

@@ -96,7 +96,7 @@ export class Model {
   }
 
   public async execute(options: ModelExecuteOpts): Promise<any> {
-    const { payload, action } = options;
+    const { payload, action, context } = options;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -106,6 +106,7 @@ export class Model {
       model,
       payload,
       action,
+      context,
     });
 
     return await this.client._fetch({

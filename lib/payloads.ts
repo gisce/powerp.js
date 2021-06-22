@@ -84,7 +84,7 @@ export const createFieldsViewGetPayload = (
 export const createModelExecutePayload = (
   options: ModelExecutePayload
 ): Payload => {
-  const { database, token, model, payload, action } = options;
+  const { database, token, model, payload, action, context } = options;
   return [
     "execute",
     database,
@@ -93,6 +93,7 @@ export const createModelExecutePayload = (
     model,
     action,
     payload || undefined,
+    context,
   ];
 };
 

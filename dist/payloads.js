@@ -95,7 +95,8 @@ var createModelExecutePayload = function (options) {
     token = options.token,
     model = options.model,
     payload = options.payload,
-    action = options.action;
+    action = options.action,
+    context = options.context;
   return [
     "execute",
     database,
@@ -104,6 +105,7 @@ var createModelExecutePayload = function (options) {
     model,
     action,
     payload || undefined,
+    context,
   ];
 };
 exports.createModelExecutePayload = createModelExecutePayload;
