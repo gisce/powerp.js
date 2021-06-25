@@ -8,6 +8,8 @@ import {
   ModelCreatePayload,
   ModelDeletePayload,
   Payload,
+  CreateReportPayload,
+  GetReportPayload,
 } from "./types";
 export declare const makeLoginTokenPayload: (
   options: LoginTokenPayload
@@ -33,4 +35,10 @@ export declare const createModelExecutePayload: (
 ) => Payload;
 export declare const createModelExecuteWorkflowPayload: (
   options: ModelExecutePayload
+) => Payload;
+export declare const createCreateReportPayload: (
+  options: CreateReportPayload
+) => Payload;
+export declare const createGetReportPayload: (
+  options: GetReportPayload
 ) => Payload;

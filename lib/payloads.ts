@@ -8,6 +8,10 @@ import {
   ModelCreatePayload,
   ModelDeletePayload,
   Payload,
+  CreateReportOpts,
+  GetReportOpts,
+  CreateReportPayload,
+  GetReportPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -129,4 +133,28 @@ export const createModelExecuteWorkflowPayload = (
     action,
     payload || undefined,
   ];
+};
+
+export const createCreateReportPayload = (
+  options: CreateReportPayload
+): Payload => {
+  const { database, token, model, name, id, context, contextReport } = options;
+  return [
+    "report",
+    database,
+    "token",
+    token,
+    name,
+    [id],
+    {
+      context: contextReport,
+      model,
+    },
+    context,
+  ];
+};
+
+export const createGetReportPayload = (options: GetReportPayload): Payload => {
+  const { id, database, token } = options;
+  return ["report_get", database, "token", token, id];
 };

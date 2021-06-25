@@ -15,7 +15,7 @@ export declare type Token = {
 export declare type Model = {
   model: string;
 };
-export declare type Context = Array<any> | null;
+export declare type Context = any | null;
 export declare type Payload = Array<
   | string
   | string[]
@@ -91,3 +91,15 @@ export declare type ModelExecutePayload = Model &
   Database &
   Token &
   ModelExecuteOpts;
+export declare type CreateReportOpts = {
+  name: string;
+  model: string;
+  id: number;
+  contextReport: Context;
+  context?: Context;
+};
+export declare type GetReportOpts = {
+  id: number;
+};
+export declare type CreateReportPayload = Database & Token & CreateReportOpts;
+export declare type GetReportPayload = Database & Token & GetReportOpts;

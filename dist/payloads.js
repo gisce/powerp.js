@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createModelExecuteWorkflowPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
+exports.createGetReportPayload = exports.createCreateReportPayload = exports.createModelExecuteWorkflowPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
 var makeLoginTokenPayload = function (options) {
   var database = options.database,
     user = options.user,
@@ -147,4 +147,34 @@ var createModelExecuteWorkflowPayload = function (options) {
   ];
 };
 exports.createModelExecuteWorkflowPayload = createModelExecuteWorkflowPayload;
+var createCreateReportPayload = function (options) {
+  var database = options.database,
+    token = options.token,
+    model = options.model,
+    name = options.name,
+    id = options.id,
+    context = options.context,
+    contextReport = options.contextReport;
+  return [
+    "report",
+    database,
+    "token",
+    token,
+    name,
+    [id],
+    {
+      context: contextReport,
+      model: model,
+    },
+    context,
+  ];
+};
+exports.createCreateReportPayload = createCreateReportPayload;
+var createGetReportPayload = function (options) {
+  var id = options.id,
+    database = options.database,
+    token = options.token;
+  return ["report_get", database, "token", token, id];
+};
+exports.createGetReportPayload = createGetReportPayload;
 //# sourceMappingURL=payloads.js.map

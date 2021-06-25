@@ -21,7 +21,7 @@ export type Model = {
   model: string;
 };
 
-export type Context = Array<any> | null;
+export type Context = any | null;
 
 export type Payload = Array<
   | string
@@ -98,3 +98,19 @@ export type ModelExecuteOpts = {
 };
 
 export type ModelExecutePayload = Model & Database & Token & ModelExecuteOpts;
+
+export type CreateReportOpts = {
+  name: string;
+  model: string;
+  id: number;
+  contextReport: Context;
+  context?: Context;
+};
+
+export type GetReportOpts = {
+  id: number;
+};
+
+export type CreateReportPayload = Database & Token & CreateReportOpts;
+
+export type GetReportPayload = Database & Token & GetReportOpts;
