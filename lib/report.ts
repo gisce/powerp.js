@@ -10,7 +10,7 @@ export class Report {
   }
 
   public async create(options: CreateReportOpts): Promise<any> {
-    const { id, name, contextReport, model, context = null } = options;
+    const { ids, name, contextReport, model, context = null } = options;
 
     const { database, token } = this.client;
 
@@ -19,7 +19,7 @@ export class Report {
       token: token!,
       model,
       context,
-      id,
+      ids,
       name,
       contextReport,
     });

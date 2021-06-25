@@ -141,7 +141,7 @@ var Report = /** @class */ (function () {
   }
   Report.prototype.create = function (options) {
     return __awaiter(this, void 0, void 0, function () {
-      var id,
+      var ids,
         name,
         contextReport,
         model,
@@ -154,7 +154,7 @@ var Report = /** @class */ (function () {
       return __generator(this, function (_c) {
         switch (_c.label) {
           case 0:
-            (id = options.id),
+            (ids = options.ids),
               (name = options.name),
               (contextReport = options.contextReport),
               (model = options.model),
@@ -166,7 +166,7 @@ var Report = /** @class */ (function () {
               token: token,
               model: model,
               context: context,
-              id: id,
+              ids: ids,
               name: name,
               contextReport: contextReport,
             });

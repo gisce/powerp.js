@@ -152,7 +152,7 @@ var createCreateReportPayload = function (options) {
     token = options.token,
     model = options.model,
     name = options.name,
-    id = options.id,
+    ids = options.ids,
     context = options.context,
     contextReport = options.contextReport;
   return [
@@ -161,7 +161,7 @@ var createCreateReportPayload = function (options) {
     "token",
     token,
     name,
-    [id],
+    ids,
     {
       context: contextReport,
       model: model,

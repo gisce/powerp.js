@@ -19,7 +19,7 @@ describe("A Report", () => {
 
     const result = await report.create({
       name: "report_preus_annex",
-      id: 4,
+      ids: [4],
       contextReport: {
         active_id: 54,
         active_ids: [54],

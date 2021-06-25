@@ -94,7 +94,7 @@ export declare type ModelExecutePayload = Model &
 export declare type CreateReportOpts = {
   name: string;
   model: string;
-  id: number;
+  ids: number[];
   contextReport: Context;
   context?: Context;
 };

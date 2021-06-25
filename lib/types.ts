@@ -102,7 +102,7 @@ export type ModelExecutePayload = Model & Database & Token & ModelExecuteOpts;
 export type CreateReportOpts = {
   name: string;
   model: string;
-  id: number;
+  ids: number[];
   contextReport: Context;
   context?: Context;
 };

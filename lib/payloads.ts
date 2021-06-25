@@ -138,14 +138,14 @@ export const createModelExecuteWorkflowPayload = (
 export const createCreateReportPayload = (
   options: CreateReportPayload
 ): Payload => {
-  const { database, token, model, name, id, context, contextReport } = options;
+  const { database, token, model, name, ids, context, contextReport } = options;
   return [
     "report",
     database,
     "token",
     token,
     name,
-    [id],
+    ids,
     {
       context: contextReport,
       model,
