@@ -118,16 +118,14 @@ var createModelExecutePayload = function (options) {
     payload = options.payload,
     action = options.action,
     context = options.context;
-  return [
-    "execute",
-    database,
-    "token",
-    token,
-    model,
-    action,
-    payload || undefined,
-    context,
-  ];
+  var base = ["execute", database, "token", token, model, action];
+  if (payload) {
+    base.push(payload);
+  }
+  if (context) {
+    base.push(context);
+  }
+  return base;
 };
 exports.createModelExecutePayload = createModelExecutePayload;
 var createModelExecuteWorkflowPayload = function (options) {
