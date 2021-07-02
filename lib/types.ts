@@ -97,7 +97,19 @@ export type ModelExecuteOpts = {
   context?: Context;
 };
 
+export type ModelExecuteOnChangeOpts = {
+  ids: Array<number>;
+  payload?: any;
+  action: string;
+  context?: Context;
+};
+
 export type ModelExecutePayload = Model & Database & Token & ModelExecuteOpts;
+
+export type ModelExecuteOnChangePayload = Model &
+  Database &
+  Token &
+  ModelExecuteOnChangeOpts;
 
 export type CreateReportOpts = {
   name: string;

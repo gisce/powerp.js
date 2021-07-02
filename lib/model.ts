@@ -7,6 +7,7 @@ import {
   ModelWriteOpts,
   ModelCreateOpts,
   ModelDeleteOpts,
+  ModelExecuteOnChangeOpts,
 } from "./types";
 import {
   createSearchPayload,
@@ -17,6 +18,7 @@ import {
   createCreatePayload,
   createDeletePayload,
   createModelExecuteWorkflowPayload,
+  createExecuteOnChangePayload,
 } from "./payloads";
 
 export class Model {
@@ -180,6 +182,28 @@ export class Model {
       payload,
       action,
       context,
+    });
+
+    return await this.client._fetch({
+      payload: executePayload,
+    });
+  }
+
+  public async executeOnChange(
+    options: ModelExecuteOnChangeOpts
+  ): Promise<any> {
+    const { payload, action, context, ids } = options;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const executePayload = createExecuteOnChangePayload({
+      database: database!,
+      token: token!,
+      model,
+      payload,
+      action,
+      context,
+      ids,
     });
 
     return await this.client._fetch({

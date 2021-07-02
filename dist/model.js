@@ -408,6 +408,47 @@ var Model = /** @class */ (function () {
       });
     });
   };
+  Model.prototype.executeOnChange = function (options) {
+    return __awaiter(this, void 0, void 0, function () {
+      var payload,
+        action,
+        context,
+        ids,
+        model,
+        _a,
+        database,
+        token,
+        executePayload;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            (payload = options.payload),
+              (action = options.action),
+              (context = options.context),
+              (ids = options.ids);
+            model = this.model;
+            (_a = this.client), (database = _a.database), (token = _a.token);
+            executePayload = payloads_1.createExecuteOnChangePayload({
+              database: database,
+              token: token,
+              model: model,
+              payload: payload,
+              action: action,
+              context: context,
+              ids: ids,
+            });
+            return [
+              4 /*yield*/,
+              this.client._fetch({
+                payload: executePayload,
+              }),
+            ];
+          case 1:
+            return [2 /*return*/, _b.sent()];
+        }
+      });
+    });
+  };
   return Model;
 })();
 exports.Model = Model;

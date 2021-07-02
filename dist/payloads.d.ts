@@ -10,6 +10,7 @@ import {
   Payload,
   CreateReportPayload,
   GetReportPayload,
+  ModelExecuteOnChangePayload,
 } from "./types";
 export declare const makeLoginTokenPayload: (
   options: LoginTokenPayload
@@ -41,4 +42,7 @@ export declare const createCreateReportPayload: (
 ) => Payload;
 export declare const createGetReportPayload: (
   options: GetReportPayload
+) => Payload;
+export declare const createExecuteOnChangePayload: (
+  options: ModelExecuteOnChangePayload
 ) => Payload;

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createGetReportPayload = exports.createCreateReportPayload = exports.createModelExecuteWorkflowPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
+exports.createExecuteOnChangePayload = exports.createGetReportPayload = exports.createCreateReportPayload = exports.createModelExecuteWorkflowPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
 var makeLoginTokenPayload = function (options) {
   var database = options.database,
     user = options.user,
@@ -175,4 +175,25 @@ var createGetReportPayload = function (options) {
   return ["report_get", database, "token", token, id];
 };
 exports.createGetReportPayload = createGetReportPayload;
+var createExecuteOnChangePayload = function (options) {
+  var database = options.database,
+    token = options.token,
+    model = options.model,
+    ids = options.ids,
+    context = options.context,
+    action = options.action,
+    payload = options.payload;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    action,
+    ids,
+    payload,
+    context,
+  ];
+};
+exports.createExecuteOnChangePayload = createExecuteOnChangePayload;
 //# sourceMappingURL=payloads.js.map

@@ -87,10 +87,20 @@ export declare type ModelExecuteOpts = {
   action: string;
   context?: Context;
 };
+export declare type ModelExecuteOnChangeOpts = {
+  ids: Array<number>;
+  payload?: any;
+  action: string;
+  context?: Context;
+};
 export declare type ModelExecutePayload = Model &
   Database &
   Token &
   ModelExecuteOpts;
+export declare type ModelExecuteOnChangePayload = Model &
+  Database &
+  Token &
+  ModelExecuteOnChangeOpts;
 export declare type CreateReportOpts = {
   name: string;
   model: string;
