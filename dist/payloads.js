@@ -183,17 +183,12 @@ var createExecuteOnChangePayload = function (options) {
     context = options.context,
     action = options.action,
     payload = options.payload;
-  return [
-    "execute",
-    database,
-    "token",
-    token,
-    model,
-    action,
-    ids,
-    payload,
-    context,
-  ];
+  var request = ["execute", database, "token", token, model, action, ids];
+  Object.keys(payload).forEach(function (key) {
+    request.push(payload[key]);
+  });
+  request.push(context);
+  return request;
 };
 exports.createExecuteOnChangePayload = createExecuteOnChangePayload;
 //# sourceMappingURL=payloads.js.map

@@ -163,15 +163,13 @@ export const createExecuteOnChangePayload = (
   options: ModelExecuteOnChangePayload
 ): Payload => {
   const { database, token, model, ids, context, action, payload } = options;
-  return [
-    "execute",
-    database,
-    "token",
-    token,
-    model,
-    action,
-    ids,
-    payload,
-    context,
-  ];
+  const request = ["execute", database, "token", token, model, action, ids];
+
+  Object.keys(payload).forEach((key) => {
+    request.push(payload[key]);
+  });
+
+  request.push(context);
+
+  return request;
 };
