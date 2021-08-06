@@ -152,20 +152,8 @@ var createCreateReportPayload = function (options) {
     name = options.name,
     ids = options.ids,
     context = options.context,
-    contextReport = options.contextReport;
-  return [
-    "report",
-    database,
-    "token",
-    token,
-    name,
-    ids,
-    {
-      context: contextReport,
-      model: model,
-    },
-    context,
-  ];
+    datas = options.datas;
+  return ["report", database, "token", token, name, ids, datas, context];
 };
 exports.createCreateReportPayload = createCreateReportPayload;
 var createGetReportPayload = function (options) {

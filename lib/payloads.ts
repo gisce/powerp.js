@@ -138,20 +138,8 @@ export const createModelExecuteWorkflowPayload = (
 export const createCreateReportPayload = (
   options: CreateReportPayload
 ): Payload => {
-  const { database, token, model, name, ids, context, contextReport } = options;
-  return [
-    "report",
-    database,
-    "token",
-    token,
-    name,
-    ids,
-    {
-      context: contextReport,
-      model,
-    },
-    context,
-  ];
+  const { database, token, model, name, ids, context, datas } = options;
+  return ["report", database, "token", token, name, ids, datas, context];
 };
 
 export const createGetReportPayload = (options: GetReportPayload): Payload => {

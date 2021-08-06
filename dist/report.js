@@ -141,22 +141,13 @@ var Report = /** @class */ (function () {
   }
   Report.prototype.create = function (options) {
     return __awaiter(this, void 0, void 0, function () {
-      var ids,
-        name,
-        contextReport,
-        model,
-        _a,
-        context,
-        _b,
-        database,
-        token,
-        payload;
+      var ids, name, datas, model, _a, context, _b, database, token, payload;
       return __generator(this, function (_c) {
         switch (_c.label) {
           case 0:
             (ids = options.ids),
               (name = options.name),
-              (contextReport = options.contextReport),
+              (datas = options.datas),
               (model = options.model),
               (_a = options.context),
               (context = _a === void 0 ? null : _a);
@@ -168,7 +159,7 @@ var Report = /** @class */ (function () {
               context: context,
               ids: ids,
               name: name,
-              contextReport: contextReport,
+              datas: datas,
             });
             return [
               4 /*yield*/,

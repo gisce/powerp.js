@@ -115,7 +115,7 @@ export type CreateReportOpts = {
   name: string;
   model: string;
   ids: number[];
-  contextReport: Context;
+  datas: any;
   context?: Context;
 };
 
