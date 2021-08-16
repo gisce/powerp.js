@@ -113,7 +113,6 @@ export type ModelExecuteOnChangePayload = Model &
 
 export type CreateReportOpts = {
   name: string;
-  model: string;
   ids: number[];
   datas: any;
   context?: Context;

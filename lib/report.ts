@@ -10,14 +10,13 @@ export class Report {
   }
 
   public async create(options: CreateReportOpts): Promise<any> {
-    const { ids, name, datas, model, context = null } = options;
+    const { ids, name, datas, context = null } = options;
 
     const { database, token } = this.client;
 
     const payload = createCreateReportPayload({
       database: database!,
       token: token!,
-      model,
       context,
       ids,
       name,

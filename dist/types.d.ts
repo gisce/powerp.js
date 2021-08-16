@@ -103,7 +103,6 @@ export declare type ModelExecuteOnChangePayload = Model &
   ModelExecuteOnChangeOpts;
 export declare type CreateReportOpts = {
   name: string;
-  model: string;
   ids: number[];
   datas: any;
   context?: Context;

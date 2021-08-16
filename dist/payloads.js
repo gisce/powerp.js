@@ -148,7 +148,6 @@ exports.createModelExecuteWorkflowPayload = createModelExecuteWorkflowPayload;
 var createCreateReportPayload = function (options) {
   var database = options.database,
     token = options.token,
-    model = options.model,
     name = options.name,
     ids = options.ids,
     context = options.context,
