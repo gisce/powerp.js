@@ -91,7 +91,6 @@ export declare type ModelExecuteOnChangeOpts = {
   ids: Array<number>;
   payload?: any;
   action: string;
-  context?: Context;
 };
 export declare type ModelExecutePayload = Model &
   Database &

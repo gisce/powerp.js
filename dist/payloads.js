@@ -167,14 +167,12 @@ var createExecuteOnChangePayload = function (options) {
     token = options.token,
     model = options.model,
     ids = options.ids,
-    context = options.context,
     action = options.action,
     payload = options.payload;
   var request = ["execute", database, "token", token, model, action, ids];
   Object.keys(payload).forEach(function (key) {
     request.push(payload[key]);
   });
-  request.push(context);
   return request;
 };
 exports.createExecuteOnChangePayload = createExecuteOnChangePayload;

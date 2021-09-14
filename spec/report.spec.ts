@@ -20,14 +20,16 @@ describe("A Report", () => {
     const result = await report.create({
       name: "report_preus_annex",
       ids: [4],
-      contextReport: {
-        active_id: 54,
-        active_ids: [54],
-        date: "2021-06-25",
-        pricelist: 23,
-        tarifa: 25,
+      datas: {
+        model: "wizard.pricelist.report.lead",
+        context: {
+          active_id: 54,
+          active_ids: [54],
+          date: "2021-06-25",
+          pricelist: 23,
+          tarifa: 25,
+        },
       },
-      model: "wizard.pricelist.report.lead",
       context: { active_id: 54, active_ids: [54] },
     });
 

@@ -101,7 +101,6 @@ export type ModelExecuteOnChangeOpts = {
   ids: Array<number>;
   payload?: any;
   action: string;
-  context?: Context;
 };
 
 export type ModelExecutePayload = Model & Database & Token & ModelExecuteOpts;

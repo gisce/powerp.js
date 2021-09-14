@@ -192,7 +192,7 @@ export class Model {
   public async executeOnChange(
     options: ModelExecuteOnChangeOpts
   ): Promise<any> {
-    const { payload, action, context, ids } = options;
+    const { payload, action, ids } = options;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -202,7 +202,6 @@ export class Model {
       model,
       payload,
       action,
-      context,
       ids,
     });
 

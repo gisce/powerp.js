@@ -150,14 +150,12 @@ export const createGetReportPayload = (options: GetReportPayload): Payload => {
 export const createExecuteOnChangePayload = (
   options: ModelExecuteOnChangePayload
 ): Payload => {
-  const { database, token, model, ids, context, action, payload } = options;
+  const { database, token, model, ids, action, payload } = options;
   const request = ["execute", database, "token", token, model, action, ids];
 
   Object.keys(payload).forEach((key) => {
     request.push(payload[key]);
   });
-
-  request.push(context);
 
   return request;
 };
