@@ -46,6 +46,7 @@ export declare type ModelSearchPayload = Model &
 export declare type ModelReadOpts = {
   ids: Array<number>;
   fields?: string[];
+  context?: Context;
 };
 export declare type ModelWriteOpts = {
   ids: Array<number>;

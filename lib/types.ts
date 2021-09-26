@@ -54,6 +54,7 @@ export type ModelSearchPayload = Model & Database & Token & ModelSearchOpts;
 export type ModelReadOpts = {
   ids: Array<number>;
   fields?: string[];
+  context?: Context;
 };
 
 export type ModelWriteOpts = {

@@ -47,8 +47,18 @@ export const createSearchPayload = (options: ModelSearchPayload): Payload => {
 };
 
 export const createReadPayload = (options: ModelReadPayload): Payload => {
-  const { database, token, model, ids, fields } = options;
-  return ["execute", database, "token", token, model, "read", ids, fields];
+  const { database, token, model, ids, fields, context = {} } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "read",
+    ids,
+    fields,
+    context,
+  ];
 };
 
 export const createWritePayload = (options: ModelWritePayload): Payload => {

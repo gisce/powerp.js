@@ -60,7 +60,7 @@ export class Model {
   }
 
   public async read(options: ModelReadOpts): Promise<any> {
-    const { ids, fields } = options;
+    const { ids, fields, context } = options;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -70,6 +70,7 @@ export class Model {
       model,
       ids,
       fields,
+      context,
     });
 
     return await this.client._fetch({

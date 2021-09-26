@@ -39,8 +39,20 @@ var createReadPayload = function (options) {
     token = options.token,
     model = options.model,
     ids = options.ids,
-    fields = options.fields;
-  return ["execute", database, "token", token, model, "read", ids, fields];
+    fields = options.fields,
+    _a = options.context,
+    context = _a === void 0 ? {} : _a;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "read",
+    ids,
+    fields,
+    context,
+  ];
 };
 exports.createReadPayload = createReadPayload;
 var createWritePayload = function (options) {

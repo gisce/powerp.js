@@ -201,11 +201,13 @@ var Model = /** @class */ (function () {
   };
   Model.prototype.read = function (options) {
     return __awaiter(this, void 0, void 0, function () {
-      var ids, fields, model, _a, database, token, payload;
+      var ids, fields, context, model, _a, database, token, payload;
       return __generator(this, function (_b) {
         switch (_b.label) {
           case 0:
-            (ids = options.ids), (fields = options.fields);
+            (ids = options.ids),
+              (fields = options.fields),
+              (context = options.context);
             model = this.model;
             (_a = this.client), (database = _a.database), (token = _a.token);
             payload = payloads_1.createReadPayload({
@@ -214,6 +216,7 @@ var Model = /** @class */ (function () {
               model: model,
               ids: ids,
               fields: fields,
+              context: context,
             });
             return [
               4 /*yield*/,
