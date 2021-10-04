@@ -8,6 +8,7 @@ import {
   ModelCreateOpts,
   ModelDeleteOpts,
   ModelExecuteOnChangeOpts,
+  ModelReadEvalUiOpts,
 } from "./types";
 import {
   createSearchPayload,
@@ -19,6 +20,7 @@ import {
   createDeletePayload,
   createModelExecuteWorkflowPayload,
   createExecuteOnChangePayload,
+  createReadEvalUiPayload,
 } from "./payloads";
 
 export class Model {
@@ -71,6 +73,26 @@ export class Model {
       ids,
       fields,
       context,
+    });
+
+    return await this.client._fetch({
+      payload,
+    });
+  }
+
+  public async read_and_eval_ui(options: ModelReadEvalUiOpts): Promise<any> {
+    const { ids, fields, context, attrs } = options;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const payload = createReadEvalUiPayload({
+      database: database!,
+      token: token!,
+      model,
+      ids,
+      fields,
+      context,
+      attrs,
     });
 
     return await this.client._fetch({

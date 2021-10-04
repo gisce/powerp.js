@@ -8,6 +8,7 @@ import {
   ModelCreateOpts,
   ModelDeleteOpts,
   ModelExecuteOnChangeOpts,
+  ModelReadEvalUiOpts,
 } from "./types";
 export declare class Model {
   model: string;
@@ -15,6 +16,7 @@ export declare class Model {
   constructor(model: string, client: Client);
   search(options: ModelSearchOpts): Promise<any>;
   read(options: ModelReadOpts): Promise<any>;
+  read_and_eval_ui(options: ModelReadEvalUiOpts): Promise<any>;
   fields_view_get(options: ModelFieldsViewGetOpts): Promise<any>;
   execute(options: ModelExecuteOpts): Promise<any>;
   write(options: ModelWriteOpts): Promise<any>;

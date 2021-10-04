@@ -11,6 +11,7 @@ import {
   CreateReportPayload,
   GetReportPayload,
   ModelExecuteOnChangePayload,
+  ModelReadEvalUiPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -59,6 +60,27 @@ export const createReadPayload = (options: ModelReadPayload): Payload => {
     fields,
     context,
   ];
+};
+
+export const createReadEvalUiPayload = (
+  options: ModelReadEvalUiPayload
+): Payload => {
+  const { database, token, model, ids, fields, context = {}, attrs } = options;
+  const payload = [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "read_and_eval_ui",
+    ids,
+    fields,
+    context,
+  ];
+  if (attrs) {
+    payload.push(attrs);
+  }
+  return payload;
 };
 
 export const createWritePayload = (options: ModelWritePayload): Payload => {

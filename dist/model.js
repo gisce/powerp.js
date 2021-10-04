@@ -230,6 +230,39 @@ var Model = /** @class */ (function () {
       });
     });
   };
+  Model.prototype.read_and_eval_ui = function (options) {
+    return __awaiter(this, void 0, void 0, function () {
+      var ids, fields, context, attrs, model, _a, database, token, payload;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            (ids = options.ids),
+              (fields = options.fields),
+              (context = options.context),
+              (attrs = options.attrs);
+            model = this.model;
+            (_a = this.client), (database = _a.database), (token = _a.token);
+            payload = payloads_1.createReadEvalUiPayload({
+              database: database,
+              token: token,
+              model: model,
+              ids: ids,
+              fields: fields,
+              context: context,
+              attrs: attrs,
+            });
+            return [
+              4 /*yield*/,
+              this.client._fetch({
+                payload: payload,
+              }),
+            ];
+          case 1:
+            return [2 /*return*/, _b.sent()];
+        }
+      });
+    });
+  };
   Model.prototype.fields_view_get = function (options) {
     return __awaiter(this, void 0, void 0, function () {
       var id, context, type, toolbar, model, _a, database, token, payload;

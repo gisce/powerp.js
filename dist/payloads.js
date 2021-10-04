@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createExecuteOnChangePayload = exports.createGetReportPayload = exports.createCreateReportPayload = exports.createModelExecuteWorkflowPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
+exports.createExecuteOnChangePayload = exports.createGetReportPayload = exports.createCreateReportPayload = exports.createModelExecuteWorkflowPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadEvalUiPayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
 var makeLoginTokenPayload = function (options) {
   var database = options.database,
     user = options.user,
@@ -55,6 +55,32 @@ var createReadPayload = function (options) {
   ];
 };
 exports.createReadPayload = createReadPayload;
+var createReadEvalUiPayload = function (options) {
+  var database = options.database,
+    token = options.token,
+    model = options.model,
+    ids = options.ids,
+    fields = options.fields,
+    _a = options.context,
+    context = _a === void 0 ? {} : _a,
+    attrs = options.attrs;
+  var payload = [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "read_and_eval_ui",
+    ids,
+    fields,
+    context,
+  ];
+  if (attrs) {
+    payload.push(attrs);
+  }
+  return payload;
+};
+exports.createReadEvalUiPayload = createReadEvalUiPayload;
 var createWritePayload = function (options) {
   var database = options.database,
     token = options.token,

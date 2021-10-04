@@ -57,6 +57,10 @@ export type ModelReadOpts = {
   context?: Context;
 };
 
+export type ModelReadEvalUiOpts = ModelReadOpts & {
+  attrs?: any;
+};
+
 export type ModelWriteOpts = {
   ids: Array<number>;
   values: any;
@@ -73,6 +77,11 @@ export type ModelDeleteOpts = {
 };
 
 export type ModelReadPayload = Model & Database & Token & ModelReadOpts;
+
+export type ModelReadEvalUiPayload = Model &
+  Database &
+  Token &
+  ModelReadEvalUiOpts;
 
 export type ModelWritePayload = Model & Database & Token & ModelWriteOpts;
 
