@@ -155,14 +155,10 @@ var createModelExecutePayload = function (options) {
     model = options.model,
     payload = options.payload,
     action = options.action,
-    context = options.context,
-    attrs = options.attrs;
+    context = options.context;
   var base = ["execute", database, "token", token, model, action];
   if (payload) {
     base.push(payload);
-  }
-  if (attrs !== undefined) {
-    base.push(attrs);
   }
   if (context) {
     base.push(context);

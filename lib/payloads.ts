@@ -138,15 +138,11 @@ export const createFieldsViewGetPayload = (
 export const createModelExecutePayload = (
   options: ModelExecutePayload
 ): Payload => {
-  const { database, token, model, payload, action, context, attrs } = options;
+  const { database, token, model, payload, action, context } = options;
   const base = ["execute", database, "token", token, model, action];
 
   if (payload) {
     base.push(payload);
-  }
-
-  if (attrs !== undefined) {
-    base.push(attrs);
   }
 
   if (context) {
