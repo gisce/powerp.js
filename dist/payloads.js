@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createExecuteOnChangePayload = exports.createGetReportPayload = exports.createCreateReportPayload = exports.createModelExecuteWorkflowPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadEvalUiPayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
+exports.createExecuteOnChangePayload = exports.createGetReportPayload = exports.createCreateReportPayload = exports.createModelExecuteWorkflowPayload = exports.createModelNameSearchPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadEvalUiPayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
 var makeLoginTokenPayload = function (options) {
   var database = options.database,
     user = options.user,
@@ -166,6 +166,31 @@ var createModelExecutePayload = function (options) {
   return base;
 };
 exports.createModelExecutePayload = createModelExecutePayload;
+var createModelNameSearchPayload = function (options) {
+  var database = options.database,
+    token = options.token,
+    model = options.model,
+    payload = options.payload,
+    action = options.action,
+    context = options.context,
+    _a = options.attrs,
+    attrs = _a === void 0 ? null : _a,
+    _b = options.operator,
+    operator = _b === void 0 ? "ilike" : _b;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    action,
+    payload,
+    attrs,
+    operator,
+    context,
+  ];
+};
+exports.createModelNameSearchPayload = createModelNameSearchPayload;
 var createModelExecuteWorkflowPayload = function (options) {
   var database = options.database,
     token = options.token,

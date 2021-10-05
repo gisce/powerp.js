@@ -12,6 +12,7 @@ import {
   GetReportPayload,
   ModelExecuteOnChangePayload,
   ModelReadEvalUiPayload,
+  ModelNameSearchPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -150,6 +151,33 @@ export const createModelExecutePayload = (
   }
 
   return base;
+};
+
+export const createModelNameSearchPayload = (
+  options: ModelNameSearchPayload
+): Payload => {
+  const {
+    database,
+    token,
+    model,
+    payload,
+    action,
+    context,
+    attrs = null,
+    operator = "ilike",
+  } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    action,
+    payload,
+    attrs,
+    operator,
+    context,
+  ];
 };
 
 export const createModelExecuteWorkflowPayload = (

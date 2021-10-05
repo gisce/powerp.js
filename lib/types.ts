@@ -134,3 +134,16 @@ export type GetReportOpts = {
 export type CreateReportPayload = Database & Token & CreateReportOpts;
 
 export type GetReportPayload = Database & Token & GetReportOpts;
+
+export type ModelNameSearchOpts = {
+  payload?: any;
+  action: string;
+  context?: Context;
+  attrs?: any;
+  operator?: string;
+};
+
+export type ModelNameSearchPayload = Model &
+  Database &
+  Token &
+  ModelNameSearchOpts;

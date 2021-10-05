@@ -9,6 +9,7 @@ import {
   ModelDeleteOpts,
   ModelExecuteOnChangeOpts,
   ModelReadEvalUiOpts,
+  ModelNameSearchOpts,
 } from "./types";
 import {
   createSearchPayload,
@@ -21,6 +22,7 @@ import {
   createModelExecuteWorkflowPayload,
   createExecuteOnChangePayload,
   createReadEvalUiPayload,
+  createModelNameSearchPayload,
 } from "./payloads";
 
 export class Model {
@@ -226,6 +228,27 @@ export class Model {
       payload,
       action,
       ids,
+    });
+
+    return await this.client._fetch({
+      payload: executePayload,
+    });
+  }
+
+  public async name_search(options: ModelNameSearchOpts): Promise<any> {
+    const { payload, action, context, attrs, operator } = options;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const executePayload = createModelNameSearchPayload({
+      database: database!,
+      token: token!,
+      model,
+      payload,
+      action,
+      context,
+      attrs,
+      operator,
     });
 
     return await this.client._fetch({
