@@ -105,6 +105,7 @@ export type ModelExecuteOpts = {
   payload?: any;
   action: string;
   context?: Context;
+  attrs?: any;
 };
 
 export type ModelExecuteOnChangeOpts = {

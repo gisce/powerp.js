@@ -298,13 +298,22 @@ var Model = /** @class */ (function () {
   };
   Model.prototype.execute = function (options) {
     return __awaiter(this, void 0, void 0, function () {
-      var payload, action, context, model, _a, database, token, executePayload;
+      var payload,
+        action,
+        context,
+        attrs,
+        model,
+        _a,
+        database,
+        token,
+        executePayload;
       return __generator(this, function (_b) {
         switch (_b.label) {
           case 0:
             (payload = options.payload),
               (action = options.action),
-              (context = options.context);
+              (context = options.context),
+              (attrs = options.attrs);
             model = this.model;
             (_a = this.client), (database = _a.database), (token = _a.token);
             executePayload = payloads_1.createModelExecutePayload({
@@ -314,6 +323,7 @@ var Model = /** @class */ (function () {
               payload: payload,
               action: action,
               context: context,
+              attrs: attrs,
             });
             return [
               4 /*yield*/,
