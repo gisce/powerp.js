@@ -478,7 +478,6 @@ var Model = /** @class */ (function () {
   Model.prototype.name_search = function (options) {
     return __awaiter(this, void 0, void 0, function () {
       var payload,
-        action,
         context,
         attrs,
         operator,
@@ -491,7 +490,6 @@ var Model = /** @class */ (function () {
         switch (_b.label) {
           case 0:
             (payload = options.payload),
-              (action = options.action),
               (context = options.context),
               (attrs = options.attrs),
               (operator = options.operator);
@@ -502,7 +500,6 @@ var Model = /** @class */ (function () {
               token: token,
               model: model,
               payload: payload,
-              action: action,
               context: context,
               attrs: attrs,
               operator: operator,

@@ -137,7 +137,6 @@ export type GetReportPayload = Database & Token & GetReportOpts;
 
 export type ModelNameSearchOpts = {
   payload?: any;
-  action: string;
   context?: Context;
   attrs?: any;
   operator?: string;

@@ -121,7 +121,6 @@ export declare type CreateReportPayload = Database & Token & CreateReportOpts;
 export declare type GetReportPayload = Database & Token & GetReportOpts;
 export declare type ModelNameSearchOpts = {
   payload?: any;
-  action: string;
   context?: Context;
   attrs?: any;
   operator?: string;
