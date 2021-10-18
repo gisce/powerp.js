@@ -7,6 +7,7 @@ export class Client {
   database?: string;
   token?: string;
   axiosInstance: AxiosInstance;
+  userAgent?: string;
 
   constructor(host?: string) {
     if (!host) {
@@ -46,6 +47,7 @@ export class Client {
         {
           headers: {
             "Content-Type": "application/json",
+            "User-Agent": this.userAgent,
           },
         }
       );
@@ -124,6 +126,6 @@ export class Client {
   }
 
   public setUserAgent(userAgent: string): void {
-    this.axiosInstance.defaults.headers.common["User-Agent"] = userAgent;
+    this.userAgent = userAgent;
   }
 }

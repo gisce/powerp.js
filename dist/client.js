@@ -178,6 +178,7 @@ var Client = /** @class */ (function () {
                 {
                   headers: {
                     "Content-Type": "application/json",
+                    "User-Agent": this.userAgent,
                   },
                 }
               ),
@@ -324,7 +325,7 @@ var Client = /** @class */ (function () {
     });
   };
   Client.prototype.setUserAgent = function (userAgent) {
-    this.axiosInstance.defaults.headers.common["User-Agent"] = userAgent;
+    this.userAgent = userAgent;
   };
   return Client;
 })();

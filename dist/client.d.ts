@@ -5,6 +5,7 @@ export declare class Client {
   database?: string;
   token?: string;
   axiosInstance: AxiosInstance;
+  userAgent?: string;
   constructor(host?: string);
   setDatabase(database: string): void;
   setToken(token: string): void;
