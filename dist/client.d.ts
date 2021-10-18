@@ -15,4 +15,5 @@ export declare class Client {
   getServerVersion(): Promise<string>;
   getLoginMessage(): Promise<string>;
   refreshToken(token: string): Promise<string>;
+  setUserAgent(userAgent: string): void;
 }

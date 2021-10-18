@@ -122,4 +122,8 @@ export class Client {
     this.token = refreshedToken;
     return refreshedToken;
   }
+
+  public setUserAgent(userAgent: string): void {
+    this.axiosInstance.defaults.headers.common["User-Agent"] = userAgent;
+  }
 }
