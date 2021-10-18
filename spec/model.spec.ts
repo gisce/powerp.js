@@ -281,5 +281,36 @@ describe("A Model", () => {
         done();
       });
     });
+    describe("when duplicating", () => {
+      test("must get new id when duplicating an item", async (done) => {
+        const c = new Client(process.env.ERP_HOST);
+        c.setDatabase(process.env.ERP_DB!);
+
+        const token = await c.loginAndGetToken({
+          user: process.env.ERP_USER!,
+          password: process.env.ERP_PASSWORD!,
+        });
+        expect(token).toBeTruthy();
+
+        const userModel = new Model("giscedata.switching.xml.encoding", c);
+
+        const randName = "test " + Date.now().toString();
+
+        const newId = await userModel.create({
+          values: {
+            acronim: randName,
+            name: randName,
+          },
+        });
+
+        const newDuplicatedId = await userModel.copy({
+          id: newId,
+          context: {},
+        });
+
+        expect(newDuplicatedId).toBeDefined();
+        done();
+      });
+    });
   });
 });
