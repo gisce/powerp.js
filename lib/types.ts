@@ -146,3 +146,10 @@ export type ModelNameSearchPayload = Model &
   Database &
   Token &
   ModelNameSearchOpts;
+
+export type ModelCopyOpts = {
+  id: number;
+  context?: Context;
+};
+
+export type ModelCopyPayload = Model & Database & Token & ModelCopyOpts;

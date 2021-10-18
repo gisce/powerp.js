@@ -129,3 +129,8 @@ export declare type ModelNameSearchPayload = Model &
   Database &
   Token &
   ModelNameSearchOpts;
+export declare type ModelCopyOpts = {
+  id: number;
+  context?: Context;
+};
+export declare type ModelCopyPayload = Model & Database & Token & ModelCopyOpts;

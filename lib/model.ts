@@ -10,6 +10,7 @@ import {
   ModelExecuteOnChangeOpts,
   ModelReadEvalUiOpts,
   ModelNameSearchOpts,
+  ModelCopyOpts,
 } from "./types";
 import {
   createSearchPayload,
@@ -23,6 +24,7 @@ import {
   createExecuteOnChangePayload,
   createReadEvalUiPayload,
   createModelNameSearchPayload,
+  createModelCopyPayload,
 } from "./payloads";
 
 export class Model {
@@ -248,6 +250,24 @@ export class Model {
       context,
       attrs,
       operator,
+    });
+
+    return await this.client._fetch({
+      payload: executePayload,
+    });
+  }
+
+  public async copy(options: ModelCopyOpts): Promise<any> {
+    const { id, context } = options;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const executePayload = createModelCopyPayload({
+      database: database!,
+      token: token!,
+      model,
+      id,
+      context,
     });
 
     return await this.client._fetch({

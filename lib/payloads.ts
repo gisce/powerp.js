@@ -13,6 +13,7 @@ import {
   ModelExecuteOnChangePayload,
   ModelReadEvalUiPayload,
   ModelNameSearchPayload,
+  ModelCopyPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -217,4 +218,9 @@ export const createExecuteOnChangePayload = (
   });
 
   return request;
+};
+
+export const createModelCopyPayload = (options: ModelCopyPayload): Payload => {
+  const { database, token, model, id, context } = options;
+  return ["execute", database, "token", token, model, "copy", id, {}, context];
 };

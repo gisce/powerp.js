@@ -516,6 +516,34 @@ var Model = /** @class */ (function () {
       });
     });
   };
+  Model.prototype.copy = function (options) {
+    return __awaiter(this, void 0, void 0, function () {
+      var id, context, model, _a, database, token, executePayload;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            (id = options.id), (context = options.context);
+            model = this.model;
+            (_a = this.client), (database = _a.database), (token = _a.token);
+            executePayload = payloads_1.createModelCopyPayload({
+              database: database,
+              token: token,
+              model: model,
+              id: id,
+              context: context,
+            });
+            return [
+              4 /*yield*/,
+              this.client._fetch({
+                payload: executePayload,
+              }),
+            ];
+          case 1:
+            return [2 /*return*/, _b.sent()];
+        }
+      });
+    });
+  };
   return Model;
 })();
 exports.Model = Model;

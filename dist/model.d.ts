@@ -10,6 +10,7 @@ import {
   ModelExecuteOnChangeOpts,
   ModelReadEvalUiOpts,
   ModelNameSearchOpts,
+  ModelCopyOpts,
 } from "./types";
 export declare class Model {
   model: string;
@@ -26,4 +27,5 @@ export declare class Model {
   executeWorkflow(options: ModelExecuteOpts): Promise<any>;
   executeOnChange(options: ModelExecuteOnChangeOpts): Promise<any>;
   name_search(options: ModelNameSearchOpts): Promise<any>;
+  copy(options: ModelCopyOpts): Promise<any>;
 }
