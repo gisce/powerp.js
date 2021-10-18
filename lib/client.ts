@@ -48,6 +48,7 @@ export class Client {
           headers: {
             "Content-Type": "application/json",
             "User-Agent": this.userAgent,
+            "Client-Agent": this.userAgent,
           },
         }
       );
