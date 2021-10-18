@@ -5,7 +5,7 @@ export declare class Client {
   database?: string;
   token?: string;
   axiosInstance: AxiosInstance;
-  userAgent?: string;
+  clientHeader?: string;
   constructor(host?: string);
   setDatabase(database: string): void;
   setToken(token: string): void;
@@ -16,5 +16,5 @@ export declare class Client {
   getServerVersion(): Promise<string>;
   getLoginMessage(): Promise<string>;
   refreshToken(token: string): Promise<string>;
-  setUserAgent(userAgent: string): void;
+  setClientHeader(clientHeader: string): void;
 }

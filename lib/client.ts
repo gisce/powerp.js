@@ -7,7 +7,7 @@ export class Client {
   database?: string;
   token?: string;
   axiosInstance: AxiosInstance;
-  userAgent?: string;
+  clientHeader?: string;
 
   constructor(host?: string) {
     if (!host) {
@@ -47,8 +47,7 @@ export class Client {
         {
           headers: {
             "Content-Type": "application/json",
-            "User-Agent": this.userAgent,
-            "Client-Agent": this.userAgent,
+            "X-GISCE-Client": this.clientHeader,
           },
         }
       );
@@ -126,7 +125,7 @@ export class Client {
     return refreshedToken;
   }
 
-  public setUserAgent(userAgent: string): void {
-    this.userAgent = userAgent;
+  public setClientHeader(clientHeader: string): void {
+    this.clientHeader = clientHeader;
   }
 }

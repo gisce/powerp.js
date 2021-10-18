@@ -178,8 +178,7 @@ var Client = /** @class */ (function () {
                 {
                   headers: {
                     "Content-Type": "application/json",
-                    "User-Agent": this.userAgent,
-                    "Client-Agent": this.userAgent,
+                    "X-GISCE-Client": this.clientHeader,
                   },
                 }
               ),
@@ -325,8 +324,8 @@ var Client = /** @class */ (function () {
       });
     });
   };
-  Client.prototype.setUserAgent = function (userAgent) {
-    this.userAgent = userAgent;
+  Client.prototype.setClientHeader = function (clientHeader) {
+    this.clientHeader = clientHeader;
   };
   return Client;
 })();
