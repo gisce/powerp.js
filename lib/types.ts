@@ -153,3 +153,11 @@ export type ModelCopyOpts = {
 };
 
 export type ModelCopyPayload = Model & Database & Token & ModelCopyOpts;
+
+export type EvalDomainOpts = {
+  domain: string;
+  values: any;
+  context?: Context;
+};
+
+export type EvalDomainPayload = Database & Token & EvalDomainOpts;

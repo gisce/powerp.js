@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
-import { UserAuth, FetchOpts } from "./types";
-import { makeLoginTokenPayload } from "./payloads";
+import { UserAuth, FetchOpts, EvalDomainOpts } from "./types";
+import { createEvalDomainPayload, makeLoginTokenPayload } from "./payloads";
 
 export class Client {
   host: string;
@@ -127,5 +127,22 @@ export class Client {
 
   public setClientHeader(clientHeader: string): void {
     this.clientHeader = clientHeader;
+  }
+
+  public async evalDomain(options: EvalDomainOpts): Promise<any> {
+    const { values, domain, context } = options;
+    const { database, token } = this;
+
+    const executePayload = createEvalDomainPayload({
+      database: database!,
+      token: token!,
+      domain,
+      values,
+      context,
+    });
+
+    return await this._fetch({
+      payload: executePayload,
+    });
   }
 }

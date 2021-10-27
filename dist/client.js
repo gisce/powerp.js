@@ -327,6 +327,35 @@ var Client = /** @class */ (function () {
   Client.prototype.setClientHeader = function (clientHeader) {
     this.clientHeader = clientHeader;
   };
+  Client.prototype.evalDomain = function (options) {
+    return __awaiter(this, void 0, void 0, function () {
+      var values, domain, context, _a, database, token, executePayload;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            (values = options.values),
+              (domain = options.domain),
+              (context = options.context);
+            (_a = this), (database = _a.database), (token = _a.token);
+            executePayload = payloads_1.createEvalDomainPayload({
+              database: database,
+              token: token,
+              domain: domain,
+              values: values,
+              context: context,
+            });
+            return [
+              4 /*yield*/,
+              this._fetch({
+                payload: executePayload,
+              }),
+            ];
+          case 1:
+            return [2 /*return*/, _b.sent()];
+        }
+      });
+    });
+  };
   return Client;
 })();
 exports.Client = Client;

@@ -14,6 +14,7 @@ import {
   ModelReadEvalUiPayload,
   ModelNameSearchPayload,
   ModelCopyPayload,
+  EvalDomainPayload,
 } from "./types";
 export declare const makeLoginTokenPayload: (
   options: LoginTokenPayload
@@ -57,4 +58,7 @@ export declare const createExecuteOnChangePayload: (
 ) => Payload;
 export declare const createModelCopyPayload: (
   options: ModelCopyPayload
+) => Payload;
+export declare const createEvalDomainPayload: (
+  options: EvalDomainPayload
 ) => Payload;

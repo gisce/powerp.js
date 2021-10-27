@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createModelCopyPayload = exports.createExecuteOnChangePayload = exports.createGetReportPayload = exports.createCreateReportPayload = exports.createModelExecuteWorkflowPayload = exports.createModelNameSearchPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadEvalUiPayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
+exports.createEvalDomainPayload = exports.createModelCopyPayload = exports.createExecuteOnChangePayload = exports.createGetReportPayload = exports.createCreateReportPayload = exports.createModelExecuteWorkflowPayload = exports.createModelNameSearchPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadEvalUiPayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
 var makeLoginTokenPayload = function (options) {
   var database = options.database,
     user = options.user,
@@ -247,4 +247,23 @@ var createModelCopyPayload = function (options) {
   return ["execute", database, "token", token, model, "copy", id, {}, context];
 };
 exports.createModelCopyPayload = createModelCopyPayload;
+var createEvalDomainPayload = function (options) {
+  var database = options.database,
+    token = options.token,
+    domain = options.domain,
+    values = options.values,
+    context = options.context;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    "ir.actions.act_window",
+    "eval_domain",
+    domain,
+    values,
+    context,
+  ];
+};
+exports.createEvalDomainPayload = createEvalDomainPayload;
 //# sourceMappingURL=payloads.js.map

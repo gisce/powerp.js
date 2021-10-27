@@ -14,6 +14,7 @@ import {
   ModelReadEvalUiPayload,
   ModelNameSearchPayload,
   ModelCopyPayload,
+  EvalDomainPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -223,4 +224,21 @@ export const createExecuteOnChangePayload = (
 export const createModelCopyPayload = (options: ModelCopyPayload): Payload => {
   const { database, token, model, id, context } = options;
   return ["execute", database, "token", token, model, "copy", id, {}, context];
+};
+
+export const createEvalDomainPayload = (
+  options: EvalDomainPayload
+): Payload => {
+  const { database, token, domain, values, context } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    "ir.actions.act_window",
+    "eval_domain",
+    domain,
+    values,
+    context,
+  ];
 };

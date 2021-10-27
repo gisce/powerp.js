@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { UserAuth, FetchOpts } from "./types";
+import { UserAuth, FetchOpts, EvalDomainOpts } from "./types";
 export declare class Client {
   host: string;
   database?: string;
@@ -17,4 +17,5 @@ export declare class Client {
   getLoginMessage(): Promise<string>;
   refreshToken(token: string): Promise<string>;
   setClientHeader(clientHeader: string): void;
+  evalDomain(options: EvalDomainOpts): Promise<any>;
 }

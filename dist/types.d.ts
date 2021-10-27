@@ -134,3 +134,9 @@ export declare type ModelCopyOpts = {
   context?: Context;
 };
 export declare type ModelCopyPayload = Model & Database & Token & ModelCopyOpts;
+export declare type EvalDomainOpts = {
+  domain: string;
+  values: any;
+  context?: Context;
+};
+export declare type EvalDomainPayload = Database & Token & EvalDomainOpts;
