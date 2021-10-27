@@ -92,7 +92,7 @@ export declare type ModelFieldsViewGetPayload = Model &
   ModelFieldsViewGetOpts;
 export declare type ModelExecuteOpts = {
   payload?: any;
-  action: string;
+  action: any;
   context?: Context;
 };
 export declare type ModelExecuteOnChangeOpts = {

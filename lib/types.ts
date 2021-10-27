@@ -103,7 +103,7 @@ export type ModelFieldsViewGetPayload = Model &
 
 export type ModelExecuteOpts = {
   payload?: any;
-  action: string;
+  action: any;
   context?: Context;
 };
 
