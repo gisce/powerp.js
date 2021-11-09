@@ -140,3 +140,14 @@ export declare type EvalDomainOpts = {
   context?: Context;
 };
 export declare type EvalDomainPayload = Database & Token & EvalDomainOpts;
+export declare type GetShortcutsOpts = {
+  context?: Context;
+};
+export declare type GetShortcutsPayload = Database & Token & GetShortcutsOpts;
+export declare type IsShortcutFavoriteOpts = {
+  context?: Context;
+  payload: any;
+};
+export declare type IsShortcutFavoritePayload = Database &
+  Token &
+  IsShortcutFavoriteOpts;

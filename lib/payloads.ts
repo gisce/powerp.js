@@ -15,6 +15,8 @@ import {
   ModelNameSearchPayload,
   ModelCopyPayload,
   EvalDomainPayload,
+  GetShortcutsPayload,
+  IsShortcutFavoritePayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -239,6 +241,37 @@ export const createEvalDomainPayload = (
     "eval_domain",
     domain,
     values,
+    context,
+  ];
+};
+
+export const createGetShortcutsPayload = (
+  options: GetShortcutsPayload
+): Payload => {
+  const { database, token, context } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    "ir.ui.view_sc",
+    "get_shortcuts",
+    context,
+  ];
+};
+
+export const createIsShortcutFavoritePayload = (
+  options: IsShortcutFavoritePayload
+): Payload => {
+  const { database, token, payload, context } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    "ir.ui.view_sc",
+    "is_favorite",
+    payload,
     context,
   ];
 };

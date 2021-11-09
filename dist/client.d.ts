@@ -1,5 +1,11 @@
 import { AxiosInstance } from "axios";
-import { UserAuth, FetchOpts, EvalDomainOpts } from "./types";
+import {
+  UserAuth,
+  FetchOpts,
+  EvalDomainOpts,
+  GetShortcutsOpts,
+  IsShortcutFavoriteOpts,
+} from "./types";
 export declare class Client {
   host: string;
   database?: string;
@@ -18,4 +24,6 @@ export declare class Client {
   refreshToken(token: string): Promise<string>;
   setClientHeader(clientHeader: string): void;
   evalDomain(options: EvalDomainOpts): Promise<any>;
+  getShortcuts(options: GetShortcutsOpts): Promise<any>;
+  isShortcutFavorite(options: IsShortcutFavoriteOpts): Promise<any>;
 }

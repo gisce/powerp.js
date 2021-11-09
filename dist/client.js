@@ -356,6 +356,57 @@ var Client = /** @class */ (function () {
       });
     });
   };
+  Client.prototype.getShortcuts = function (options) {
+    return __awaiter(this, void 0, void 0, function () {
+      var context, _a, database, token, executePayload;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            context = options.context;
+            (_a = this), (database = _a.database), (token = _a.token);
+            executePayload = payloads_1.createGetShortcutsPayload({
+              database: database,
+              token: token,
+              context: context,
+            });
+            return [
+              4 /*yield*/,
+              this._fetch({
+                payload: executePayload,
+              }),
+            ];
+          case 1:
+            return [2 /*return*/, _b.sent()];
+        }
+      });
+    });
+  };
+  Client.prototype.isShortcutFavorite = function (options) {
+    return __awaiter(this, void 0, void 0, function () {
+      var context, payload, _a, database, token, executePayload;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            (context = options.context), (payload = options.payload);
+            (_a = this), (database = _a.database), (token = _a.token);
+            executePayload = payloads_1.createIsShortcutFavoritePayload({
+              database: database,
+              token: token,
+              payload: payload,
+              context: context,
+            });
+            return [
+              4 /*yield*/,
+              this._fetch({
+                payload: executePayload,
+              }),
+            ];
+          case 1:
+            return [2 /*return*/, _b.sent()];
+        }
+      });
+    });
+  };
   return Client;
 })();
 exports.Client = Client;

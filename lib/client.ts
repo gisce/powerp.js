@@ -1,6 +1,17 @@
 import axios, { AxiosInstance } from "axios";
-import { UserAuth, FetchOpts, EvalDomainOpts } from "./types";
-import { createEvalDomainPayload, makeLoginTokenPayload } from "./payloads";
+import {
+  UserAuth,
+  FetchOpts,
+  EvalDomainOpts,
+  GetShortcutsOpts,
+  IsShortcutFavoriteOpts,
+} from "./types";
+import {
+  createEvalDomainPayload,
+  createGetShortcutsPayload,
+  createIsShortcutFavoritePayload,
+  makeLoginTokenPayload,
+} from "./payloads";
 
 export class Client {
   host: string;
@@ -138,6 +149,39 @@ export class Client {
       token: token!,
       domain,
       values,
+      context,
+    });
+
+    return await this._fetch({
+      payload: executePayload,
+    });
+  }
+
+  public async getShortcuts(options: GetShortcutsOpts): Promise<any> {
+    const { context } = options;
+    const { database, token } = this;
+
+    const executePayload = createGetShortcutsPayload({
+      database: database!,
+      token: token!,
+      context,
+    });
+
+    return await this._fetch({
+      payload: executePayload,
+    });
+  }
+
+  public async isShortcutFavorite(
+    options: IsShortcutFavoriteOpts
+  ): Promise<any> {
+    const { context, payload } = options;
+    const { database, token } = this;
+
+    const executePayload = createIsShortcutFavoritePayload({
+      database: database!,
+      token: token!,
+      payload,
       context,
     });
 

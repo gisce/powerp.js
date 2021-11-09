@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createEvalDomainPayload = exports.createModelCopyPayload = exports.createExecuteOnChangePayload = exports.createGetReportPayload = exports.createCreateReportPayload = exports.createModelExecuteWorkflowPayload = exports.createModelNameSearchPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadEvalUiPayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
+exports.createIsShortcutFavoritePayload = exports.createGetShortcutsPayload = exports.createEvalDomainPayload = exports.createModelCopyPayload = exports.createExecuteOnChangePayload = exports.createGetReportPayload = exports.createCreateReportPayload = exports.createModelExecuteWorkflowPayload = exports.createModelNameSearchPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadEvalUiPayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
 var makeLoginTokenPayload = function (options) {
   var database = options.database,
     user = options.user,
@@ -266,4 +266,36 @@ var createEvalDomainPayload = function (options) {
   ];
 };
 exports.createEvalDomainPayload = createEvalDomainPayload;
+var createGetShortcutsPayload = function (options) {
+  var database = options.database,
+    token = options.token,
+    context = options.context;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    "ir.ui.view_sc",
+    "get_shortcuts",
+    context,
+  ];
+};
+exports.createGetShortcutsPayload = createGetShortcutsPayload;
+var createIsShortcutFavoritePayload = function (options) {
+  var database = options.database,
+    token = options.token,
+    payload = options.payload,
+    context = options.context;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    "ir.ui.view_sc",
+    "is_favorite",
+    payload,
+    context,
+  ];
+};
+exports.createIsShortcutFavoritePayload = createIsShortcutFavoritePayload;
 //# sourceMappingURL=payloads.js.map
