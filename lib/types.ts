@@ -176,3 +176,10 @@ export type IsShortcutFavoriteOpts = {
 export type IsShortcutFavoritePayload = Database &
   Token &
   IsShortcutFavoriteOpts;
+
+export type ModelPermReadOpts = {
+  ids: Array<number>;
+  context?: Context;
+};
+
+export type ModelPermReadPayload = Model & Database & Token & ModelPermReadOpts;

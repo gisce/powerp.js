@@ -11,6 +11,7 @@ import {
   ModelReadEvalUiOpts,
   ModelNameSearchOpts,
   ModelCopyOpts,
+  ModelPermReadOpts,
 } from "./types";
 import {
   createSearchPayload,
@@ -25,6 +26,7 @@ import {
   createReadEvalUiPayload,
   createModelNameSearchPayload,
   createModelCopyPayload,
+  createPermReadPayload,
 } from "./payloads";
 
 export class Model {
@@ -272,6 +274,24 @@ export class Model {
 
     return await this.client._fetch({
       payload: executePayload,
+    });
+  }
+
+  public async perm_read(options: ModelPermReadOpts): Promise<any> {
+    const { ids, context } = options;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const payload = createPermReadPayload({
+      database: database!,
+      token: token!,
+      model,
+      ids,
+      context,
+    });
+
+    return await this.client._fetch({
+      payload,
     });
   }
 }

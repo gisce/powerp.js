@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createIsShortcutFavoritePayload = exports.createGetShortcutsPayload = exports.createEvalDomainPayload = exports.createModelCopyPayload = exports.createExecuteOnChangePayload = exports.createGetReportPayload = exports.createCreateReportPayload = exports.createModelExecuteWorkflowPayload = exports.createModelNameSearchPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadEvalUiPayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
+exports.createIsShortcutFavoritePayload = exports.createGetShortcutsPayload = exports.createEvalDomainPayload = exports.createModelCopyPayload = exports.createExecuteOnChangePayload = exports.createGetReportPayload = exports.createCreateReportPayload = exports.createModelExecuteWorkflowPayload = exports.createModelNameSearchPayload = exports.createModelExecutePayload = exports.createFieldsViewGetPayload = exports.createDeletePayload = exports.createCreatePayload = exports.createWritePayload = exports.createReadEvalUiPayload = exports.createPermReadPayload = exports.createReadPayload = exports.createSearchPayload = exports.makeLoginTokenPayload = void 0;
 var makeLoginTokenPayload = function (options) {
   var database = options.database,
     user = options.user,
@@ -55,6 +55,25 @@ var createReadPayload = function (options) {
   ];
 };
 exports.createReadPayload = createReadPayload;
+var createPermReadPayload = function (options) {
+  var database = options.database,
+    token = options.token,
+    model = options.model,
+    ids = options.ids,
+    _a = options.context,
+    context = _a === void 0 ? {} : _a;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "perm_read",
+    ids,
+    context,
+  ];
+};
+exports.createPermReadPayload = createPermReadPayload;
 var createReadEvalUiPayload = function (options) {
   var database = options.database,
     token = options.token,

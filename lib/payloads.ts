@@ -17,6 +17,7 @@ import {
   EvalDomainPayload,
   GetShortcutsPayload,
   IsShortcutFavoritePayload,
+  ModelPermReadPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -63,6 +64,22 @@ export const createReadPayload = (options: ModelReadPayload): Payload => {
     "read",
     ids,
     fields,
+    context,
+  ];
+};
+
+export const createPermReadPayload = (
+  options: ModelPermReadPayload
+): Payload => {
+  const { database, token, model, ids, context = {} } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "perm_read",
+    ids,
     context,
   ];
 };

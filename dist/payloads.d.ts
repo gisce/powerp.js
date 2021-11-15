@@ -17,6 +17,7 @@ import {
   EvalDomainPayload,
   GetShortcutsPayload,
   IsShortcutFavoritePayload,
+  ModelPermReadPayload,
 } from "./types";
 export declare const makeLoginTokenPayload: (
   options: LoginTokenPayload
@@ -25,6 +26,9 @@ export declare const createSearchPayload: (
   options: ModelSearchPayload
 ) => Payload;
 export declare const createReadPayload: (options: ModelReadPayload) => Payload;
+export declare const createPermReadPayload: (
+  options: ModelPermReadPayload
+) => Payload;
 export declare const createReadEvalUiPayload: (
   options: ModelReadEvalUiPayload
 ) => Payload;

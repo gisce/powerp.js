@@ -544,6 +544,34 @@ var Model = /** @class */ (function () {
       });
     });
   };
+  Model.prototype.perm_read = function (options) {
+    return __awaiter(this, void 0, void 0, function () {
+      var ids, context, model, _a, database, token, payload;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            (ids = options.ids), (context = options.context);
+            model = this.model;
+            (_a = this.client), (database = _a.database), (token = _a.token);
+            payload = payloads_1.createPermReadPayload({
+              database: database,
+              token: token,
+              model: model,
+              ids: ids,
+              context: context,
+            });
+            return [
+              4 /*yield*/,
+              this.client._fetch({
+                payload: payload,
+              }),
+            ];
+          case 1:
+            return [2 /*return*/, _b.sent()];
+        }
+      });
+    });
+  };
   return Model;
 })();
 exports.Model = Model;

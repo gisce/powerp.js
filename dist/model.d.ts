@@ -11,6 +11,7 @@ import {
   ModelReadEvalUiOpts,
   ModelNameSearchOpts,
   ModelCopyOpts,
+  ModelPermReadOpts,
 } from "./types";
 export declare class Model {
   model: string;
@@ -28,4 +29,5 @@ export declare class Model {
   executeOnChange(options: ModelExecuteOnChangeOpts): Promise<any>;
   name_search(options: ModelNameSearchOpts): Promise<any>;
   copy(options: ModelCopyOpts): Promise<any>;
+  perm_read(options: ModelPermReadOpts): Promise<any>;
 }
