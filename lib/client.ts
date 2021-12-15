@@ -54,7 +54,7 @@ export class Client {
     try {
       const response = await this.axiosInstance.post(
         `${host}/${service}`,
-        JSON.stringify(options.payload),
+        options.payload,
         {
           headers: {
             "Content-Type": "application/json",
