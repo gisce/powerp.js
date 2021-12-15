@@ -3,6 +3,7 @@ import { Model } from "../lib/model";
 import * as dotenv from "dotenv";
 
 dotenv.config();
+jest.setTimeout(30000);
 
 describe("A Model", () => {
   describe("Calling methods", () => {
