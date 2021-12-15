@@ -1,12 +1,20 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "rootDir": "lib",
     "declaration": true,
-    "outDir": "./dist",
-    "rootDir": "./lib",
-    "strict": true,
-    "sourceMap": true
+    "declarationDir": "dist",
+    "module": "esnext",
+    "target": "es5",
+    "lib": ["es6", "es2016", "es2017"],
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "baseUrl": "./src",
+    "skipLibCheck": true,
+    "strictBindCallApply": true
   },
-  "exclude": ["spec/"]
+  "include": ["lib/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
