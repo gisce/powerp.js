@@ -142,8 +142,17 @@ export const createDeletePayload = (options: ModelDeletePayload): Payload => {
 export const createFieldsViewGetPayload = (
   options: ModelFieldsViewGetPayload
 ): Payload => {
-  const { database, token, model, id, context, toolbar, type } = options;
-  return [
+  const {
+    database,
+    token,
+    model,
+    id,
+    context,
+    toolbar,
+    type,
+    version,
+  } = options;
+  const payload = [
     "execute",
     database,
     "token",
@@ -155,6 +164,12 @@ export const createFieldsViewGetPayload = (
     context,
     toolbar,
   ];
+
+  if (version) {
+    payload.push(version);
+  }
+
+  return payload;
 };
 
 export const createModelExecutePayload = (

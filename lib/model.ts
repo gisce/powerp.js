@@ -107,7 +107,7 @@ export class Model {
   }
 
   public async fields_view_get(options: ModelFieldsViewGetOpts): Promise<any> {
-    const { id, context, type, toolbar } = options;
+    const { id, context, type, toolbar, version } = options;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -119,6 +119,7 @@ export class Model {
       type,
       context,
       toolbar,
+      version,
     });
 
     return await this.client._fetch({

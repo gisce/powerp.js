@@ -94,6 +94,7 @@ export type ModelFieldsViewGetOpts = {
   id: number | null;
   context?: Context;
   toolbar: boolean;
+  version?: number;
 };
 
 export type ModelFieldsViewGetPayload = Model &
