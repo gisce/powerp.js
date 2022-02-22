@@ -5,9 +5,11 @@ import {
   EvalDomainOpts,
   GetShortcutsOpts,
   IsShortcutFavoriteOpts,
+  AttributeConditionParserOpts,
 } from "./types";
 import {
   createEvalDomainPayload,
+  createAttributeConditionPayload,
   createGetShortcutsPayload,
   createIsShortcutFavoritePayload,
   makeLoginTokenPayload,
@@ -150,6 +152,23 @@ export class Client {
       domain,
       values,
       context,
+    });
+
+    return await this._fetch({
+      payload: executePayload,
+    });
+  }
+
+  public async parseCondition(options: AttributeConditionParserOpts): Promise<any> {
+    const { values, condition, context } = options;
+    const { database, token } = this;
+
+    const executePayload = createAttributeConditionPayload({
+      database: database!,
+      token: token!,
+      condition,
+      values,
+      context
     });
 
     return await this._fetch({
