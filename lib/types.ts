@@ -164,6 +164,14 @@ export type EvalDomainOpts = {
 
 export type EvalDomainPayload = Database & Token & EvalDomainOpts;
 
+export type AttributeConditionParserOpts = {
+  condition: string;
+  values: any;
+  context?: Context;
+}
+
+export type AttributeConditionPayload = Database & Token & AttributeConditionParserOpts;
+
 export type GetShortcutsOpts = {
   context?: Context;
 };

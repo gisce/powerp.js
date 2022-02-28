@@ -15,6 +15,7 @@ import {
   ModelNameSearchPayload,
   ModelCopyPayload,
   EvalDomainPayload,
+  AttributeConditionPayload,
   GetShortcutsPayload,
   IsShortcutFavoritePayload,
   ModelPermReadPayload,
@@ -276,6 +277,23 @@ export const createEvalDomainPayload = (
     domain,
     values,
     context,
+  ];
+};
+
+export const createAttributeConditionPayload = (
+  options: AttributeConditionPayload
+): Payload => {
+  const { database, token, condition, values, context } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    "ir.ui.view",
+    "parse_condition",
+    condition,
+    values,
+    context
   ];
 };
 
