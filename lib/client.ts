@@ -15,6 +15,9 @@ import {
   makeLoginTokenPayload,
 } from "./payloads";
 
+if (process.env.REACT_APP_STAGE === "PROD")
+  console.debug = function no_console() {};
+
 export class Client {
   host: string;
   database?: string;

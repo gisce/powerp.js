@@ -241,7 +241,7 @@ export class Model {
   }
 
   public async name_search(options: ModelNameSearchOpts): Promise<any> {
-    const { payload, context, attrs, operator } = options;
+    const { payload, context, attrs, operator, limit } = options;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -253,6 +253,7 @@ export class Model {
       context,
       attrs,
       operator,
+      limit,
     });
 
     return await this.client._fetch({
