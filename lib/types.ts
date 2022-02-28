@@ -141,6 +141,7 @@ export type ModelNameSearchOpts = {
   context?: Context;
   attrs?: any;
   operator?: string;
+  limit?: number;
 };
 
 export type ModelNameSearchPayload = Model &
