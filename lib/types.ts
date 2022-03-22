@@ -45,7 +45,7 @@ export type ModelSearchOpts = {
   offset?: number;
   limit?: number | boolean;
   context?: Context;
-  order?: number;
+  order?: number | string;
   count?: boolean;
 };
 
