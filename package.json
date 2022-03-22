@@ -10,6 +10,7 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
+    "prepublishOnly": "npm run build",
     "build": "rimraf dist && rollup -c && npm shrinkwrap",
     "test": "jest --coverage"
   },
