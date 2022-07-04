@@ -45,7 +45,7 @@ export type ModelSearchOpts = {
   offset?: number;
   limit?: number | boolean;
   context?: Context;
-  order?: number | string;
+  order?: number | string;
   count?: boolean;
 };
 
@@ -168,9 +168,11 @@ export type AttributeConditionParserOpts = {
   condition: string;
   values: any;
   context?: Context;
-}
+};
 
-export type AttributeConditionPayload = Database & Token & AttributeConditionParserOpts;
+export type AttributeConditionPayload = Database &
+  Token &
+  AttributeConditionParserOpts;
 
 export type GetShortcutsOpts = {
   context?: Context;
@@ -193,3 +195,11 @@ export type ModelPermReadOpts = {
 };
 
 export type ModelPermReadPayload = Model & Database & Token & ModelPermReadOpts;
+
+export type ButTreeOpenOpts = {
+  model: string;
+  id: number;
+  context?: Context;
+};
+
+export type ButTreeOpenPayload = Database & Token & ButTreeOpenOpts;

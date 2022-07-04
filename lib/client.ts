@@ -6,6 +6,7 @@ import {
   GetShortcutsOpts,
   IsShortcutFavoriteOpts,
   AttributeConditionParserOpts,
+  ButTreeOpenOpts,
 } from "./types";
 import {
   createEvalDomainPayload,
@@ -13,6 +14,7 @@ import {
   createGetShortcutsPayload,
   createIsShortcutFavoritePayload,
   makeLoginTokenPayload,
+  createButTreeOpenPayload,
 } from "./payloads";
 
 if (process.env.REACT_APP_STAGE === "PROD")
@@ -162,7 +164,9 @@ export class Client {
     });
   }
 
-  public async parseCondition(options: AttributeConditionParserOpts): Promise<any> {
+  public async parseCondition(
+    options: AttributeConditionParserOpts
+  ): Promise<any> {
     const { values, condition, context } = options;
     const { database, token } = this;
 
@@ -171,7 +175,7 @@ export class Client {
       token: token!,
       condition,
       values,
-      context
+      context,
     });
 
     return await this._fetch({
@@ -204,6 +208,23 @@ export class Client {
       database: database!,
       token: token!,
       payload,
+      context,
+    });
+
+    return await this._fetch({
+      payload: executePayload,
+    });
+  }
+
+  public async treeButOpen(options: ButTreeOpenOpts): Promise<any> {
+    const { context, model, id } = options;
+    const { database, token } = this;
+
+    const executePayload = createButTreeOpenPayload({
+      database: database!,
+      token: token!,
+      model,
+      id,
       context,
     });
 

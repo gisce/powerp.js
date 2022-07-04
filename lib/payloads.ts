@@ -19,6 +19,7 @@ import {
   GetShortcutsPayload,
   IsShortcutFavoritePayload,
   ModelPermReadPayload,
+  ButTreeOpenPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -293,7 +294,7 @@ export const createAttributeConditionPayload = (
     "parse_condition",
     condition,
     values,
-    context
+    context,
   ];
 };
 
@@ -324,6 +325,25 @@ export const createIsShortcutFavoritePayload = (
     "ir.ui.view_sc",
     "is_favorite",
     payload,
+    context,
+  ];
+};
+
+export const createButTreeOpenPayload = (
+  options: ButTreeOpenPayload
+): Payload => {
+  const { database, token, model, id, context } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    "ir.values",
+    "get",
+    "action",
+    "tree_but_open",
+    [[model, id]],
+    false,
     context,
   ];
 };
