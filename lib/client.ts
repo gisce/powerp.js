@@ -33,7 +33,6 @@ export class Client {
     }
 
     this.host = host;
-    this.axiosInstance = axios.create();
   }
 
   public setDatabase(database: string): void {
@@ -44,8 +43,11 @@ export class Client {
     this.token = token;
   }
 
-  public setAxiosInstance(axiosInstance: AxiosInstance): void {
-    this.axiosInstance = axiosInstance;
+  public getAxiosInstance(): AxiosInstance {
+    if (!this.axiosInstance) {
+      this.axiosInstance = axios.create();
+    }
+    return this.axiosInstance;
   }
 
   public async _fetch(options: FetchOpts): Promise<any> {
@@ -59,7 +61,7 @@ export class Client {
     console.debug(`Sending ${options.payload} to ${host}/${service}`);
 
     try {
-      const response = await this.axiosInstance.post(
+      const response = await this.getAxiosInstance().post(
         `${host}/${service}`,
         options.payload,
         {
