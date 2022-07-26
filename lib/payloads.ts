@@ -20,6 +20,7 @@ import {
   IsShortcutFavoritePayload,
   ModelPermReadPayload,
   ButTreeOpenPayload,
+  ModelFieldsGetPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -170,6 +171,30 @@ export const createFieldsViewGetPayload = (
   if (version) {
     payload.push(version);
   }
+
+  return payload;
+};
+
+export const createFieldsGetPayload = (
+  options: ModelFieldsGetPayload
+): Payload => {
+  const {
+    database,
+    token,
+    model,
+    fields,
+    context,
+  } = options;
+  const payload = [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "fields_get",
+    fields,
+    context
+  ];
 
   return payload;
 };
