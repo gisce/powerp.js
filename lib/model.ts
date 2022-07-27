@@ -12,6 +12,7 @@ import {
   ModelNameSearchOpts,
   ModelCopyOpts,
   ModelPermReadOpts,
+  ModelFieldsGetOpts,
 } from "./types";
 import {
   createSearchPayload,
@@ -27,6 +28,7 @@ import {
   createModelNameSearchPayload,
   createModelCopyPayload,
   createPermReadPayload,
+  createFieldsGetPayload,
 } from "./payloads";
 
 export class Model {
@@ -120,6 +122,24 @@ export class Model {
       context,
       toolbar,
       version,
+    });
+
+    return await this.client._fetch({
+      payload,
+    });
+  }
+
+  public async fields_get(options: ModelFieldsGetOpts): Promise<any> {
+    const { fields, context } = options;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const payload = createFieldsGetPayload({
+      database: database!,
+      token: token!,
+      model,
+      fields,
+      context,
     });
 
     return await this.client._fetch({
