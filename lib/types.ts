@@ -102,6 +102,16 @@ export type ModelFieldsViewGetPayload = Model &
   Token &
   ModelFieldsViewGetOpts;
 
+export type ModelFieldsGetOpts = {
+  fields: string[];
+  context?: Context;
+};
+
+export type ModelFieldsGetPayload = Model &
+Database &
+Token &
+ModelFieldsGetOpts;
+
 export type ModelExecuteOpts = {
   payload?: any;
   action: any;
