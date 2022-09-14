@@ -16,10 +16,6 @@ import {
   makeLoginTokenPayload,
   createButTreeOpenPayload,
 } from "./payloads";
-
-if (process.env.REACT_APP_STAGE === "PROD")
-  console.debug = function no_console() {};
-
 export class Client {
   host: string;
   database?: string;
@@ -58,7 +54,7 @@ export class Client {
       throw "You must login first";
     }
 
-    console.debug(`Sending ${options.payload} to ${host}/${service}`);
+    // console.debug(`Sending ${options.payload} to ${host}/${service}`);
 
     try {
       const response = await this.getAxiosInstance().post(
@@ -71,7 +67,7 @@ export class Client {
           },
         }
       );
-      console.debug(`Response from API: ${JSON.stringify(response.data)}`);
+      // console.debug(`Response from API: ${JSON.stringify(response.data)}`);
       if (response.data.exception) {
         throw response.data.exception;
       }

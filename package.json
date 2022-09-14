@@ -32,9 +32,8 @@
     "access": "public"
   },
   "homepage": "https://github.com/gisce/powerp.js#readme",
-  "dependencies": {
-    "axios": "^0.27.2",
-    "dotenv": "^8.2.0"
+  "peerDependencies": {
+    "axios": "^0.27.2"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.1",
@@ -44,6 +43,7 @@
     "@types/node": "^14.14.12",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
+    "dotenv": "^8.2.0",
     "eslint": "^7.16.0",
     "husky": ">=4",
     "jest": "^26.6.3",
