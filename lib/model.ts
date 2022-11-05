@@ -13,6 +13,7 @@ import {
   ModelCopyOpts,
   ModelPermReadOpts,
   ModelFieldsGetOpts,
+  ModelExportDataOpts,
 } from "./types";
 import {
   createSearchPayload,
@@ -29,6 +30,7 @@ import {
   createModelCopyPayload,
   createPermReadPayload,
   createFieldsGetPayload,
+  createExportDataPayload,
 } from "./payloads";
 
 export class Model {
@@ -309,6 +311,33 @@ export class Model {
       token: token!,
       model,
       ids,
+      context,
+    });
+
+    return await this.client._fetch({
+      payload,
+    });
+  }
+
+  public async export_data(options: ModelExportDataOpts): Promise<any> {
+    const {
+      fields = [],
+      context,
+      domain = [],
+      format,
+      limit = false,
+    } = options;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const payload = createExportDataPayload({
+      database: database!,
+      token: token!,
+      model,
+      domain,
+      limit,
+      fields,
+      format,
       context,
     });
 

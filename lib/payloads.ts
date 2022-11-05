@@ -21,6 +21,8 @@ import {
   ModelPermReadPayload,
   ButTreeOpenPayload,
   ModelFieldsGetPayload,
+  ModelExportDataPayload,
+  ModelExportDataOpts,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -178,13 +180,7 @@ export const createFieldsViewGetPayload = (
 export const createFieldsGetPayload = (
   options: ModelFieldsGetPayload
 ): Payload => {
-  const {
-    database,
-    token,
-    model,
-    fields,
-    context,
-  } = options;
+  const { database, token, model, fields, context } = options;
   const payload = [
     "execute",
     database,
@@ -193,7 +189,7 @@ export const createFieldsGetPayload = (
     model,
     "fields_get",
     fields,
-    context
+    context,
   ];
 
   return payload;
@@ -369,6 +365,34 @@ export const createButTreeOpenPayload = (
     "tree_but_open",
     [[model, id]],
     false,
+    context,
+  ];
+};
+
+export const createExportDataPayload = (
+  options: ModelExportDataPayload
+): Payload => {
+  const {
+    database,
+    token,
+    model,
+    domain,
+    limit,
+    fields,
+    format,
+    context = {},
+  } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "export_data2",
+    domain,
+    limit,
+    fields,
+    format,
     context,
   ];
 };
