@@ -325,7 +325,7 @@ export class Model {
       context,
       domain = [],
       format,
-      limit = false,
+      limit = null,
     } = options;
     const { model } = this;
     const { database, token } = this.client;

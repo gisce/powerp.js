@@ -217,7 +217,7 @@ export type ButTreeOpenPayload = Database & Token & ButTreeOpenOpts;
 export type ModelExportDataOpts = {
   domain?: Array<any>;
   format: string;
-  limit?: number | boolean;
+  limit?: number | null;
   fields?: string[];
   context?: Context;
 };

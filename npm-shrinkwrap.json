@@ -1,12 +1,12 @@
 {
   "name": "@gisce/powerp.js",
-  "version": "1.2.1-rc.0",
+  "version": "1.2.1-rc.1",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "@gisce/powerp.js",
-      "version": "1.2.1-rc.0",
+      "version": "1.2.1-rc.1",
       "license": "MIT",
       "devDependencies": {
         "@rollup/plugin-commonjs": "^21.0.1",
