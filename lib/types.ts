@@ -108,9 +108,9 @@ export type ModelFieldsGetOpts = {
 };
 
 export type ModelFieldsGetPayload = Model &
-Database &
-Token &
-ModelFieldsGetOpts;
+  Database &
+  Token &
+  ModelFieldsGetOpts;
 
 export type ModelExecuteOpts = {
   payload?: any;
@@ -213,3 +213,16 @@ export type ButTreeOpenOpts = {
 };
 
 export type ButTreeOpenPayload = Database & Token & ButTreeOpenOpts;
+
+export type ModelExportDataOpts = {
+  domain?: Array<any>;
+  format: string;
+  limit?: number | null;
+  fields?: string[];
+  context?: Context;
+};
+
+export type ModelExportDataPayload = Database &
+  Token &
+  Model &
+  ModelExportDataOpts;

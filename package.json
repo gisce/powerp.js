@@ -1,6 +1,6 @@
 {
   "name": "@gisce/powerp.js",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "PowERP Javascript Client",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -10,6 +10,10 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
+    "preminor": "npm version preminor --preid rc",
+    "prerelease": "npm version prerelease --preid rc",
+    "prepatch": "npm version prepatch --preid rc",
+    "premajor": "npm version premajor --preid rc",
     "prepublishOnly": "npm run build",
     "build": "rimraf dist && rollup -c && npm shrinkwrap",
     "test": "jest --coverage"
