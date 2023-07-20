@@ -1,6 +1,6 @@
 {
   "name": "@gisce/powerp.js",
-  "version": "1.2.1-rc.1",
+  "version": "1.2.1",
   "description": "PowERP Javascript Client",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
