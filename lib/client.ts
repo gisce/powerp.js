@@ -82,7 +82,10 @@ export class Client {
     }
   }
 
-  public async loginAndGetToken(options: UserAuth): Promise<string> {
+  public async loginAndGetToken(
+    options: UserAuth,
+    requestOptions?: RequestOptions
+  ): Promise<string> {
     const { database } = this;
     const { user, password } = options;
 
@@ -98,6 +101,7 @@ export class Client {
     const token = await this._fetch({
       payload,
       service: "common",
+      options: requestOptions,
     });
     if (!token) {
       throw "Invalid User/Login";
