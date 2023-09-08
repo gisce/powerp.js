@@ -18,17 +18,13 @@ import {
   createButTreeOpenPayload,
 } from "./payloads";
 export class Client {
-  host: string;
+  host?: string;
   database?: string;
   token?: string;
   axiosInstance: AxiosInstance;
   clientHeader?: string;
 
-  constructor(host?: string) {
-    if (!host) {
-      throw "A host is required";
-    }
-
+  public setHost(host: string): void {
     this.host = host;
   }
 
