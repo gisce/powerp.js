@@ -7,6 +7,7 @@ import {
   IsShortcutFavoriteOpts,
   AttributeConditionParserOpts,
   ButTreeOpenOpts,
+  RequestOptions,
 } from "./types";
 import {
   createEvalDomainPayload,
@@ -17,17 +18,13 @@ import {
   createButTreeOpenPayload,
 } from "./payloads";
 export class Client {
-  host: string;
+  host?: string;
   database?: string;
   token?: string;
   axiosInstance: AxiosInstance | undefined;
   clientHeader?: string;
 
-  constructor(host?: string) {
-    if (!host) {
-      throw new Error("A host is required");
-    }
-
+  public setHost(host: string): void {
     this.host = host;
   }
 
@@ -46,8 +43,8 @@ export class Client {
     return this.axiosInstance;
   }
 
-  public async _fetch(options: FetchOpts): Promise<any> {
-    const { service = "object" } = options;
+  public async _fetch(data: FetchOpts): Promise<any> {
+    const { service = "object", options = {} } = data;
     const { host, token } = this;
 
     if (service != "common" && service != "db" && !token) {
@@ -59,12 +56,13 @@ export class Client {
     try {
       const response = await this.getAxiosInstance().post(
         `${host}/${service}`,
-        options.payload,
+        data.payload,
         {
           headers: {
             "Content-Type": "application/json",
-            "X-GISCE-Client": this.clientHeader!,
+            "X-GISCE-Client": this.clientHeader,
           },
+          ...options,
         },
       );
       // console.debug(`Response from API: ${JSON.stringify(response.data)}`);
@@ -80,7 +78,10 @@ export class Client {
     }
   }
 
-  public async loginAndGetToken(options: UserAuth): Promise<string> {
+  public async loginAndGetToken(
+    options: UserAuth,
+    requestOptions?: RequestOptions,
+  ): Promise<string> {
     const { database } = this;
     const { user, password } = options;
 
@@ -96,6 +97,7 @@ export class Client {
     const token = await this._fetch({
       payload,
       service: "common",
+      options: requestOptions,
     });
     if (!token) {
       throw new Error("Invalid User/Login");
@@ -104,29 +106,35 @@ export class Client {
     return token;
   }
 
-  public async getDatabases(): Promise<string[]> {
+  public async getDatabases(options?: RequestOptions): Promise<string[]> {
     return await this._fetch({
       service: "db",
       payload: ["list"],
+      options,
     });
   }
 
-  public async getServerVersion(): Promise<string> {
+  public async getServerVersion(options?: RequestOptions): Promise<string> {
     return await this._fetch({
       service: "db",
       payload: ["server_version"],
+      options,
     });
   }
 
-  public async getLoginMessage(): Promise<string> {
+  public async getLoginMessage(options?: RequestOptions): Promise<string> {
     const loginMessage = await this._fetch({
       service: "common",
       payload: ["login_message"],
+      options,
     });
     return loginMessage || "";
   }
 
-  public async refreshToken(token: string): Promise<string> {
+  public async refreshToken(
+    token: string,
+    options?: RequestOptions,
+  ): Promise<string> {
     const { database } = this;
 
     if (!database) {
@@ -136,6 +144,7 @@ export class Client {
     const refreshedToken = await this._fetch({
       service: "common",
       payload: ["refresh_token", token],
+      options,
     });
     this.token = refreshedToken;
     return refreshedToken;
@@ -145,8 +154,11 @@ export class Client {
     this.clientHeader = clientHeader;
   }
 
-  public async evalDomain(options: EvalDomainOpts): Promise<any> {
-    const { values, domain, context } = options;
+  public async evalDomain(
+    data: EvalDomainOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { values, domain, context } = data;
     const { database, token } = this;
 
     const executePayload = createEvalDomainPayload({
@@ -159,13 +171,15 @@ export class Client {
 
     return await this._fetch({
       payload: executePayload,
+      options,
     });
   }
 
   public async parseCondition(
-    options: AttributeConditionParserOpts,
+    data: AttributeConditionParserOpts,
+    options?: RequestOptions,
   ): Promise<any> {
-    const { values, condition, context } = options;
+    const { values, condition, context } = data;
     const { database, token } = this;
 
     const executePayload = createAttributeConditionPayload({
@@ -178,11 +192,15 @@ export class Client {
 
     return await this._fetch({
       payload: executePayload,
+      options,
     });
   }
 
-  public async getShortcuts(options: GetShortcutsOpts): Promise<any> {
-    const { context } = options;
+  public async getShortcuts(
+    data: GetShortcutsOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { context } = data;
     const { database, token } = this;
 
     const executePayload = createGetShortcutsPayload({
@@ -193,13 +211,15 @@ export class Client {
 
     return await this._fetch({
       payload: executePayload,
+      options,
     });
   }
 
   public async isShortcutFavorite(
-    options: IsShortcutFavoriteOpts,
+    data: IsShortcutFavoriteOpts,
+    options?: RequestOptions,
   ): Promise<any> {
-    const { context, payload } = options;
+    const { context, payload } = data;
     const { database, token } = this;
 
     const executePayload = createIsShortcutFavoritePayload({
@@ -211,11 +231,15 @@ export class Client {
 
     return await this._fetch({
       payload: executePayload,
+      options,
     });
   }
 
-  public async treeButOpen(options: ButTreeOpenOpts): Promise<any> {
-    const { context, model, id } = options;
+  public async treeButOpen(
+    data: ButTreeOpenOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { context, model, id } = data;
     const { database, token } = this;
 
     const executePayload = createButTreeOpenPayload({
@@ -228,6 +252,7 @@ export class Client {
 
     return await this._fetch({
       payload: executePayload,
+      options,
     });
   }
 

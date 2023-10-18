@@ -38,6 +38,7 @@ export type Payload = Array<
 export type FetchOpts = {
   payload: Payload;
   service?: string;
+  options?: RequestOptions;
 };
 
 export type ModelSearchOpts = {
@@ -226,3 +227,5 @@ export type ModelExportDataPayload = Database &
   Token &
   Model &
   ModelExportDataOpts;
+
+export type RequestOptions = any;

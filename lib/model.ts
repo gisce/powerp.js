@@ -14,6 +14,7 @@ import {
   ModelPermReadOpts,
   ModelFieldsGetOpts,
   ModelExportDataOpts,
+  RequestOptions,
 } from "./types";
 import {
   createSearchPayload,
@@ -42,7 +43,10 @@ export class Model {
     this.client = client;
   }
 
-  public async search(options: ModelSearchOpts): Promise<any> {
+  public async search(
+    data: ModelSearchOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
     const {
       params = [],
       offset = 0,
@@ -50,7 +54,7 @@ export class Model {
       order = 0,
       context = null,
       count = false,
-    } = options;
+    } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -68,11 +72,15 @@ export class Model {
 
     return await this.client._fetch({
       payload,
+      options,
     });
   }
 
-  public async read(options: ModelReadOpts): Promise<any> {
-    const { ids, fields, context } = options;
+  public async read(
+    data: ModelReadOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { ids, fields, context } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -87,11 +95,15 @@ export class Model {
 
     return await this.client._fetch({
       payload,
+      options,
     });
   }
 
-  public async read_and_eval_ui(options: ModelReadEvalUiOpts): Promise<any> {
-    const { ids, fields, context, attrs } = options;
+  public async read_and_eval_ui(
+    data: ModelReadEvalUiOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { ids, fields, context, attrs } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -107,11 +119,15 @@ export class Model {
 
     return await this.client._fetch({
       payload,
+      options,
     });
   }
 
-  public async fields_view_get(options: ModelFieldsViewGetOpts): Promise<any> {
-    const { id, context, type, toolbar, version } = options;
+  public async fields_view_get(
+    data: ModelFieldsViewGetOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { id, context, type, toolbar, version } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -128,11 +144,15 @@ export class Model {
 
     return await this.client._fetch({
       payload,
+      options,
     });
   }
 
-  public async fields_get(options: ModelFieldsGetOpts): Promise<any> {
-    const { fields, context } = options;
+  public async fields_get(
+    data: ModelFieldsGetOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { fields, context } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -146,11 +166,15 @@ export class Model {
 
     return await this.client._fetch({
       payload,
+      options,
     });
   }
 
-  public async execute(options: ModelExecuteOpts): Promise<any> {
-    const { payload, action, context } = options;
+  public async execute(
+    data: ModelExecuteOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { payload, action, context } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -165,11 +189,15 @@ export class Model {
 
     return await this.client._fetch({
       payload: executePayload,
+      options,
     });
   }
 
-  public async write(options: ModelWriteOpts): Promise<any> {
-    const { ids, values, context } = options;
+  public async write(
+    data: ModelWriteOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { ids, values, context } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -184,11 +212,15 @@ export class Model {
 
     return await this.client._fetch({
       payload,
+      options,
     });
   }
 
-  public async create(options: ModelCreateOpts): Promise<any> {
-    const { values, context } = options;
+  public async create(
+    data: ModelCreateOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { values, context } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -202,11 +234,15 @@ export class Model {
 
     return await this.client._fetch({
       payload,
+      options,
     });
   }
 
-  public async delete(options: ModelDeleteOpts): Promise<any> {
-    const { ids } = options;
+  public async delete(
+    data: ModelDeleteOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { ids } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -219,11 +255,15 @@ export class Model {
 
     return await this.client._fetch({
       payload,
+      options,
     });
   }
 
-  public async executeWorkflow(options: ModelExecuteOpts): Promise<any> {
-    const { payload, action, context } = options;
+  public async executeWorkflow(
+    data: ModelExecuteOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { payload, action, context } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -238,13 +278,15 @@ export class Model {
 
     return await this.client._fetch({
       payload: executePayload,
+      options,
     });
   }
 
   public async executeOnChange(
-    options: ModelExecuteOnChangeOpts,
+    data: ModelExecuteOnChangeOpts,
+    options?: RequestOptions,
   ): Promise<any> {
-    const { payload, action, ids } = options;
+    const { payload, action, ids } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -259,11 +301,15 @@ export class Model {
 
     return await this.client._fetch({
       payload: executePayload,
+      options,
     });
   }
 
-  public async name_search(options: ModelNameSearchOpts): Promise<any> {
-    const { payload, context, attrs, operator, limit } = options;
+  public async name_search(
+    data: ModelNameSearchOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { payload, context, attrs, operator, limit } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -280,11 +326,15 @@ export class Model {
 
     return await this.client._fetch({
       payload: executePayload,
+      options,
     });
   }
 
-  public async copy(options: ModelCopyOpts): Promise<any> {
-    const { id, context } = options;
+  public async copy(
+    data: ModelCopyOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { id, context } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -298,11 +348,15 @@ export class Model {
 
     return await this.client._fetch({
       payload: executePayload,
+      options,
     });
   }
 
-  public async perm_read(options: ModelPermReadOpts): Promise<any> {
-    const { ids, context } = options;
+  public async perm_read(
+    data: ModelPermReadOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { ids, context } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -316,11 +370,15 @@ export class Model {
 
     return await this.client._fetch({
       payload,
+      options,
     });
   }
 
-  public async export_data(options: ModelExportDataOpts): Promise<any> {
-    const { fields = [], context, domain = [], format, limit = null } = options;
+  public async export_data(
+    data: ModelExportDataOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { fields = [], context, domain = [], format, limit = null } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -337,6 +395,7 @@ export class Model {
 
     return await this.client._fetch({
       payload,
+      options,
     });
   }
 }
