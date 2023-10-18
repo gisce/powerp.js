@@ -12,16 +12,16 @@
   },
   "types": "dist/index.d.ts",
   "scripts": {
-    "preinstall": "npx only-allow npm",
-    "start": "concurrently npm:dev:*",
+    "analyze": "npx vite-bundle-visualizer",
     "build": "tsc --noEmit && vite build",
-    "test": "vitest run",
-    "test:watch": "vitest --watch",
-    "dev:vite": "vite build --watch --force",
-    "dev:tsc": "tsc --noEmit --watch",
-    "prepare": "husky install",
     "check": "lint-staged",
-    "analyze": "npx vite-bundle-visualizer"
+    "dev:tsc": "tsc --noEmit --watch",
+    "dev:vite": "vite build --watch --force",
+    "preinstall": "npx only-allow npm",
+    "prepare": "husky install",
+    "start": "concurrently npm:dev:*",
+    "test:watch": "vitest --watch",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
