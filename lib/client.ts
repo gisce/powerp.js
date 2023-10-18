@@ -256,10 +256,11 @@ export class Client {
     });
   }
 
-  public async getConfig(): Promise<any> {
+  public async getConfig(options?: RequestOptions): Promise<any> {
     return await this._fetch({
       service: "wc",
       payload: ["get_config"],
+      options,
     });
   }
 }
