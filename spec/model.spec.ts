@@ -1,9 +1,11 @@
+import { test, expect, describe } from "vitest";
+
 import { Client } from "../lib/client";
 import { Model } from "../lib/model";
 import * as dotenv from "dotenv";
 
 dotenv.config();
-jest.setTimeout(30000);
+// jest.setTimeout(30000);
 
 describe("A Model", () => {
   describe("Calling methods", () => {
@@ -24,7 +26,6 @@ describe("A Model", () => {
           params: [["id", "=", "1"]],
         });
         expect(result.length).toBe(1);
-        done();
       });
       test("must count items for a search query", async (done) => {
         const c = new Client(process.env.ERP_HOST);
@@ -42,7 +43,6 @@ describe("A Model", () => {
           count: true,
         });
         expect(result).toBeGreaterThan(100);
-        done();
       });
 
       test("must retrieve menu items id's", async (done) => {
@@ -61,7 +61,6 @@ describe("A Model", () => {
           params: [["parent_id", "=", false]],
         });
         expect(results.length).toBeGreaterThan(1);
-        done();
       });
       test("must retrieve menu items with full details", async (done) => {
         const c = new Client(process.env.ERP_HOST);
@@ -89,7 +88,6 @@ describe("A Model", () => {
         expect(testItem.icon.length).toBeGreaterThan(0);
         expect(testItem.name).toBeTruthy();
         expect(testItem.name.length).toBeGreaterThan(0);
-        done();
       });
     });
     describe("when retrieving a tree view", () => {
@@ -213,7 +211,6 @@ describe("A Model", () => {
         )[0];
 
         expect(updatedUser.name).toBe(newName);
-        done();
       });
     });
     describe("when creating", () => {
@@ -245,7 +242,6 @@ describe("A Model", () => {
         )[0];
 
         expect(newObject.name).toBe(randName);
-        done();
       });
     });
     describe("when deleting", () => {
@@ -279,7 +275,6 @@ describe("A Model", () => {
         });
 
         expect(removedObject.length).toBe(0);
-        done();
       });
     });
     describe("when duplicating", () => {
@@ -310,7 +305,6 @@ describe("A Model", () => {
         });
 
         expect(newDuplicatedId).toBeDefined();
-        done();
       });
     });
   });

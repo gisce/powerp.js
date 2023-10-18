@@ -1,6 +1,7 @@
 import { Client } from "../lib/client";
 import { Report } from "../lib/Report";
 import * as dotenv from "dotenv";
+import { test, expect, describe } from "vitest";
 
 dotenv.config();
 
@@ -41,7 +42,5 @@ describe("A Report", () => {
 
     expect(reportState.state).toBeDefined();
     expect(reportState.state).toBeFalsy();
-
-    done();
   });
 });

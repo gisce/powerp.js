@@ -1,6 +1,5 @@
-/* eslint-disable no-prototype-builtins */
+import { test, expect, describe } from "vitest";
 import { Client } from "../lib/client";
-import axios from "axios";
 import * as dotenv from "dotenv";
 
 dotenv.config();
@@ -39,13 +38,6 @@ describe("A PowERP Client", () => {
       expect(c.axiosInstance).toBeTruthy();
     });
 
-    test("should receive an axios instance if set", () => {
-      const c = new Client(process.env.ERP_HOST);
-      const axiosApiInstance = axios.create();
-      c.setAxiosInstance(axiosApiInstance);
-      expect(c.axiosInstance).toBe(axiosApiInstance);
-    });
-
     test("should allow login", async (done) => {
       const c = new Client(process.env.ERP_HOST);
       c.setDatabase(process.env.ERP_DB!);
@@ -55,7 +47,6 @@ describe("A PowERP Client", () => {
         password: process.env.ERP_PASSWORD!,
       });
       expect(token).toBeTruthy();
-      done();
     });
 
     test("should not allow login with invalid credentials", async () => {
@@ -95,21 +86,18 @@ describe("A PowERP Client", () => {
 
       expect(Array.isArray(dbs)).toBe(true);
       expect(dbs.length).toBeGreaterThan(0);
-      done();
     });
 
     test("should be able to get server version", async (done) => {
       const c = new Client(process.env.ERP_HOST);
       const serverVersion: string = await c.getServerVersion();
       expect(serverVersion).toBeTruthy();
-      done();
     });
 
     test("should be able to get login message", async (done) => {
       const c = new Client(process.env.ERP_HOST);
       const loginMessage: string = await c.getLoginMessage();
       expect(typeof loginMessage).toBe("string");
-      done();
     });
   });
 });

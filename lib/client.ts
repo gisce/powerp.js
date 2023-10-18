@@ -20,7 +20,7 @@ export class Client {
   host: string;
   database?: string;
   token?: string;
-  axiosInstance: AxiosInstance;
+  axiosInstance: AxiosInstance | undefined;
   clientHeader?: string;
 
   constructor(host?: string) {
@@ -63,7 +63,7 @@ export class Client {
         {
           headers: {
             "Content-Type": "application/json",
-            "X-GISCE-Client": this.clientHeader,
+            "X-GISCE-Client": this.clientHeader!,
           },
         }
       );
