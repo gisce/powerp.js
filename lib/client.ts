@@ -25,7 +25,7 @@ export class Client {
 
   constructor(host?: string) {
     if (!host) {
-      throw "A host is required";
+      throw new Error("A host is required");
     }
 
     this.host = host;
@@ -51,7 +51,7 @@ export class Client {
     const { host, token } = this;
 
     if (service != "common" && service != "db" && !token) {
-      throw "You must login first";
+      throw new Error("You must login first");
     }
 
     // console.debug(`Sending ${options.payload} to ${host}/${service}`);
@@ -65,7 +65,7 @@ export class Client {
             "Content-Type": "application/json",
             "X-GISCE-Client": this.clientHeader!,
           },
-        }
+        },
       );
       // console.debug(`Response from API: ${JSON.stringify(response.data)}`);
       if (response.data.exception) {
@@ -74,7 +74,7 @@ export class Client {
       return response.data;
     } catch (e) {
       console.error(
-        `Error in fetching ${host}/${service}: ${JSON.stringify(e, null, 2)}`
+        `Error in fetching ${host}/${service}: ${JSON.stringify(e, null, 2)}`,
       );
       throw e;
     }
@@ -85,7 +85,7 @@ export class Client {
     const { user, password } = options;
 
     if (!database) {
-      throw "You must set a database first";
+      throw new Error("You must set a database first");
     }
 
     const payload = makeLoginTokenPayload({
@@ -98,7 +98,7 @@ export class Client {
       service: "common",
     });
     if (!token) {
-      throw "Invalid User/Login";
+      throw new Error("Invalid User/Login");
     }
     this.token = token;
     return token;
@@ -130,7 +130,7 @@ export class Client {
     const { database } = this;
 
     if (!database) {
-      throw "You must set a database first";
+      throw new Error("You must set a database first");
     }
 
     const refreshedToken = await this._fetch({
@@ -163,7 +163,7 @@ export class Client {
   }
 
   public async parseCondition(
-    options: AttributeConditionParserOpts
+    options: AttributeConditionParserOpts,
   ): Promise<any> {
     const { values, condition, context } = options;
     const { database, token } = this;
@@ -197,7 +197,7 @@ export class Client {
   }
 
   public async isShortcutFavorite(
-    options: IsShortcutFavoriteOpts
+    options: IsShortcutFavoriteOpts,
   ): Promise<any> {
     const { context, payload } = options;
     const { database, token } = this;

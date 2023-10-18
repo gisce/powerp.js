@@ -242,7 +242,7 @@ export class Model {
   }
 
   public async executeOnChange(
-    options: ModelExecuteOnChangeOpts
+    options: ModelExecuteOnChangeOpts,
   ): Promise<any> {
     const { payload, action, ids } = options;
     const { model } = this;
@@ -320,13 +320,7 @@ export class Model {
   }
 
   public async export_data(options: ModelExportDataOpts): Promise<any> {
-    const {
-      fields = [],
-      context,
-      domain = [],
-      format,
-      limit = null,
-    } = options;
+    const { fields = [], context, domain = [], format, limit = null } = options;
     const { model } = this;
     const { database, token } = this.client;
 

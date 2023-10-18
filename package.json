@@ -69,8 +69,8 @@
     "vitest": "^0.34.6"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": "eslint --fix",
-    "src/**/*.{js,jsx,ts,tsx,json,css,md}": "prettier --write"
+    "lib/**/*.{js,jsx,ts,tsx}": "eslint --fix",
+    "lib/**/*.{js,jsx,ts,tsx,json,css,md}": "prettier --write"
   },
   "release": {
     "branches": [

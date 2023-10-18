@@ -22,7 +22,6 @@ import {
   ButTreeOpenPayload,
   ModelFieldsGetPayload,
   ModelExportDataPayload,
-  ModelExportDataOpts,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -74,7 +73,7 @@ export const createReadPayload = (options: ModelReadPayload): Payload => {
 };
 
 export const createPermReadPayload = (
-  options: ModelPermReadPayload
+  options: ModelPermReadPayload,
 ): Payload => {
   const { database, token, model, ids, context = {} } = options;
   return [
@@ -90,7 +89,7 @@ export const createPermReadPayload = (
 };
 
 export const createReadEvalUiPayload = (
-  options: ModelReadEvalUiPayload
+  options: ModelReadEvalUiPayload,
 ): Payload => {
   const { database, token, model, ids, fields, context = {}, attrs } = options;
   const payload = [
@@ -145,18 +144,10 @@ export const createDeletePayload = (options: ModelDeletePayload): Payload => {
 };
 
 export const createFieldsViewGetPayload = (
-  options: ModelFieldsViewGetPayload
+  options: ModelFieldsViewGetPayload,
 ): Payload => {
-  const {
-    database,
-    token,
-    model,
-    id,
-    context,
-    toolbar,
-    type,
-    version,
-  } = options;
+  const { database, token, model, id, context, toolbar, type, version } =
+    options;
   const payload = [
     "execute",
     database,
@@ -178,7 +169,7 @@ export const createFieldsViewGetPayload = (
 };
 
 export const createFieldsGetPayload = (
-  options: ModelFieldsGetPayload
+  options: ModelFieldsGetPayload,
 ): Payload => {
   const { database, token, model, fields, context } = options;
   const payload = [
@@ -196,7 +187,7 @@ export const createFieldsGetPayload = (
 };
 
 export const createModelExecutePayload = (
-  options: ModelExecutePayload
+  options: ModelExecutePayload,
 ): Payload => {
   const { database, token, model, payload, action, context } = options;
   const base = ["execute", database, "token", token, model, action];
@@ -213,7 +204,7 @@ export const createModelExecutePayload = (
 };
 
 export const createModelNameSearchPayload = (
-  options: ModelNameSearchPayload
+  options: ModelNameSearchPayload,
 ): Payload => {
   const {
     database,
@@ -241,7 +232,7 @@ export const createModelNameSearchPayload = (
 };
 
 export const createModelExecuteWorkflowPayload = (
-  options: ModelExecutePayload
+  options: ModelExecutePayload,
 ): Payload => {
   const { database, token, model, payload, action } = options;
   return [
@@ -256,7 +247,7 @@ export const createModelExecuteWorkflowPayload = (
 };
 
 export const createCreateReportPayload = (
-  options: CreateReportPayload
+  options: CreateReportPayload,
 ): Payload => {
   const { database, token, name, ids, context, datas } = options;
   return ["report", database, "token", token, name, ids, datas, context];
@@ -268,7 +259,7 @@ export const createGetReportPayload = (options: GetReportPayload): Payload => {
 };
 
 export const createExecuteOnChangePayload = (
-  options: ModelExecuteOnChangePayload
+  options: ModelExecuteOnChangePayload,
 ): Payload => {
   const { database, token, model, ids, action, payload } = options;
   const request = ["execute", database, "token", token, model, action, ids];
@@ -286,7 +277,7 @@ export const createModelCopyPayload = (options: ModelCopyPayload): Payload => {
 };
 
 export const createEvalDomainPayload = (
-  options: EvalDomainPayload
+  options: EvalDomainPayload,
 ): Payload => {
   const { database, token, domain, values, context } = options;
   return [
@@ -303,7 +294,7 @@ export const createEvalDomainPayload = (
 };
 
 export const createAttributeConditionPayload = (
-  options: AttributeConditionPayload
+  options: AttributeConditionPayload,
 ): Payload => {
   const { database, token, condition, values, context } = options;
   return [
@@ -320,7 +311,7 @@ export const createAttributeConditionPayload = (
 };
 
 export const createGetShortcutsPayload = (
-  options: GetShortcutsPayload
+  options: GetShortcutsPayload,
 ): Payload => {
   const { database, token, context } = options;
   return [
@@ -335,7 +326,7 @@ export const createGetShortcutsPayload = (
 };
 
 export const createIsShortcutFavoritePayload = (
-  options: IsShortcutFavoritePayload
+  options: IsShortcutFavoritePayload,
 ): Payload => {
   const { database, token, payload, context } = options;
   return [
@@ -351,7 +342,7 @@ export const createIsShortcutFavoritePayload = (
 };
 
 export const createButTreeOpenPayload = (
-  options: ButTreeOpenPayload
+  options: ButTreeOpenPayload,
 ): Payload => {
   const { database, token, model, id, context } = options;
   return [
@@ -370,7 +361,7 @@ export const createButTreeOpenPayload = (
 };
 
 export const createExportDataPayload = (
-  options: ModelExportDataPayload
+  options: ModelExportDataPayload,
 ): Payload => {
   const {
     database,

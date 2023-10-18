@@ -57,7 +57,7 @@ describe("A PowERP Client", () => {
         c.loginAndGetToken({
           user: process.env.ERP_USER!,
           password: "invalidPassword",
-        })
+        }),
       ).rejects.toEqual("Invalid User/Login");
     });
 

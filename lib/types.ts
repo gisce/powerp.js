@@ -29,7 +29,7 @@ export type Payload = Array<
   | number
   | number[]
   | boolean
-  | Array<string[]>
+  | string[][]
   | null
   | undefined
   | Context
@@ -41,7 +41,7 @@ export type FetchOpts = {
 };
 
 export type ModelSearchOpts = {
-  params?: Array<any>;
+  params?: any[];
   offset?: number;
   limit?: number | boolean;
   context?: Context;
@@ -52,7 +52,7 @@ export type ModelSearchOpts = {
 export type ModelSearchPayload = Model & Database & Token & ModelSearchOpts;
 
 export type ModelReadOpts = {
-  ids: Array<number>;
+  ids: number[];
   fields?: string[];
   context?: Context;
 };
@@ -62,7 +62,7 @@ export type ModelReadEvalUiOpts = ModelReadOpts & {
 };
 
 export type ModelWriteOpts = {
-  ids: Array<number>;
+  ids: number[];
   values: any;
   context?: Context;
 };
@@ -73,7 +73,7 @@ export type ModelCreateOpts = {
 };
 
 export type ModelDeleteOpts = {
-  ids: Array<number>;
+  ids: number[];
 };
 
 export type ModelReadPayload = Model & Database & Token & ModelReadOpts;
@@ -119,7 +119,7 @@ export type ModelExecuteOpts = {
 };
 
 export type ModelExecuteOnChangeOpts = {
-  ids: Array<number>;
+  ids: number[];
   payload?: any;
   action: string;
 };
@@ -200,7 +200,7 @@ export type IsShortcutFavoritePayload = Database &
   IsShortcutFavoriteOpts;
 
 export type ModelPermReadOpts = {
-  ids: Array<number>;
+  ids: number[];
   context?: Context;
 };
 
@@ -215,7 +215,7 @@ export type ButTreeOpenOpts = {
 export type ButTreeOpenPayload = Database & Token & ButTreeOpenOpts;
 
 export type ModelExportDataOpts = {
-  domain?: Array<any>;
+  domain?: any[];
   format: string;
   limit?: number | null;
   fields?: string[];
