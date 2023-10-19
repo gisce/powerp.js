@@ -47,7 +47,7 @@ export class Client {
     const { service = "object", options = {} } = data;
     const { host, token } = this;
 
-    if (service != "common" && service != "db" && !token) {
+    if (service != "common" && service != "db" && service != "wc" && !token) {
       throw new Error("You must login first");
     }
 
