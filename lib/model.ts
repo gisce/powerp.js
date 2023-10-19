@@ -54,7 +54,7 @@ export class Model {
       order = 0,
       context = null,
       count = false,
-    } = data;
+    } = data || {};
     const { model } = this;
     const { database, token } = this.client;
 
