@@ -74,6 +74,7 @@ export type ModelCreateOpts = {
 
 export type ModelDeleteOpts = {
   ids: Array<number>;
+  context?: Context;
 };
 
 export type ModelReadPayload = Model & Database & Token & ModelReadOpts;
