@@ -97,6 +97,7 @@ export type ModelFieldsViewGetOpts = {
   context?: Context;
   toolbar: boolean;
   version?: number;
+  overrideMethodName?: string;
 };
 
 export type ModelFieldsViewGetPayload = Model &

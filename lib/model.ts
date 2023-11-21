@@ -127,7 +127,7 @@ export class Model {
     data: ModelFieldsViewGetOpts,
     options?: RequestOptions,
   ): Promise<any> {
-    const { id, context, type, toolbar, version } = data;
+    const { id, context, type, toolbar, version, overrideMethodName } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -140,6 +140,7 @@ export class Model {
       context,
       toolbar,
       version,
+      overrideMethodName,
     });
 
     return await this.client._fetch({
