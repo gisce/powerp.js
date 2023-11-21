@@ -263,4 +263,15 @@ export class Client {
       options,
     });
   }
+
+  public async checkForFeatures(
+    features: string[],
+    options?: RequestOptions,
+  ): Promise<any> {
+    await this._fetch({
+      service: "common",
+      payload: ["check_for_features", features],
+      options,
+    });
+  }
 }
