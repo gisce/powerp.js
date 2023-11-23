@@ -268,7 +268,7 @@ export class Client {
     features: string[],
     options?: RequestOptions,
   ): Promise<any> {
-    await this._fetch({
+    return await this._fetch({
       service: "common",
       payload: ["check_for_features", features],
       options,
