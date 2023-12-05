@@ -2,7 +2,7 @@
   "name": "@gisce/powerp.js",
   "version": "1.3.0-alpha.12",
   "description": "PowERP Javascript Client",
-  "module": "dist/powerpjs.es.js",
+  "module": "./dist/powerpjs.es.js",
   "files": [
     "dist",
     "src"
@@ -11,6 +11,12 @@
     "node": "20.5.0"
   },
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/powerpjs.es.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "analyze": "npx vite-bundle-visualizer",
     "build": "tsc --noEmit && vite build",
