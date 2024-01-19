@@ -80,7 +80,7 @@ export class Client {
             2,
           )}`,
         );
-      } else {
+      } else if (e.name !== "CanceledError") {
         console.error(
           `Error in fetching ${host}/${service}: ${JSON.stringify(e, null, 2)}`,
         );
