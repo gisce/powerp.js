@@ -53,15 +53,16 @@ export class Client {
 
     // console.debug(`Sending ${options.payload} to ${host}/${service}`);
 
+    if (!host) {
+      throw new Error("You must set a host first");
+    }
+
     try {
       const response = await this.getAxiosInstance().post(
         `${host}/${service}`,
         data.payload,
         {
-          headers: {
-            "Content-Type": "application/json",
-            "X-GISCE-Client": this.clientHeader,
-          },
+          headers: getDefaultHeaders(this.clientHeader),
           ...options,
         },
       );
@@ -71,9 +72,19 @@ export class Client {
       }
       return response.data;
     } catch (e) {
-      console.error(
-        `Error in fetching ${host}/${service}: ${JSON.stringify(e, null, 2)}`,
-      );
+      if (e.name === "CanceledError" && process.env.NODE_ENV !== "production") {
+        console.warn(
+          `CANCELED request to ${host}/${service}: ${JSON.stringify(
+            e,
+            null,
+            2,
+          )}`,
+        );
+      } else {
+        console.error(
+          `Error in fetching ${host}/${service}: ${JSON.stringify(e, null, 2)}`,
+        );
+      }
       throw e;
     }
   }
@@ -274,4 +285,15 @@ export class Client {
       options,
     });
   }
+}
+
+function getDefaultHeaders(clientHeader?: string): Record<string, string> {
+  const defaultHeaders: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+  if (clientHeader) {
+    defaultHeaders["X-GISCE-Client"] = clientHeader;
+  }
+
+  return defaultHeaders;
 }
