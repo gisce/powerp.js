@@ -18,15 +18,17 @@
     }
   },
   "scripts": {
-    "analyze": "npx vite-bundle-visualizer",
-    "build": "tsc --noEmit && vite build",
+    "build:tsc": "tsc --noEmit",
+    "build:vite": "vite build",
+    "build": "concurrently npm:build:*",
     "check": "lint-staged",
     "dev:tsc": "tsc --noEmit --watch",
     "dev:vite": "vite build --watch --force",
-    "prepare": "husky install",
     "start": "concurrently npm:dev:*",
+    "prepare": "husky install",
     "test:watch": "vitest --watch",
-    "test": "vitest run"
+    "test": "vitest run",
+    "analyze": "vite-bundle-visualizer"
   },
   "repository": {
     "type": "git",
