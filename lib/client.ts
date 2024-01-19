@@ -62,10 +62,7 @@ export class Client {
         `${host}/${service}`,
         data.payload,
         {
-          headers: {
-            "Content-Type": "application/json",
-            "X-GISCE-Client": this.clientHeader,
-          },
+          headers: getDefaultHeaders(this.clientHeader),
           ...options,
         },
       );
@@ -288,4 +285,15 @@ export class Client {
       options,
     });
   }
+}
+
+function getDefaultHeaders(clientHeader?: string): Record<string, string> {
+  const defaultHeaders: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+  if (clientHeader) {
+    defaultHeaders["X-GISCE-Client"] = clientHeader;
+  }
+
+  return defaultHeaders;
 }
