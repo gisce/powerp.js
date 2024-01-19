@@ -53,6 +53,10 @@ export class Client {
 
     // console.debug(`Sending ${options.payload} to ${host}/${service}`);
 
+    if (!host) {
+      throw new Error("You must set a host first");
+    }
+
     try {
       const response = await this.getAxiosInstance().post(
         `${host}/${service}`,
@@ -71,9 +75,19 @@ export class Client {
       }
       return response.data;
     } catch (e) {
-      console.error(
-        `Error in fetching ${host}/${service}: ${JSON.stringify(e, null, 2)}`,
-      );
+      if (e.name === "CanceledError" && process.env.NODE_ENV !== "production") {
+        console.warn(
+          `CANCELED request to ${host}/${service}: ${JSON.stringify(
+            e,
+            null,
+            2,
+          )}`,
+        );
+      } else {
+        console.error(
+          `Error in fetching ${host}/${service}: ${JSON.stringify(e, null, 2)}`,
+        );
+      }
       throw e;
     }
   }
