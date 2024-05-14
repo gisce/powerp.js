@@ -22,6 +22,7 @@ import {
   ButTreeOpenPayload,
   ModelFieldsGetPayload,
   ModelExportDataPayload,
+  ReadForViewPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -393,6 +394,32 @@ export const createExportDataPayload = (
     limit,
     fields,
     format,
+    context,
+  ];
+};
+
+export const createReadForViewPayload = (
+  options: ReadForViewPayload,
+): Payload => {
+  const {
+    database,
+    token,
+    model,
+    domain,
+    view_id,
+    context = {},
+    version,
+  } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "read_for_view",
+    view_id,
+    domain,
+    version,
     context,
   ];
 };
