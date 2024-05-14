@@ -231,3 +231,12 @@ export type ModelExportDataPayload = Database &
   ModelExportDataOpts;
 
 export type RequestOptions = any;
+
+export type ReadForViewOpts = {
+  domain?: any[];
+  view_id: number;
+  context?: Context;
+  version?: number;
+};
+
+export type ReadForViewPayload = Database & Token & Model & ReadForViewOpts;
