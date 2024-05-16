@@ -140,8 +140,8 @@ export const createCreatePayload = (options: ModelCreatePayload): Payload => {
 };
 
 export const createDeletePayload = (options: ModelDeletePayload): Payload => {
-  const { database, token, model, ids } = options;
-  return ["execute", database, "token", token, model, "unlink", ids];
+  const { database, token, model, ids, context } = options;
+  return ["execute", database, "token", token, model, "unlink", ids, context];
 };
 
 export const createFieldsViewGetPayload = (

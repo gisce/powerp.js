@@ -206,7 +206,7 @@ export class Model {
   }
 
   public async delete(options: ModelDeleteOpts): Promise<any> {
-    const { ids } = options;
+    const { ids, context } = options;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -215,6 +215,7 @@ export class Model {
       token: token!,
       model,
       ids,
+      context
     });
 
     return await this.client._fetch({
