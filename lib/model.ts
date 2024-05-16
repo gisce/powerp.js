@@ -15,6 +15,7 @@ import {
   ModelFieldsGetOpts,
   ModelExportDataOpts,
   RequestOptions,
+  ReadForViewOpts,
 } from "./types";
 import {
   createSearchPayload,
@@ -32,6 +33,7 @@ import {
   createPermReadPayload,
   createFieldsGetPayload,
   createExportDataPayload,
+  createReadForViewPayload,
 } from "./payloads";
 
 export class Model {
@@ -393,6 +395,30 @@ export class Model {
       fields,
       format,
       context,
+    });
+
+    return await this.client._fetch({
+      payload,
+      options,
+    });
+  }
+
+  public async read_for_view(
+    data: ReadForViewOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { view_id, domain = [], context, version } = data;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const payload = createReadForViewPayload({
+      database: database!,
+      token: token!,
+      model,
+      view_id,
+      context,
+      domain,
+      version,
     });
 
     return await this.client._fetch({
