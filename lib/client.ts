@@ -23,6 +23,7 @@ export class Client {
   token?: string;
   axiosInstance: AxiosInstance | undefined;
   clientHeader?: string;
+  onTokenAccessDenied?: (error: any) => void;
 
   public setHost(host: string): void {
     this.host = host;
@@ -34,6 +35,12 @@ export class Client {
 
   public setToken(token: string): void {
     this.token = token;
+  }
+
+  public setOnTokenAccessDenied(
+    onTokenAccessDenied: (error: any) => void,
+  ): void {
+    this.onTokenAccessDenied = onTokenAccessDenied;
   }
 
   public getAxiosInstance(): AxiosInstance {
@@ -55,7 +62,7 @@ export class Client {
 
     try {
       const response = await this.getAxiosInstance().post(
-        `${host}/${service}`,
+        `${host!}/${service}`,
         data.payload,
         {
           headers: {
@@ -71,8 +78,11 @@ export class Client {
       }
       return response.data;
     } catch (e) {
+      if (e === "AccessDenied Token Error") {
+        this.onTokenAccessDenied?.(e);
+      }
       console.error(
-        `Error in fetching ${host}/${service}: ${JSON.stringify(e, null, 2)}`,
+        `Error in fetching ${host!}/${service}: ${JSON.stringify(e, null, 2)}`,
       );
       throw e;
     }
