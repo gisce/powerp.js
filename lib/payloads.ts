@@ -432,7 +432,7 @@ export const createReadAggPayload = (options: ReadAggPayload): Payload => {
     "token",
     token,
     model,
-    "read_for_view",
+    "read_agg",
     domain,
     aggregate_fields,
   ];
