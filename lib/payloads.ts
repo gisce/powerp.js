@@ -23,6 +23,7 @@ import {
   ModelFieldsGetPayload,
   ModelExportDataPayload,
   ReadForViewPayload,
+  ReadAggPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -421,5 +422,18 @@ export const createReadForViewPayload = (
     domain,
     version,
     context,
+  ];
+};
+export const createReadAggPayload = (options: ReadAggPayload): Payload => {
+  const { database, token, model, domain, aggregate_fields } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "read_for_view",
+    domain,
+    aggregate_fields,
   ];
 };

@@ -16,6 +16,7 @@ import {
   ModelExportDataOpts,
   RequestOptions,
   ReadForViewOpts,
+  ReadAggOpts,
 } from "./types";
 import {
   createSearchPayload,
@@ -34,6 +35,7 @@ import {
   createFieldsGetPayload,
   createExportDataPayload,
   createReadForViewPayload,
+  createReadAggPayload,
 } from "./payloads";
 
 export class Model {
@@ -419,6 +421,28 @@ export class Model {
       context,
       domain,
       version,
+    });
+
+    return await this.client._fetch({
+      payload,
+      options,
+    });
+  }
+
+  public async read_agg(
+    data: ReadAggOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { domain = [], aggregate_fields } = data;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const payload = createReadAggPayload({
+      database: database!,
+      token: token!,
+      model,
+      domain,
+      aggregate_fields,
     });
 
     return await this.client._fetch({
