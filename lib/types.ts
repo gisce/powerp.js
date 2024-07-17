@@ -240,3 +240,10 @@ export type ReadForViewOpts = {
 };
 
 export type ReadForViewPayload = Database & Token & Model & ReadForViewOpts;
+
+export type ReadAggOpts = {
+  domain?: any[];
+  aggregate_fields: Record<string, string[]>;
+};
+
+export type ReadAggPayload = Database & Token & Model & ReadAggOpts;
