@@ -1,6 +1,6 @@
 {
   "name": "@gisce/powerp.js",
-  "version": "2.2.0",
+  "version": "2.3.1",
   "description": "PowERP Javascript Client",
   "module": "./dist/powerpjs.es.js",
   "files": [
@@ -108,7 +108,13 @@
           "npmPublish": true
         }
       ],
-      "@semantic-release/github",
+      [
+        "@semantic-release/github",
+        {
+          "successComment": false,
+          "failComment": false
+        }
+      ],
       "@semantic-release/git"
     ]
   }
