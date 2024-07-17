@@ -1,6 +1,6 @@
 {
   "name": "@gisce/powerp.js",
-  "version": "2.3.1",
+  "version": "2.1.0-alpha.2",
   "description": "PowERP Javascript Client",
   "module": "./dist/powerpjs.es.js",
   "files": [
@@ -18,15 +18,17 @@
     }
   },
   "scripts": {
-    "analyze": "npx vite-bundle-visualizer",
-    "build": "tsc --noEmit && vite build",
+    "build:tsc": "tsc --noEmit",
+    "build:vite": "vite build",
+    "build": "concurrently npm:build:*",
     "check": "lint-staged",
     "dev:tsc": "tsc --noEmit --watch",
     "dev:vite": "vite build --watch --force",
-    "prepare": "husky install",
     "start": "concurrently npm:dev:*",
+    "prepare": "husky install",
     "test:watch": "vitest --watch",
-    "test": "vitest run"
+    "test": "vitest run",
+    "analyze": "vite-bundle-visualizer"
   },
   "repository": {
     "type": "git",
@@ -70,10 +72,9 @@
     "prettier": "3.0.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "semantic-release": "21.0.7",
-    "typescript": "^5.0.4",
-    "vite": "4.4.8",
+    "typescript": "5.3.3",
+    "vite": "4.5.1",
     "vite-bundle-visualizer": "^0.10.0",
-    "vite-compatible-readable-stream": "^3.6.1",
     "vite-plugin-dts": "^3.6.0",
     "vitest": "^0.34.6"
   },
@@ -108,13 +109,7 @@
           "npmPublish": true
         }
       ],
-      [
-        "@semantic-release/github",
-        {
-          "successComment": false,
-          "failComment": false
-        }
-      ],
+      "@semantic-release/github",
       "@semantic-release/git"
     ]
   }

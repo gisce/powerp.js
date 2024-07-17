@@ -11,7 +11,8 @@ describe("A Model", () => {
   describe("Calling methods", () => {
     describe("when searching", () => {
       test("must accept a search args", async (done) => {
-        const c = new Client(process.env.ERP_HOST);
+        const c = new Client();
+        c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
 
         const token = await c.loginAndGetToken({
@@ -28,7 +29,8 @@ describe("A Model", () => {
         expect(result.length).toBe(1);
       });
       test("must count items for a search query", async (done) => {
-        const c = new Client(process.env.ERP_HOST);
+        const c = new Client();
+        c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
 
         const token = await c.loginAndGetToken({
@@ -46,7 +48,8 @@ describe("A Model", () => {
       });
 
       test("must retrieve menu items id's", async (done) => {
-        const c = new Client(process.env.ERP_HOST);
+        const c = new Client();
+        c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
 
         const token = await c.loginAndGetToken({
@@ -61,9 +64,10 @@ describe("A Model", () => {
           params: [["parent_id", "=", false]],
         });
         expect(results.length).toBeGreaterThan(1);
-      });
+      }, 15000);
       test("must retrieve menu items with full details", async (done) => {
-        const c = new Client(process.env.ERP_HOST);
+        const c = new Client();
+        c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
 
         const token = await c.loginAndGetToken({
@@ -92,7 +96,8 @@ describe("A Model", () => {
     });
     describe("when retrieving a tree view", () => {
       test("must retrieve a valid action for id 71", async () => {
-        const c = new Client(process.env.ERP_HOST);
+        const c = new Client();
+        c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
 
         const token = await c.loginAndGetToken({
@@ -108,7 +113,8 @@ describe("A Model", () => {
         expect(actions.length).toBe(1);
       });
       test("must retrieve valid views for type tree and id 96", async () => {
-        const c = new Client(process.env.ERP_HOST);
+        const c = new Client();
+        c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
 
         const token = await c.loginAndGetToken({
@@ -131,7 +137,8 @@ describe("A Model", () => {
         expect(fieldsAndArch.view_id).toBe(96);
       });
       test("must retrieve valid views for type form and id 97", async () => {
-        const c = new Client(process.env.ERP_HOST);
+        const c = new Client();
+        c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
 
         const token = await c.loginAndGetToken({
@@ -154,7 +161,8 @@ describe("A Model", () => {
         expect(fieldsAndArch.view_id).toBe(97);
       });
       test("must be able to star/unstar an item", async () => {
-        const c = new Client(process.env.ERP_HOST);
+        const c = new Client();
+        c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
 
         const token = await c.loginAndGetToken({
@@ -187,7 +195,8 @@ describe("A Model", () => {
     });
     describe("when writing", () => {
       test("must update name field for an user", async (done) => {
-        const c = new Client(process.env.ERP_HOST);
+        const c = new Client();
+        c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
 
         const token = await c.loginAndGetToken({
@@ -215,7 +224,8 @@ describe("A Model", () => {
     });
     describe("when creating", () => {
       test("must get new id for new object", async (done) => {
-        const c = new Client(process.env.ERP_HOST);
+        const c = new Client();
+        c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
 
         const token = await c.loginAndGetToken({
@@ -246,7 +256,8 @@ describe("A Model", () => {
     });
     describe("when deleting", () => {
       test("must get true when removing a new item", async (done) => {
-        const c = new Client(process.env.ERP_HOST);
+        const c = new Client();
+        c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
 
         const token = await c.loginAndGetToken({
@@ -279,7 +290,8 @@ describe("A Model", () => {
     });
     describe("when duplicating", () => {
       test("must get new id when duplicating an item", async (done) => {
-        const c = new Client(process.env.ERP_HOST);
+        const c = new Client();
+        c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
 
         const token = await c.loginAndGetToken({
