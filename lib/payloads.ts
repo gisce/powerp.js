@@ -24,6 +24,8 @@ import {
   ModelExportDataPayload,
   ReadForViewPayload,
   ReadAggPayload,
+  SaveViewPrefsPayload,
+  ReadViewPrefsPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -424,6 +426,7 @@ export const createReadForViewPayload = (
     context,
   ];
 };
+
 export const createReadAggPayload = (options: ReadAggPayload): Payload => {
   const { database, token, model, domain, aggregate_fields } = options;
   return [
@@ -435,5 +438,38 @@ export const createReadAggPayload = (options: ReadAggPayload): Payload => {
     "read_agg",
     domain,
     aggregate_fields,
+  ];
+};
+
+export const createSaveViewPrefsPayload = (
+  options: SaveViewPrefsPayload,
+): Payload => {
+  const { database, token, key, preferences } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    "res.users",
+    "save_view_prefs",
+    key,
+    preferences,
+    {},
+  ];
+};
+
+export const createReadViewPrefsPayload = (
+  options: ReadViewPrefsPayload,
+): Payload => {
+  const { database, token, key } = options;
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    "res.users",
+    "get_view_prefs",
+    key,
+    {},
   ];
 };
