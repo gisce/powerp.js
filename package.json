@@ -1,6 +1,6 @@
 {
   "name": "@gisce/powerp.js",
-  "version": "2.3.2",
+  "version": "2.4.0-alpha.2",
   "description": "PowERP Javascript Client",
   "module": "./dist/powerpjs.es.js",
   "files": [
