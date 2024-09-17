@@ -1,6 +1,6 @@
 {
   "name": "@gisce/powerp.js",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "PowERP Javascript Client",
   "module": "./dist/powerpjs.es.js",
   "files": [
@@ -115,7 +115,13 @@
           "failComment": false
         }
       ],
-      "@semantic-release/git"
+      "@semantic-release/git",
+      [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "echo ${nextRelease.type} > .release-type && echo ${nextRelease.gitTag} > .release-tag"
+        }
+      ]
     ]
   }
 }
