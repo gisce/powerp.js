@@ -8,6 +8,8 @@ import {
   AttributeConditionParserOpts,
   ButTreeOpenOpts,
   RequestOptions,
+  SaveViewPrefsOptions,
+  ReadViewPrefsOptions,
 } from "./types";
 import {
   createEvalDomainPayload,
@@ -16,6 +18,8 @@ import {
   createIsShortcutFavoritePayload,
   makeLoginTokenPayload,
   createButTreeOpenPayload,
+  createSaveViewPrefsPayload,
+  createReadViewPrefsPayload,
 } from "./payloads";
 export class Client {
   host?: string;
@@ -281,6 +285,45 @@ export class Client {
     return await this._fetch({
       service: "common",
       payload: ["check_for_features", features],
+      options,
+    });
+  }
+
+  public async saveViewPrefs(
+    payload: SaveViewPrefsOptions,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { database, token } = this;
+    const { key, preferences } = payload;
+
+    const saveViewPrefsPayload = createSaveViewPrefsPayload({
+      database: database!,
+      token: token!,
+      key,
+      preferences,
+    });
+
+    return await this._fetch({
+      payload: saveViewPrefsPayload,
+      options,
+    });
+  }
+
+  public async readViewPrefs(
+    payload: ReadViewPrefsOptions,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { database, token } = this;
+    const { key } = payload;
+
+    const readViewPrefsPayload = createReadViewPrefsPayload({
+      database: database!,
+      token: token!,
+      key,
+    });
+
+    return await this._fetch({
+      payload: readViewPrefsPayload,
       options,
     });
   }

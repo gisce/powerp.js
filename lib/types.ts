@@ -247,3 +247,16 @@ export type ReadAggOpts = {
 };
 
 export type ReadAggPayload = Database & Token & Model & ReadAggOpts;
+
+export type SaveViewPrefsOptions = {
+  key: string;
+  preferences: any;
+};
+
+export type ReadViewPrefsOptions = {
+  key: string;
+};
+
+export type SaveViewPrefsPayload = Database & Token & SaveViewPrefsOptions;
+
+export type ReadViewPrefsPayload = Database & Token & ReadViewPrefsOptions;
