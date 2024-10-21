@@ -227,7 +227,7 @@ export const createModelNameSearchPayload = (
     context,
     attrs = null,
     operator = "ilike",
-    limit = 80,
+    limit,
   } = options;
   return [
     "execute",
