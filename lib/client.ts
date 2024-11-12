@@ -136,6 +136,16 @@ export class Client {
     });
   }
 
+  public async getServerEnvironment(
+    options?: RequestOptions,
+  ): Promise<Record<string, string>> {
+    return await this._fetch({
+      service: "common",
+      payload: ["get_server_environment", true],
+      options,
+    });
+  }
+
   public async getLoginMessage(options?: RequestOptions): Promise<string> {
     const loginMessage = await this._fetch({
       service: "common",
