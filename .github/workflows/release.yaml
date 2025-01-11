@@ -83,7 +83,7 @@ jobs:
             branch: ${{ needs.release.outputs.branch_name }}
     steps:
       - name: Call update version dependency flow for each project
-        uses: gisce/create-update-version-pr@v0.0.9
+        uses: gisce/create-update-version-pr@v0.0.25
         with:
           dependentProject: ${{ matrix.project }}
           tagName: ${{ needs.release.outputs.tag_name }}
