@@ -83,11 +83,29 @@ jobs:
             branch: ${{ needs.release.outputs.branch_name }}
     steps:
       - name: Call update version dependency flow for each project
-        uses: gisce/create-update-version-pr@v0.0.25
+        uses: gisce/create-update-version-pr@v0.0.9
         with:
           dependentProject: ${{ matrix.project }}
           tagName: ${{ needs.release.outputs.tag_name }}
           dependentProjectBranch: ${{ matrix.branch }}
           libraryName: ${{ env.LIBRARY_NAME }}
+          githubToken: ${{ secrets.GH_PAT }}
+          releaseType: ${{ needs.release.outputs.release_type }}
+
+  create-sync-prs:
+    name: Create sync PRs
+    needs: release
+    if: github.ref == 'refs/heads/v2'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target: ['alpha', 'v2-develop']
+    steps:
+      - name: Call create sync pr
+        uses: gisce/create-sync-pr@v0.0.26
+        with:
+          repository: ${{ env.LIBRARY_NAME }}
+          targetBranch: ${{ matrix.target }}
+          baseBranch: v2
           githubToken: ${{ secrets.GH_PAT }}
           releaseType: ${{ needs.release.outputs.release_type }}
