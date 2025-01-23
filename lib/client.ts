@@ -49,7 +49,11 @@ export class Client {
 
   public getAxiosInstance(): AxiosInstance {
     if (!this.axiosInstance) {
-      this.axiosInstance = axios.create();
+      this.axiosInstance = axios.create({
+        headers: {
+          "Referrer-Policy": "no-referrer",
+        },
+      });
     }
     return this.axiosInstance;
   }
@@ -132,6 +136,16 @@ export class Client {
     return await this._fetch({
       service: "db",
       payload: ["server_version"],
+      options,
+    });
+  }
+
+  public async getServerEnvironment(
+    options?: RequestOptions,
+  ): Promise<Record<string, string>> {
+    return await this._fetch({
+      service: "common",
+      payload: ["get_server_environment", true],
       options,
     });
   }
