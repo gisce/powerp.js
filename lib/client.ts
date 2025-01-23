@@ -49,11 +49,7 @@ export class Client {
 
   public getAxiosInstance(): AxiosInstance {
     if (!this.axiosInstance) {
-      this.axiosInstance = axios.create({
-        headers: {
-          "Referrer-Policy": "no-referrer",
-        },
-      });
+      this.axiosInstance = axios.create();
     }
     return this.axiosInstance;
   }
