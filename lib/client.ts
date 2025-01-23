@@ -54,14 +54,6 @@ export class Client {
           "Referrer-Policy": "no-referrer",
         },
       });
-      this.axiosInstance.interceptors.request.use((config) => {
-        if (config.headers) {
-          config.headers.Referer = "";
-          config.headers.referrer = "";
-          config.headers.Referrer = "";
-        }
-        return config;
-      });
     }
     return this.axiosInstance;
   }
