@@ -260,3 +260,15 @@ export type ReadViewPrefsOptions = {
 export type SaveViewPrefsPayload = Database & Token & SaveViewPrefsOptions;
 
 export type ReadViewPrefsPayload = Database & Token & ReadViewPrefsOptions;
+
+export type ModelGetToolbarOpts = {
+  type: string;
+  id: number | null;
+  context?: Context;
+  version?: number;
+};
+
+export type ModelGetToolbarPayload = Model &
+  Database &
+  Token &
+  ModelGetToolbarOpts;
