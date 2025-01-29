@@ -159,7 +159,7 @@ export class Model {
     data: ModelGetToolbarOpts,
     options?: RequestOptions,
   ): Promise<any> {
-    const { id, context, type, toolbar, version } = data;
+    const { id, context, type, version } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -170,7 +170,6 @@ export class Model {
       id,
       type,
       context,
-      toolbar,
       version,
     });
 

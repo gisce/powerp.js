@@ -265,7 +265,6 @@ export type ModelGetToolbarOpts = {
   type: string;
   id: number | null;
   context?: Context;
-  toolbar: boolean;
   version?: number;
 };
 
