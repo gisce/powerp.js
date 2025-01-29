@@ -26,6 +26,7 @@ import {
   ReadAggPayload,
   SaveViewPrefsPayload,
   ReadViewPrefsPayload,
+  ModelGetToolbarPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -168,6 +169,31 @@ export const createFieldsViewGetPayload = (
     token,
     model,
     overrideMethodName || "fields_view_get",
+    id,
+    type,
+    context,
+    toolbar,
+  ];
+
+  if (version) {
+    payload.push(version);
+  }
+
+  return payload;
+};
+
+export const createGetToolbarPayload = (
+  options: ModelGetToolbarPayload,
+): Payload => {
+  const { database, token, model, id, context, toolbar, type, version } =
+    options;
+  const payload = [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "get_toolbar",
     id,
     type,
     context,
