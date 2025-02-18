@@ -17,6 +17,7 @@ import {
   RequestOptions,
   ReadForViewOpts,
   ReadAggOpts,
+  ModelGetToolbarOpts,
 } from "./types";
 import {
   createSearchPayload,
@@ -36,6 +37,7 @@ import {
   createExportDataPayload,
   createReadForViewPayload,
   createReadAggPayload,
+  createGetToolbarPayload,
 } from "./payloads";
 
 export class Model {
@@ -145,6 +147,30 @@ export class Model {
       toolbar,
       version,
       overrideMethodName,
+    });
+
+    return await this.client._fetch({
+      payload,
+      options,
+    });
+  }
+
+  public async get_toolbar(
+    data: ModelGetToolbarOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { id, context, type, version } = data;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const payload = createGetToolbarPayload({
+      database: database!,
+      token: token!,
+      model,
+      id,
+      type,
+      context,
+      version,
     });
 
     return await this.client._fetch({
