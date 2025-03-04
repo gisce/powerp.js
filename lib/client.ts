@@ -10,6 +10,7 @@ import {
   RequestOptions,
   SaveViewPrefsOptions,
   ReadViewPrefsOptions,
+  ParseConditionsOpts,
 } from "./types";
 import {
   createEvalDomainPayload,
@@ -20,6 +21,7 @@ import {
   createButTreeOpenPayload,
   createSaveViewPrefsPayload,
   createReadViewPrefsPayload,
+  createParseConditionsPayload,
 } from "./payloads";
 export class Client {
   host?: string;
@@ -210,6 +212,28 @@ export class Client {
       database: database!,
       token: token!,
       condition,
+      values,
+      context,
+    });
+
+    return await this._fetch({
+      payload: executePayload,
+      options,
+    });
+  }
+
+  public async parseConditions(
+    data: ParseConditionsOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { color, status, values, context } = data;
+    const { database, token } = this;
+
+    const executePayload = createParseConditionsPayload({
+      database: database!,
+      token: token!,
+      color,
+      status,
       values,
       context,
     });
