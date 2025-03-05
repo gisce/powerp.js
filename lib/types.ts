@@ -188,8 +188,7 @@ export type AttributeConditionPayload = Database &
   AttributeConditionParserOpts;
 
 export type ParseConditionsOpts = {
-  color: string;
-  status: string;
+  conditions: Record<string, string>;
   values: any;
   context?: Context;
 };

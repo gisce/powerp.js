@@ -226,14 +226,13 @@ export class Client {
     data: ParseConditionsOpts,
     options?: RequestOptions,
   ): Promise<any> {
-    const { color, status, values, context } = data;
+    const { conditions, values, context } = data;
     const { database, token } = this;
 
     const executePayload = createParseConditionsPayload({
       database: database!,
       token: token!,
-      color,
-      status,
+      conditions,
       values,
       context,
     });

@@ -351,10 +351,7 @@ export const createAttributeConditionPayload = (
 export const createParseConditionsPayload = (
   options: ParseConditionsPayload,
 ): Payload => {
-  const { database, token, color, status, values, context } = options;
-  const conditions: any = {};
-  if (color !== undefined) conditions.color = color;
-  if (status !== undefined) conditions.status = status;
+  const { database, token, conditions, values, context } = options;
 
   return [
     "execute",
@@ -363,7 +360,7 @@ export const createParseConditionsPayload = (
     token,
     "ir.ui.view",
     "parse_conditions",
-    conditions,
+    conditions || {},
     values,
     context,
   ];
