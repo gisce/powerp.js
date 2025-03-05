@@ -27,6 +27,7 @@ import {
   SaveViewPrefsPayload,
   ReadViewPrefsPayload,
   ModelGetToolbarPayload,
+  ParseConditionsPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -342,6 +343,24 @@ export const createAttributeConditionPayload = (
     "ir.ui.view",
     "parse_condition",
     condition,
+    values,
+    context,
+  ];
+};
+
+export const createParseConditionsPayload = (
+  options: ParseConditionsPayload,
+): Payload => {
+  const { database, token, conditions, values, context } = options;
+
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    "ir.ui.view",
+    "parse_conditions",
+    conditions || {},
     values,
     context,
   ];
