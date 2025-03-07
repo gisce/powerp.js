@@ -187,6 +187,14 @@ export type AttributeConditionPayload = Database &
   Token &
   AttributeConditionParserOpts;
 
+export type ParseConditionsOpts = {
+  conditions: Record<string, string>;
+  values: any;
+  context?: Context;
+};
+
+export type ParseConditionsPayload = Database & Token & ParseConditionsOpts;
+
 export type GetShortcutsOpts = {
   context?: Context;
 };
