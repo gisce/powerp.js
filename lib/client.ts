@@ -60,6 +60,8 @@ export class Client {
     const { service = "object", options = {} } = data;
     const { host, token } = this;
 
+    const { headers = {}, ...restOptions } = options;
+
     if (service != "common" && service != "db" && service != "wc" && !token) {
       throw new Error("You must login first");
     }
@@ -74,8 +76,9 @@ export class Client {
           headers: {
             "Content-Type": "application/json",
             "X-GISCE-Client": this.clientHeader,
+            ...headers,
           },
-          ...options,
+          ...restOptions,
         },
       );
       // console.debug(`Response from API: ${JSON.stringify(response.data)}`);
