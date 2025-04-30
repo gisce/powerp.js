@@ -80,13 +80,14 @@ export class Client {
       );
       // console.debug(`Response from API: ${JSON.stringify(response.data)}`);
       if (response.data.exception) {
-        throw response.data.exception;
+        throw response.data;
       }
       return response.data;
-    } catch (e) {
-      if (e === "AccessDenied Token Error") {
+    } catch (e: any) {
+      if (e?.exception === "AccessDenied Token Error") {
         this.onTokenAccessDenied?.(e);
       }
+
       console.error(
         `Error in fetching ${host!}/${service}: ${JSON.stringify(e, null, 2)}`,
       );
