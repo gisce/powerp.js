@@ -4,6 +4,7 @@ import {
   ModelReadOpts,
   ModelFieldsViewGetOpts,
   ModelExecuteOpts,
+  ModelRawExecuteOpts,
   ModelWriteOpts,
   ModelCreateOpts,
   ModelDeleteOpts,
@@ -24,6 +25,7 @@ import {
   createReadPayload,
   createFieldsViewGetPayload,
   createModelExecutePayload,
+  createModelRawExecutePayload,
   createWritePayload,
   createCreatePayload,
   createDeletePayload,
@@ -216,6 +218,28 @@ export class Model {
       payload,
       action,
       context,
+    });
+
+    return await this.client._fetch({
+      payload: executePayload,
+      options,
+    });
+  }
+
+  public async raw_execute(
+    data: ModelRawExecuteOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { payload, action } = data;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const executePayload = createModelRawExecutePayload({
+      database: database!,
+      token: token!,
+      model,
+      payload,
+      action,
     });
 
     return await this.client._fetch({
