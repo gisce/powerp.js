@@ -28,6 +28,7 @@ import {
   ReadViewPrefsPayload,
   ModelGetToolbarPayload,
   ParseConditionsPayload,
+  ModelRawExecutePayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -236,6 +237,24 @@ export const createModelExecutePayload = (
 
   if (context) {
     base.push(context);
+  }
+
+  return base;
+};
+
+export const createModelRawExecutePayload = (
+  options: ModelRawExecutePayload,
+): Payload => {
+  const { database, token, model, payload, action } = options;
+  const base = ["execute", database, "token", token, model, action];
+
+  if (payload) {
+    // Concatenate payload if it's an array, otherwise just push it
+    if (Array.isArray(payload)) {
+      base.push(...payload);
+    } else {
+      base.push(payload);
+    }
   }
 
   return base;

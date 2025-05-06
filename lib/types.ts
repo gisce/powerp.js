@@ -121,6 +121,11 @@ export type ModelExecuteOpts = {
   context?: Context;
 };
 
+export type ModelRawExecuteOpts = {
+  payload?: any;
+  action: any;
+};
+
 export type ModelExecuteOnChangeOpts = {
   ids: number[];
   payload?: any;
@@ -133,6 +138,11 @@ export type ModelExecuteOnChangePayload = Model &
   Database &
   Token &
   ModelExecuteOnChangeOpts;
+
+export type ModelRawExecutePayload = Model &
+  Database &
+  Token &
+  ModelRawExecuteOpts;
 
 export type CreateReportOpts = {
   name: string;
