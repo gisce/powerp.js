@@ -28,6 +28,7 @@ import {
   ReadViewPrefsPayload,
   ModelGetToolbarPayload,
   ParseConditionsPayload,
+  ModelCheckPermPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -515,4 +516,11 @@ export const createReadViewPrefsPayload = (
     key,
     {},
   ];
+};
+
+export const createCheckPermPayload = (
+  options: ModelCheckPermPayload,
+): Payload => {
+  const { database, token, model, type } = options;
+  return ["execute", database, "token", token, model, "check_perm", type];
 };
