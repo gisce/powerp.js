@@ -19,6 +19,7 @@ import {
   ReadForViewOpts,
   ReadAggOpts,
   ModelGetToolbarOpts,
+  ModelCheckPermOpts,
 } from "./types";
 import {
   createSearchPayload,
@@ -40,6 +41,7 @@ import {
   createReadForViewPayload,
   createReadAggPayload,
   createGetToolbarPayload,
+  createCheckPermPayload,
 } from "./payloads";
 
 export class Model {
@@ -493,6 +495,26 @@ export class Model {
       model,
       domain,
       aggregate_fields,
+    });
+
+    return await this.client._fetch({
+      payload,
+      options,
+    });
+  }
+
+  public async check_perm(
+    data: ModelCheckPermOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { model, type } = data;
+    const { database, token } = this.client;
+
+    const payload = createCheckPermPayload({
+      database: database!,
+      token: token!,
+      model,
+      type,
     });
 
     return await this.client._fetch({
