@@ -26,6 +26,9 @@ import {
   ReadAggPayload,
   SaveViewPrefsPayload,
   ReadViewPrefsPayload,
+  ModelGetToolbarPayload,
+  ParseConditionsPayload,
+  ModelRawExecutePayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -181,6 +184,29 @@ export const createFieldsViewGetPayload = (
   return payload;
 };
 
+export const createGetToolbarPayload = (
+  options: ModelGetToolbarPayload,
+): Payload => {
+  const { database, token, model, id, context, type, version } = options;
+  const payload = [
+    "execute",
+    database,
+    "token",
+    token,
+    model,
+    "get_toolbar",
+    id,
+    type,
+    context,
+  ];
+
+  if (version) {
+    payload.push(version);
+  }
+
+  return payload;
+};
+
 export const createFieldsGetPayload = (
   options: ModelFieldsGetPayload,
 ): Payload => {
@@ -211,6 +237,24 @@ export const createModelExecutePayload = (
 
   if (context) {
     base.push(context);
+  }
+
+  return base;
+};
+
+export const createModelRawExecutePayload = (
+  options: ModelRawExecutePayload,
+): Payload => {
+  const { database, token, model, payload, action } = options;
+  const base = ["execute", database, "token", token, model, action];
+
+  if (payload) {
+    // Concatenate payload if it's an array, otherwise just push it
+    if (Array.isArray(payload)) {
+      base.push(...payload);
+    } else {
+      base.push(payload);
+    }
   }
 
   return base;
@@ -318,6 +362,24 @@ export const createAttributeConditionPayload = (
     "ir.ui.view",
     "parse_condition",
     condition,
+    values,
+    context,
+  ];
+};
+
+export const createParseConditionsPayload = (
+  options: ParseConditionsPayload,
+): Payload => {
+  const { database, token, conditions, values, context } = options;
+
+  return [
+    "execute",
+    database,
+    "token",
+    token,
+    "ir.ui.view",
+    "parse_conditions",
+    conditions || {},
     values,
     context,
   ];

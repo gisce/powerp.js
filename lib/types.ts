@@ -121,6 +121,11 @@ export type ModelExecuteOpts = {
   context?: Context;
 };
 
+export type ModelRawExecuteOpts = {
+  payload?: any;
+  action: any;
+};
+
 export type ModelExecuteOnChangeOpts = {
   ids: number[];
   payload?: any;
@@ -133,6 +138,11 @@ export type ModelExecuteOnChangePayload = Model &
   Database &
   Token &
   ModelExecuteOnChangeOpts;
+
+export type ModelRawExecutePayload = Model &
+  Database &
+  Token &
+  ModelRawExecuteOpts;
 
 export type CreateReportOpts = {
   name: string;
@@ -186,6 +196,14 @@ export type AttributeConditionParserOpts = {
 export type AttributeConditionPayload = Database &
   Token &
   AttributeConditionParserOpts;
+
+export type ParseConditionsOpts = {
+  conditions: Record<string, string>;
+  values: any;
+  context?: Context;
+};
+
+export type ParseConditionsPayload = Database & Token & ParseConditionsOpts;
 
 export type GetShortcutsOpts = {
   context?: Context;
@@ -260,3 +278,15 @@ export type ReadViewPrefsOptions = {
 export type SaveViewPrefsPayload = Database & Token & SaveViewPrefsOptions;
 
 export type ReadViewPrefsPayload = Database & Token & ReadViewPrefsOptions;
+
+export type ModelGetToolbarOpts = {
+  type: string;
+  id: number | null;
+  context?: Context;
+  version?: number;
+};
+
+export type ModelGetToolbarPayload = Model &
+  Database &
+  Token &
+  ModelGetToolbarOpts;

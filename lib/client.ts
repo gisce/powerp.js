@@ -10,6 +10,7 @@ import {
   RequestOptions,
   SaveViewPrefsOptions,
   ReadViewPrefsOptions,
+  ParseConditionsOpts,
 } from "./types";
 import {
   createEvalDomainPayload,
@@ -20,6 +21,7 @@ import {
   createButTreeOpenPayload,
   createSaveViewPrefsPayload,
   createReadViewPrefsPayload,
+  createParseConditionsPayload,
 } from "./payloads";
 export class Client {
   host?: string;
@@ -78,13 +80,14 @@ export class Client {
       );
       // console.debug(`Response from API: ${JSON.stringify(response.data)}`);
       if (response.data.exception) {
-        throw response.data.exception;
+        throw response.data;
       }
       return response.data;
-    } catch (e) {
-      if (e === "AccessDenied Token Error") {
+    } catch (e: any) {
+      if (e?.exception === "AccessDenied Token Error") {
         this.onTokenAccessDenied?.(e);
       }
+
       console.error(
         `Error in fetching ${host!}/${service}: ${JSON.stringify(e, null, 2)}`,
       );
@@ -132,6 +135,16 @@ export class Client {
     return await this._fetch({
       service: "db",
       payload: ["server_version"],
+      options,
+    });
+  }
+
+  public async getServerEnvironment(
+    options?: RequestOptions,
+  ): Promise<Record<string, string>> {
+    return await this._fetch({
+      service: "common",
+      payload: ["get_server_environment", true],
       options,
     });
   }
@@ -200,6 +213,27 @@ export class Client {
       database: database!,
       token: token!,
       condition,
+      values,
+      context,
+    });
+
+    return await this._fetch({
+      payload: executePayload,
+      options,
+    });
+  }
+
+  public async parseConditions(
+    data: ParseConditionsOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { conditions, values, context } = data;
+    const { database, token } = this;
+
+    const executePayload = createParseConditionsPayload({
+      database: database!,
+      token: token!,
+      conditions,
       values,
       context,
     });

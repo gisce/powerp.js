@@ -4,6 +4,7 @@ import {
   ModelReadOpts,
   ModelFieldsViewGetOpts,
   ModelExecuteOpts,
+  ModelRawExecuteOpts,
   ModelWriteOpts,
   ModelCreateOpts,
   ModelDeleteOpts,
@@ -17,12 +18,14 @@ import {
   RequestOptions,
   ReadForViewOpts,
   ReadAggOpts,
+  ModelGetToolbarOpts,
 } from "./types";
 import {
   createSearchPayload,
   createReadPayload,
   createFieldsViewGetPayload,
   createModelExecutePayload,
+  createModelRawExecutePayload,
   createWritePayload,
   createCreatePayload,
   createDeletePayload,
@@ -36,6 +39,7 @@ import {
   createExportDataPayload,
   createReadForViewPayload,
   createReadAggPayload,
+  createGetToolbarPayload,
 } from "./payloads";
 
 export class Model {
@@ -153,6 +157,30 @@ export class Model {
     });
   }
 
+  public async get_toolbar(
+    data: ModelGetToolbarOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { id, context, type, version } = data;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const payload = createGetToolbarPayload({
+      database: database!,
+      token: token!,
+      model,
+      id,
+      type,
+      context,
+      version,
+    });
+
+    return await this.client._fetch({
+      payload,
+      options,
+    });
+  }
+
   public async fields_get(
     data: ModelFieldsGetOpts,
     options?: RequestOptions,
@@ -190,6 +218,28 @@ export class Model {
       payload,
       action,
       context,
+    });
+
+    return await this.client._fetch({
+      payload: executePayload,
+      options,
+    });
+  }
+
+  public async raw_execute(
+    data: ModelRawExecuteOpts,
+    options?: RequestOptions,
+  ): Promise<any> {
+    const { payload, action } = data;
+    const { model } = this;
+    const { database, token } = this.client;
+
+    const executePayload = createModelRawExecutePayload({
+      database: database!,
+      token: token!,
+      model,
+      payload,
+      action,
     });
 
     return await this.client._fetch({
