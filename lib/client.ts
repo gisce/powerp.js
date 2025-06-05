@@ -84,7 +84,10 @@ export class Client {
       }
       return response.data;
     } catch (e: any) {
-      if (e?.exception === "AccessDenied Token Error") {
+      if (
+        e?.exception === "AccessDenied Token Error" ||
+        e?.response?.status === 401
+      ) {
         this.onTokenAccessDenied?.(e);
       }
 
