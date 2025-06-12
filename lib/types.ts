@@ -290,3 +290,10 @@ export type ModelGetToolbarPayload = Model &
   Database &
   Token &
   ModelGetToolbarOpts;
+
+export type ModelCheckPermOpts = {
+  model: string;
+  type: string;
+};
+
+export type ModelCheckPermPayload = Database & Token & ModelCheckPermOpts;
