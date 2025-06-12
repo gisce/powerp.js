@@ -30,6 +30,7 @@ import {
   ParseConditionsPayload,
   ModelCheckPermPayload,
   ModelRawExecutePayload,
+  ModelCheckPermPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
