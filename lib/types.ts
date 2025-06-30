@@ -297,3 +297,10 @@ export type ModelCheckPermOpts = {
 };
 
 export type ModelCheckPermPayload = Database & Token & ModelCheckPermOpts;
+
+export type ModelCheckPermsOpts = {
+  model: string;
+  types: string[];
+};
+
+export type ModelCheckPermsPayload = Database & Token & ModelCheckPermsOpts;
