@@ -30,6 +30,7 @@ import {
   ParseConditionsPayload,
   ModelRawExecutePayload,
   ModelCheckPermPayload,
+  ModelCheckPermsPayload,
 } from "./types";
 
 export const makeLoginTokenPayload = (options: LoginTokenPayload): Payload => {
@@ -542,4 +543,11 @@ export const createCheckPermPayload = (
 ): Payload => {
   const { database, token, model, type } = options;
   return ["execute", database, "token", token, model, "check_perm", type];
+};
+
+export const createCheckPermsPayload = (
+  options: ModelCheckPermsPayload,
+): Payload => {
+  const { database, token, model, types } = options;
+  return ["execute", database, "token", token, model, "check_perms", types];
 };
