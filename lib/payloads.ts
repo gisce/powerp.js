@@ -492,7 +492,7 @@ export const createReadForViewPayload = (
 };
 
 export const createReadAggPayload = (options: ReadAggPayload): Payload => {
-  const { database, token, model, domain, aggregate_fields } = options;
+  const { database, token, model, domain, aggregate_fields, context } = options;
   return [
     "execute",
     database,
@@ -502,6 +502,7 @@ export const createReadAggPayload = (options: ReadAggPayload): Payload => {
     "read_agg",
     domain,
     aggregate_fields,
+    context,
   ];
 };
 
