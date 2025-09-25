@@ -487,7 +487,7 @@ export class Model {
     data: ReadAggOpts,
     options?: RequestOptions,
   ): Promise<any> {
-    const { domain = [], aggregate_fields } = data;
+    const { domain = [], aggregate_fields, context = {} } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -497,6 +497,7 @@ export class Model {
       model,
       domain,
       aggregate_fields,
+      context,
     });
 
     return await this.client._fetch({
