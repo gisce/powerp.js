@@ -75,7 +75,7 @@ export class Client {
           headers: {
             "Content-Type": "application/json",
             "X-GISCE-Client": this.clientHeader,
-            "X-GISCE-Session": this.sessionId,
+            ...(this.sessionId !== undefined && { "X-GISCE-Session": this.sessionId }),
           },
           ...options,
         },
