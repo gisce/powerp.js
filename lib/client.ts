@@ -29,6 +29,7 @@ export class Client {
   token?: string;
   axiosInstance: AxiosInstance | undefined;
   clientHeader?: string;
+  sessionId?: string;
   onTokenAccessDenied?: (error: any) => void;
 
   public setHost(host: string): void {
@@ -74,6 +75,7 @@ export class Client {
           headers: {
             "Content-Type": "application/json",
             "X-GISCE-Client": this.clientHeader,
+            ...(this.sessionId !== undefined && { "X-GISCE-Session": this.sessionId }),
           },
           ...options,
         },
@@ -182,6 +184,10 @@ export class Client {
 
   public setClientHeader(clientHeader: string): void {
     this.clientHeader = clientHeader;
+  }
+
+  public setSessionId(sessionId: string): void {
+    this.sessionId = sessionId;
   }
 
   public async evalDomain(
