@@ -189,7 +189,16 @@ export const createFieldsViewGetPayload = (
 export const createGetToolbarPayload = (
   options: ModelGetToolbarPayload,
 ): Payload => {
-  const { database, token, model, id, context, type, version } = options;
+  const {
+    database,
+    token,
+    model,
+    id,
+    context,
+    type,
+    version,
+    fieldsToRetrieve,
+  } = options;
   const payload = [
     "execute",
     database,
@@ -197,7 +206,9 @@ export const createGetToolbarPayload = (
     token,
     model,
     "get_toolbar",
-    id,
+    (id === null || id === undefined) && fieldsToRetrieve
+      ? fieldsToRetrieve
+      : id,
     type,
     context,
   ];

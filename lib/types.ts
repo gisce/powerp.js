@@ -285,6 +285,7 @@ export type ModelGetToolbarOpts = {
   id: number | null;
   context?: Context;
   version?: number;
+  fieldsToRetrieve?: string[];
 };
 
 export type ModelGetToolbarPayload = Model &
