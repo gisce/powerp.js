@@ -165,7 +165,7 @@ export class Model {
     data: ModelGetToolbarOpts,
     options?: RequestOptions,
   ): Promise<any> {
-    const { id, context, type, version } = data;
+    const { id, context, type, version, fieldsToRetrieve } = data;
     const { model } = this;
     const { database, token } = this.client;
 
@@ -177,6 +177,7 @@ export class Model {
       type,
       context,
       version,
+      fieldsToRetrieve,
     });
 
     return await this.client._fetch({
