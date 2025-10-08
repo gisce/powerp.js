@@ -75,7 +75,9 @@ export class Client {
           headers: {
             "Content-Type": "application/json",
             "X-GISCE-Client": this.clientHeader,
-            ...(this.sessionId !== undefined && { "X-GISCE-Session": this.sessionId }),
+            ...(this.sessionId !== undefined && {
+              "X-GISCE-Session": this.sessionId,
+            }),
           },
           ...options,
         },
@@ -123,6 +125,20 @@ export class Client {
     });
     if (!token) {
       throw new Error("Invalid User/Login");
+    }
+    this.token = token;
+    return token;
+  }
+
+  public async getSslToken(requestOptions?: RequestOptions): Promise<string> {
+    const payload = ["ssl_token"];
+    const token = await this._fetch({
+      payload,
+      service: "common",
+      options: requestOptions,
+    });
+    if (!token) {
+      throw new Error("Error getting SSL token");
     }
     this.token = token;
     return token;
