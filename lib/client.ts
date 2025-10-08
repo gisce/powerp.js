@@ -130,6 +130,20 @@ export class Client {
     return token;
   }
 
+  public async getSslToken(requestOptions?: RequestOptions): Promise<string> {
+    const payload = ["ssl_token"];
+    const token = await this._fetch({
+      payload,
+      service: "common",
+      options: requestOptions,
+    });
+    if (!token) {
+      throw new Error("Error getting SSL token");
+    }
+    this.token = token;
+    return token;
+  }
+
   public async getDatabases(options?: RequestOptions): Promise<string[]> {
     return await this._fetch({
       service: "db",
