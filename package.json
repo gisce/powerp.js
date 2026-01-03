@@ -7,9 +7,6 @@
     "dist",
     "src"
   ],
-  "engines": {
-    "node": "20.5.0"
-  },
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
