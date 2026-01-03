@@ -72,3 +72,4 @@ $ npm update powerp.js
 
 [ ] Implement pending methods from the old version
 [ ] Improve the way to publish this library. NPM public registry?
+
