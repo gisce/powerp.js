@@ -1,15 +1,12 @@
 {
   "name": "@gisce/powerp.js",
-  "version": "2.13.0",
+  "version": "2.14.0",
   "description": "PowERP Javascript Client",
   "module": "./dist/powerpjs.es.js",
   "files": [
     "dist",
     "src"
   ],
-  "engines": {
-    "node": "20.5.0"
-  },
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
@@ -51,7 +48,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
-    "@gisce/commitlint-rules": "1.0.5",
+    "@gisce/commitlint-rules": "1.1.0",
     "@semantic-release/exec": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/npm": "10.0.4",
