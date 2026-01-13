@@ -6,8 +6,9 @@ import { test, expect, describe } from "vitest";
 dotenv.config();
 
 describe("A Report", () => {
-  test("must create a new report and fetch status", async (done) => {
-    const c = new Client(process.env.ERP_HOST);
+  test("must create a new report and fetch status", async () => {
+    const c = new Client();
+    c.setHost(process.env.ERP_HOST!);
     c.setDatabase(process.env.ERP_DB!);
 
     const token = await c.loginAndGetToken({
