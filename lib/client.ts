@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from "axios";
 import { JSONParse, JSONStringify } from "json-with-bigint";
-import { nanoid } from "nanoid";
 import {
   UserAuth,
   FetchOpts,
@@ -98,7 +97,7 @@ export class Client {
         {
           headers: {
             "Content-Type": "application/json",
-            "X-Request-Id": nanoid(),
+            "X-Request-Id": crypto.randomUUID(),
             ...(this.clientHeader !== undefined && {
               "X-GISCE-Client": this.clientHeader,
             }),

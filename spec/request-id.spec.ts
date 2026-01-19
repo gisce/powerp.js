@@ -79,7 +79,7 @@ describe("X-Request-Id Header", () => {
     expect(capturedHeaders["x-gisce-session"]).toBe("test-session-id");
   });
 
-  test("X-Request-Id should be nanoid format (21 chars, URL-safe)", async () => {
+  test("X-Request-Id should be UUID v4 format", async () => {
     let capturedRequestId: string | undefined;
 
     nock(TEST_HOST)
@@ -95,9 +95,11 @@ describe("X-Request-Id Header", () => {
     await client.getDatabases();
 
     expect(capturedRequestId).toBeDefined();
-    // nanoid default length is 21
-    expect(capturedRequestId!.length).toBe(21);
-    // nanoid uses URL-safe alphabet: A-Za-z0-9_-
-    expect(capturedRequestId).toMatch(/^[A-Za-z0-9_-]+$/);
+    // UUID v4 format: 8-4-4-4-12 hex digits = 36 characters
+    expect(capturedRequestId!.length).toBe(36);
+    // UUID v4 pattern: version 4 (4xxx) and variant (89ab)
+    expect(capturedRequestId).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+    );
   });
 });
