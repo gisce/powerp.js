@@ -123,6 +123,7 @@
     ]
   },
   "dependencies": {
-    "json-with-bigint": "^3.5.2"
+    "json-with-bigint": "^3.5.2",
+    "nanoid": "^5.1.6"
   }
 }
