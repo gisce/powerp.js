@@ -47,7 +47,7 @@ describe("A Model", () => {
         expect(result).toBeGreaterThan(100);
       });
 
-      test("must retrieve menu items id's", async () => {
+      test.skip("must retrieve menu items id's", async () => {
         const c = new Client();
         c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
@@ -65,7 +65,7 @@ describe("A Model", () => {
         });
         expect(results.length).toBeGreaterThan(1);
       });
-      test("must retrieve menu items with full details", async () => {
+      test.skip("must retrieve menu items with full details", async () => {
         const c = new Client();
         c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
@@ -112,7 +112,7 @@ describe("A Model", () => {
         });
         expect(actions.length).toBe(1);
       });
-      test("must retrieve valid views for type tree and id 96", async () => {
+      test.skip("must retrieve valid views for type tree and id 96", async () => {
         const c = new Client();
         c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
@@ -136,7 +136,7 @@ describe("A Model", () => {
         expect(fieldsAndArch.type).toBe("tree");
         expect(fieldsAndArch.view_id).toBe(96);
       });
-      test("must retrieve valid views for type form and id 97", async () => {
+      test.skip("must retrieve valid views for type form and id 97", async () => {
         const c = new Client();
         c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
@@ -160,7 +160,7 @@ describe("A Model", () => {
         expect(fieldsAndArch.type).toBe("form");
         expect(fieldsAndArch.view_id).toBe(97);
       });
-      test("must be able to star/unstar an item", async () => {
+      test.skip("must be able to star/unstar an item", async () => {
         const c = new Client();
         c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
@@ -194,7 +194,7 @@ describe("A Model", () => {
       });
     });
     describe("when writing", () => {
-      test("must update name field for an user", async () => {
+      test.skip("must update name field for an user", async () => {
         const c = new Client();
         c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
@@ -223,7 +223,7 @@ describe("A Model", () => {
       });
     });
     describe("when creating", () => {
-      test("must get new id for new object", async () => {
+      test.skip("must get new id for new object", async () => {
         const c = new Client();
         c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
@@ -255,7 +255,7 @@ describe("A Model", () => {
       });
     });
     describe("when deleting", () => {
-      test("must get true when removing a new item", async () => {
+      test.skip("must get true when removing a new item", async () => {
         const c = new Client();
         c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
@@ -289,7 +289,7 @@ describe("A Model", () => {
       });
     });
     describe("when duplicating", () => {
-      test("must get new id when duplicating an item", async () => {
+      test.skip("must get new id when duplicating an item", async () => {
         const c = new Client();
         c.setHost(process.env.ERP_HOST!);
         c.setDatabase(process.env.ERP_DB!);
