@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import { JSONParse, JSONStringify } from "json-with-bigint";
 import { uuidv4 } from "./uuid.js";
+import { normalizeBigIntValues } from "./bigint-utils.js";
 import {
   UserAuth,
   FetchOpts,
@@ -59,7 +60,10 @@ export class Client {
           (data: string) => {
             if (typeof data === "string") {
               try {
-                return JSONParse(data);
+                const parsed = JSONParse(data);
+                // Normalize BigInt values to handle cases where context.source
+                // returns objects with parsedValue and source properties
+                return normalizeBigIntValues(parsed);
               } catch {
                 return data;
               }
@@ -71,7 +75,10 @@ export class Client {
           (data: unknown, headers: any) => {
             if (data !== undefined && headers) {
               headers["Content-Type"] = "application/json";
-              return JSONStringify(data);
+              // Normalize BigInt values before stringifying to ensure
+              // objects with parsedValue and source are converted to BigInt
+              const normalized = normalizeBigIntValues(data);
+              return JSONStringify(normalized);
             }
             return data;
           },
