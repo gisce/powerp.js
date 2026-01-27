@@ -1,6 +1,6 @@
 {
   "name": "@gisce/powerp.js",
-  "version": "2.15.0",
+  "version": "2.15.1",
   "description": "PowERP Javascript Client",
   "module": "./dist/powerpjs.es.js",
   "files": [
@@ -122,7 +122,5 @@
       ]
     ]
   },
-  "dependencies": {
-    "json-with-bigint": "^3.5.2"
-  }
+  "dependencies": {}
 }
