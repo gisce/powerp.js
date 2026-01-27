@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from "axios";
-import { JSONParse, JSONStringify } from "json-with-bigint";
 import { uuidv4 } from "./uuid.js";
 import {
   UserAuth,
@@ -54,29 +53,7 @@ export class Client {
 
   public getAxiosInstance(): AxiosInstance {
     if (!this.axiosInstance) {
-      this.axiosInstance = axios.create({
-        transformResponse: [
-          (data: string) => {
-            if (typeof data === "string") {
-              try {
-                return JSONParse(data);
-              } catch {
-                return data;
-              }
-            }
-            return data;
-          },
-        ],
-        transformRequest: [
-          (data: unknown, headers: any) => {
-            if (data !== undefined && headers) {
-              headers["Content-Type"] = "application/json";
-              return JSONStringify(data);
-            }
-            return data;
-          },
-        ],
-      });
+      this.axiosInstance = axios.create();
     }
     return this.axiosInstance;
   }

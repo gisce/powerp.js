@@ -122,7 +122,5 @@
       ]
     ]
   },
-  "dependencies": {
-    "json-with-bigint": "^3.5.2"
-  }
+  "dependencies": {}
 }
